@@ -1,18 +1,18 @@
 development:
-  database: rails_base_app_development
+  database: tracking_service_plattaform_development
   adapter:  mysql2
   encoding: utf8
   pool:     5
-  username: #USERNAME#
+  username: cuni
   password: #PASSWORD#
   host:    localhost
 
 test:
-  database: rails_base_app_test
+  database: tracking_service_plattaform_test
   adapter:  mysql2
   encoding: utf8
   pool:     5
-  username: #USERNAME#
+  username: cuni
   password: #PASSWORD#
   host:    localhost
 
