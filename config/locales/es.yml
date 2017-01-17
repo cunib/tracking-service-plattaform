@@ -1,0 +1,58 @@
+es:
+  ##############################
+  # SCAFFOLD
+  ##############################
+  business:
+    index:
+      actions:
+  views:
+    application:
+      title: "Plataforma de seguimiento de pedidos"
+    navbar:
+      app_title: "Plataforma de seguimiento de pedidos"
+      bussines: "Negocios"
+      dropdown:
+    errors:
+      messages:
+        unprocessable_entity:          "Entidad no procesable"
+        unprocessable_entity_messages: "La solicitud está bien formada pero fue imposible seguirla debido a errores semánticos."
+        something_went_wrong:          "Algo salió mal"
+        something_went_wrong_messages: "Un error en la aplicación no permite que la misma funcione correctamente. Comuníquese con su administrador."
+        not_found:                     "La página que está buscando no existe."
+        not_found_message:             "Es posible que haya escrito mal la dirección o que la página haya sido movida."
+        forbidden:                     "Permiso denegado"
+        forbidden_message:             "La página a la que está intentando acceder requiere otros privilegios distintos a los que usted posee. Si considera esto un error, comuníquese con su administrador."
+        empy_table:                    "No existen registros para mostrar"
+    pagination:
+      first:    "&laquo; Primera"
+      last:     "Última &raquo;"
+      previous: "&lsaquo; Anterior"
+      next:     "Siguiente &rsaquo;"
+      truncate: "..."
+    sessions:
+      successfully_signed_in:  "Sesión iniciada correctamente"
+      successfully_signed_out: "Sesión finalizada correctamente"
+    scaffold:
+      destroy: "¿Borrar?"
+  ##################################
+  # HELPERS
+  ##################################
+  helpers:
+    page_entries_info:
+      one_page:
+        display_entries:
+          zero:  "Ningún objeto encontrado"
+          one:   "Mostrando <strong>1</strong> objeto"
+          other: "Mostrando <strong>todos (%{count})</strong> los objetos"
+      more_pages:
+        display_entries: "Mostrando registros del <strong>%{first}&nbsp; al &nbsp;%{last}</strong> de un total de <strong>%{total}</strong> registros"
+  session:
+    errors:
+      unauthorized: "No posee permisos suficientes para acceder a esta página."
+  sessions:
+    failure:
+      title: "Error en el inicio de sesión"
+      explanation: |
+        Ocurrió un error inesperado al intentar iniciar sesión con su usuario UNLP
+      details: |
+        Por favor, intente nuevamente la operación en unos minutos.
