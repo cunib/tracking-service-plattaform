@@ -2,11 +2,14 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :name %>
-    <%= f.input :address %>
+    <div class="row">
+      <%= f.input :name, wrapper_html: { class: 'col-md-6' } %>
+      <%= f.input :address, wrapper_html: { class: 'col-md-6' } %>
+    </div>
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit, class: 'btn btn-success', value: t('.submit', default: t('global.form.actions.submit')) %>
+    <%= f.button :submit, class: 'btn btn-success', 
+      value: t('.submit', default: t('global.form.actions.submit')) %>
   </div>
 <% end %>

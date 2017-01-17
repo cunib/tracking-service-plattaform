@@ -6,6 +6,9 @@ es:
     index:
       title: "Negocios"
       actions:
+    filter:
+      name: "Nombre"
+      address: "Dirección"
   views:
     application:
       title: "Plataforma de seguimiento de pedidos"

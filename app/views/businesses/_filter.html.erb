@@ -1,0 +1,28 @@
+<div class="collapse col-md-12" id="collapse_search_form">
+  <div class="search">
+    <%= search_form_for(@q) do |f| -%>
+      <div class="row">
+        <%= f.input :name_cont,
+                    required: false,
+                    label: t('.name'),
+                    wrapper_html: { class: 'col-md-6' }
+        %>
+        <%= f.input :address_cont,
+                    required: false,
+                    label: t('.address'),
+                    wrapper_html: { class: 'col-md-6' }
+        %>
+      </div>
+      <div class="row">
+        <div class="col-md-12 text-right">
+          <%= f.submit t('global.filters.submit'), class: 'btn btn-info btn-sm' %>
+          <%= link_to icon('remove'),
+                      businesses_path(_reset: 'reset'),
+                      title: t('global.filters.clear_filter'),
+                      data: { toggle: 'tooltip', container: 'body', placement: 'left' },
+                      class: 'btn btn-primary btn-sm' -%>
+        </div>
+      </div>
+    <% end -%>
+  </div>
+</div>
