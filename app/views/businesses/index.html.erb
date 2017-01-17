@@ -1,0 +1,51 @@
+<div class="page-header">
+  <div class="actions">
+    <%= link_to icon('plus'), new_business_path, 
+      class: 'btn btn-success', data: { toggle: 'tooltip', container: 'body' }, 
+      title: t('businesses.actions.new', default: t('global.actions.new')) %>
+  </div>
+
+  <h1><%= t '.title' %></h1>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th><%= t 'activerecord.attributes.business.name' %></th>
+      <th><%= t 'activerecord.attributes.business.address' %></th>
+      <th class="actions"><%= t '.actions', default: t('global.index.actions') %></th>
+    </tr>
+    </thead>
+
+    <tbody>
+      <% @businesses.each do |business| -%>
+        <tr>
+          <td><%= business.name %></td>
+          <td><%= business.address %></td>
+          <td>
+            <div class="btn-toolbar btn-group-xs">
+              <%= link_to icon('eye-open'), business,
+                class: 'btn btn-link',
+                title: t('businesses.actions.show', default: t('global.actions.show')),
+                data: { toggle: 'tooltip', container: 'body', placement: 'left' } %>
+              <%= link_to icon('pencil'), edit_business_path(business),
+                class: 'btn btn-link',
+                title: t('businesses.actions.edit', default: t('global.actions.edit')),
+                data: { toggle: 'tooltip', container: 'body', placement: 'left' } %>
+              <%= link_to icon('trash'), business,  method: :delete,
+                class: 'btn btn-link text-danger',
+                title: t('businesses.actions.destroy', default: t('global.actions.destroy')),
+                data: { toggle: 'tooltip', container: 'body', placement: 'left', 
+                        confirm: t('businesses.actions.confirm_destroy', 
+                        default: t('global.actions.confirm_destroy'))} %>
+            </div>
+          </td>
+        </tr>
+      <% end -%>
+    </tbody>
+  </table>
+
+  <%= render partial:'shared/pager', locals: { model: @businesses } %>
+
+</div>
