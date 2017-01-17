@@ -1,0 +1,20 @@
+es:
+  flash:
+    actions:
+      create:
+        notice: 'El %{resource_name} fue creado correctamente'
+        notice_html: '<i class="glyphicon glyphicon-ok-sign"></i> El %{resource_name} fue creado correctamente'
+      update:
+        notice: 'El %{resource_name} fue actualizado correctamente'
+        notice_html: '<i class="glyphicon glyphicon-ok-sign"></i> El %{resource_name} fue actualizado correctamente'
+      destroy:
+        notice: 'El %{resource_name} fue borrado correctamente'
+        notice_html: '<i class="glyphicon glyphicon-ok-sign"></i> El %{resource_name} fue borrado correctamente'
+        alert: 'El %{resource_name} no puede ser borrado'
+        alert_html: '<i class="glyphicon glyphicon-exclamation-sign"></i> El %{resource_name} no puede ser borrado'
+    payment_requests:
+      reload:
+        notice: 'El estado se ha actualizado correctamente'
+        notice_html: '<i class="glyphicon glyphicon-ok-sign"></i> El estado se ha actualizado correctamente'
+        alert: 'Ha ocurrido un error en la actualización de estado'
+        alert_html: '<i class="glyphicon glyphicon-exclamation-sign"></i> Ha ocurrido un error en la actualización de estado'

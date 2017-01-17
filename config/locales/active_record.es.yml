@@ -1,0 +1,12 @@
+es:
+  activerecord:
+    models:
+      office: "Business"
+    attributes:
+      business:
+        name: "Nombre"
+        address: "Dirección"
+    errors:
+      models:
+        business:
+          attributes:

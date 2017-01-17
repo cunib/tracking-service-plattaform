@@ -2,8 +2,9 @@ es:
   ##############################
   # SCAFFOLD
   ##############################
-  business:
+  businesses:
     index:
+      title: "Negocios"
       actions:
   views:
     application:
