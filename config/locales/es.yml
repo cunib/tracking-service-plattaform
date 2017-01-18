@@ -15,7 +15,8 @@ es:
     navbar:
       app_title: "Plataforma de seguimiento de pedidos"
       bussines: "Negocios"
-      dropdown:
+      dropdown: 
+        title: "Configuración"
     errors:
       messages:
         unprocessable_entity:          "Entidad no procesable"
