@@ -1,0 +1,14 @@
+<%= simple_form_for(@delivery_man) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <div class="row">
+      <%= f.input :nickname, wrapper_html: { class: 'col-md-12' } %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, class: 'btn btn-success', 
+      value: t('.submit', default: t('global.form.actions.submit')) %>
+  </div>
+<% end %>

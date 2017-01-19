@@ -9,6 +9,12 @@ es:
     filter:
       name: "Nombre"
       address: "Dirección"
+  delivery_men:
+    index:
+      title: "Repartidores"
+      actions:
+    filter:
+      nickname: "Apodo"
   views:
     application:
       title: "Plataforma de seguimiento de pedidos"
@@ -17,6 +23,7 @@ es:
       bussines: "Negocios"
       dropdown: 
         title: "Configuración"
+        delivery_men: "Repartidores"
     errors:
       messages:
         unprocessable_entity:          "Entidad no procesable"

@@ -1,11 +1,14 @@
 es:
   activerecord:
     models:
-      office: "Business"
+      business: "Business"
+      delivery_man: "Repartidor"
     attributes:
       business:
         name: "Nombre"
         address: "Dirección"
+      delivery_man:
+        nickname: "Apodo"
     errors:
       models:
         business:
