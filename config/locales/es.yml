@@ -15,6 +15,15 @@ es:
       actions:
     filter:
       nickname: "Apodo"
+  deliveries:
+    index:
+      title: "Ordenes"
+      actions:
+    filter:
+      business: "Negocio"
+      address: "Dirección"
+      start_date: "Fecha de inicio"
+      end_date: "Fecha de fin"
   views:
     application:
       title: "Plataforma de seguimiento de pedidos"
@@ -24,6 +33,7 @@ es:
       dropdown: 
         title: "Configuración"
         delivery_men: "Repartidores"
+        deliveries: "Ordenes"
     errors:
       messages:
         unprocessable_entity:          "Entidad no procesable"
