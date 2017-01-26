@@ -1,6 +1,6 @@
-class CreateDelivery < ActiveRecord::Migration[5.0]
+class CreateOrder < ActiveRecord::Migration[5.0]
   def change
-    create_table :deliveries do |t|
+    create_table :orders do |t|
       t.date :start_date
       t.date :end_date
       t.string :address

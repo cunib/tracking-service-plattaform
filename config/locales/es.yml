@@ -15,9 +15,9 @@ es:
       actions:
     filter:
       nickname: "Apodo"
-  deliveries:
+  orders:
     index:
-      title: "Ordenes"
+      title: "Pedidos"
       actions:
     filter:
       business: "Negocio"
@@ -33,7 +33,7 @@ es:
       dropdown: 
         title: "Configuración"
         delivery_men: "Repartidores"
-        deliveries: "Ordenes"
+        orders: "Pedidos"
     errors:
       messages:
         unprocessable_entity:          "Entidad no procesable"

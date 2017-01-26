@@ -3,14 +3,14 @@ es:
     models:
       business: "Business"
       delivery_man: "Repartidor"
-      delivery: "Orden"
+      order: "Pedido"
     attributes:
       business:
         name: "Nombre"
         address: "Dirección"
       delivery_man:
         nickname: "Apodo"
-      delivery:
+      order:
         business: "Negocio"
         address: "Dirección"
         start_date: "Fecha de inicio"

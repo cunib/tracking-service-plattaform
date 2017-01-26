@@ -2,6 +2,6 @@ Rails.application.routes.draw do
   root 'businesses#index'
   resources :businesses
   resources :delivery_men
-  resources :deliveries
+  resources :orders
 
 end
