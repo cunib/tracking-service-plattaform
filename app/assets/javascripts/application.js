@@ -11,6 +11,8 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery-ujs
+//= require bootstrap
 //= require nprogress
 //= require nprogress-turbolinks
-//= require bootstrap-sprockets
+
