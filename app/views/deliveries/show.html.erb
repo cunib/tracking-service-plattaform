@@ -5,10 +5,10 @@
     </div>
     <div class="col-md-2">
       <div class="actions">
-        <%= link_to icon('chevron-left'), delivery_men_path, 
+        <%= link_to icon('chevron-left'), deliveries_path, 
           class: 'btn btn-default', data: { toggle: 'tooltip', container: 'body' }, 
           title: t('.back', default: t('global.actions.back')) %>
-        <%= link_to icon('pencil'), edit_delivery_man_path(@delivery_man), 
+        <%= link_to icon('pencil'), edit_delivery_path(@delivery), 
           class: 'btn btn-primary', data: { toggle: 'tooltip', container: 'body' }, 
           title: t('.back', default: t('global.actions.edit')) %>
       </div>
@@ -19,10 +19,14 @@
 <div class="row">
   <div class="col-md-12">
     <dl class="dl-horizontal">
-        <dt><%= t 'activerecord.attributes.delivery_man.nickname' %></dt>
-        <dd><%= @delivery_man.nickname %></dd>
-        <dt><%= t 'activerecord.attributes.delivery_man.business' %></dt>
-        <dd><%= @delivery_man.business %></dd>
+        <dt><%= t 'activerecord.attributes.delivery.business' %></dt>
+        <dd><%= @delivery.business %></dd>
+        <dt><%= t 'activerecord.attributes.delivery.address' %></dt>
+        <dd><%= @delivery.address %></dd>
+        <dt><%= t 'activerecord.attributes.delivery.start_date' %></dt>
+        <dd><%= @delivery.start_date %></dd>
+        <dt><%= t 'activerecord.attributes.delivery.end_date' %></dt>
+        <dd><%= @delivery.end_date %></dd>
     </dl>
   </div>
 </div>

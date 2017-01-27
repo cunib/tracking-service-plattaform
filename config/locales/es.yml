@@ -24,6 +24,9 @@ es:
       address: "Dirección"
       start_date: "Fecha de inicio"
       end_date: "Fecha de fin"
+  deliveries:
+    index:
+      title: "Repartos"
   views:
     application:
       title: "Plataforma de seguimiento de pedidos"
@@ -34,6 +37,7 @@ es:
         title: "Configuración"
         delivery_men: "Repartidores"
         orders: "Pedidos"
+        deliveries: "Repartos"
     errors:
       messages:
         unprocessable_entity:          "Entidad no procesable"

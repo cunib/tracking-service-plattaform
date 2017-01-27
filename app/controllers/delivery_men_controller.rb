@@ -45,6 +45,6 @@ class DeliveryMenController < ApplicationController
     end
 
     def delivery_man_params
-      params.require(:delivery_man).permit(:name, :address)
+      params.require(:delivery_man).permit(:nickname, :business_id)
     end
 end
