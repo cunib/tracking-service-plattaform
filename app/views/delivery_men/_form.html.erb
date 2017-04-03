@@ -4,7 +4,8 @@
   <div class="form-inputs">
     <div class="row">
       <%= f.input :nickname, wrapper_html: { class: 'col-md-6' } %>
-      <%= f.input :business_id, wrapper_html: { class: 'col-md-6' } %>
+      <%= f.input :business_id, as: :select2, collection: Business.all,
+        wrapper_html: { class: 'col-md-6' } %>
     </div>
   </div>
 

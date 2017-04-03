@@ -13,6 +13,8 @@
                     wrapper_html: { class: 'col-md-4' }
         %>
         <%= f.input :delivery_man_id,
+                    as: :select2,
+                    collection: DeliveryMan.all,
                     required: false,
                     label: t('.name'),
                     wrapper_html: { class: 'col-md-4' }

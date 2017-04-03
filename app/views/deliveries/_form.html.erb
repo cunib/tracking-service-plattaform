@@ -3,9 +3,10 @@
 
   <div class="form-inputs">
     <div class="row">
-      <%= f.input :delivery_man_id, wrapper_html: { class: 'col-md-4' } %>
       <%= f.input :start_date, wrapper_html: { class: 'col-md-4' } %>
       <%= f.input :end_date, wrapper_html: { class: 'col-md-4' } %>
+      <%= f.input :delivery_man_id, as: :select2, collection: DeliveryMan.all,
+        wrapper_html: { class: 'col-md-4' } %>
     </div>
   </div>
 

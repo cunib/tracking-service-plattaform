@@ -17,7 +17,7 @@
                     label: t('.name'),
                     wrapper_html: { class: 'col-md-3' }
         %>
-        <%= f.input :business_id,
+        <%= f.input :business_id, as: :select2, collection: Business.all,
                     required: false,
                     label: t('.name'),
                     wrapper_html: { class: 'col-md-3' }
