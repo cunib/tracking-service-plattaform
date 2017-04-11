@@ -39,6 +39,9 @@ gem 'select2_simple_form', github: 'lndl/select2_simple_form', tag: '0.7.3'
 # Configurations
 gem 'config', '~> 1.3.0'
 
+# State machine
+gem 'stateful_enum', '~> 0.4.0'
+
 group :development do
   gem 'rails-erd',              '~> 1.4.6'
   gem 'better_errors',          '~> 1.1.0'
@@ -49,6 +52,7 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'graphviz'
 end
 
 # Test tools
