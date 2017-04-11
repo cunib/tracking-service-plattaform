@@ -11,6 +11,9 @@
 // about supported directives.
 //
 //= require jquery
+//= require bootstrap
+//= require jquery-ujs
+//= require select2
+//= require select2_simple_form
 //= require nprogress
 //= require nprogress-turbolinks
-//= require bootstrap-sprockets

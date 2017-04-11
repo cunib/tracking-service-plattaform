@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161211235207) do
+ActiveRecord::Schema.define(version: 20170410110028) do
 
   create_table "businesses", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
@@ -19,4 +19,32 @@ ActiveRecord::Schema.define(version: 20161211235207) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "deliveries", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.date    "start_date"
+    t.date    "end_date"
+    t.integer "delivery_man_id"
+    t.index ["delivery_man_id"], name: "index_deliveries_on_delivery_man_id", using: :btree
+  end
+
+  create_table "delivery_men", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string  "nickname"
+    t.integer "business_id"
+    t.index ["business_id"], name: "index_delivery_men_on_business_id", using: :btree
+  end
+
+  create_table "orders", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.date    "start_date"
+    t.date    "end_date"
+    t.string  "address"
+    t.integer "business_id"
+    t.integer "delivery_id"
+    t.integer "status",      default: 0, null: false
+    t.index ["business_id"], name: "index_orders_on_business_id", using: :btree
+    t.index ["delivery_id"], name: "index_orders_on_delivery_id", using: :btree
+  end
+
+  add_foreign_key "deliveries", "delivery_men"
+  add_foreign_key "delivery_men", "businesses"
+  add_foreign_key "orders", "businesses"
+  add_foreign_key "orders", "deliveries"
 end

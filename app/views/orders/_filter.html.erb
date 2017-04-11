@@ -1,0 +1,38 @@
+<div class="collapse col-md-12" id="collapse_search_form">
+  <div class="search">
+    <%= search_form_for(@q) do |f| -%>
+      <div class="row">
+        <%= f.input :start_date,
+                    required: false,
+                    label: t('.name'),
+                    wrapper_html: { class: 'col-md-3' }
+        %>
+        <%= f.input :end_date,
+                    required: false,
+                    label: t('.name'),
+                    wrapper_html: { class: 'col-md-3' }
+        %>
+        <%= f.input :address,
+                    required: false,
+                    label: t('.name'),
+                    wrapper_html: { class: 'col-md-3' }
+        %>
+        <%= f.input :business_id, as: :select2, collection: Business.all,
+                    required: false,
+                    label: t('.name'),
+                    wrapper_html: { class: 'col-md-3' }
+        %>
+      </div>
+      <div class="row">
+        <div class="col-md-12 text-right">
+          <%= f.submit t('global.filters.submit'), class: 'btn btn-info btn-sm' %>
+          <%= link_to icon('remove'),
+                      orders_path(_reset: 'reset'),
+                      title: t('global.filters.clear_filter'),
+                      data: { toggle: 'tooltip', container: 'body', placement: 'left' },
+                      class: 'btn btn-primary btn-sm' -%>
+        </div>
+      </div>
+    <% end -%>
+  </div>
+</div>

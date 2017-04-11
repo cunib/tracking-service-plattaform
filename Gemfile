@@ -16,7 +16,6 @@ gem 'nprogress-rails',          '~> 0.2.0.2'
 source 'https://rails-assets.org' do
   gem 'rails-assets-jquery',           '~> 1.11'
   gem 'rails-assets-jquery-ujs',       '~> 1.0'
-  gem 'rails-assets-select2',          '~> 3.5.2'
 end
 
 # Use SCSS for stylesheets
@@ -34,9 +33,14 @@ gem 'responders',               '~> 2.2.0'
 
 # Forms
 gem 'simple_form',                     '~> 3.3.1'
+gem 'select2-rails'
+gem 'select2_simple_form', github: 'lndl/select2_simple_form', tag: '0.7.3'
 
 # Configurations
 gem 'config', '~> 1.3.0'
+
+# State machine
+gem 'stateful_enum', '~> 0.4.0'
 
 group :development do
   gem 'rails-erd',              '~> 1.4.6'
@@ -48,6 +52,7 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'graphviz'
 end
 
 # Test tools

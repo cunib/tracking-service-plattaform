@@ -1,11 +1,25 @@
 es:
   activerecord:
     models:
-      office: "Business"
+      business: "Business"
+      delivery_man: "Repartidor"
+      order: "Pedido"
+      delivery: "Reparto"
     attributes:
       business:
         name: "Nombre"
         address: "Dirección"
+      delivery_man:
+        nickname: "Apodo"
+      order:
+        business: "Negocio"
+        address: "Dirección"
+        start_date: "Fecha de inicio"
+        end_date: "Fecha de fin"
+      delivery:
+        delivery_man: "Repartidor"
+        start_date: "Fecha de inicio"
+        end_date: "Fecha de fin"
     errors:
       models:
         business:

@@ -1,0 +1,17 @@
+<%= simple_form_for(@delivery) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <div class="row">
+      <%= f.input :start_date, wrapper_html: { class: 'col-md-4' } %>
+      <%= f.input :end_date, wrapper_html: { class: 'col-md-4' } %>
+      <%= f.input :delivery_man_id, as: :select2, collection: DeliveryMan.all,
+        wrapper_html: { class: 'col-md-4' } %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, class: 'btn btn-success', 
+      value: t('.submit', default: t('global.form.actions.submit')) %>
+  </div>
+<% end %>

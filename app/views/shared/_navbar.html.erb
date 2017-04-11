@@ -19,7 +19,9 @@
             <span class="caret"></span>
           </a>
           <ul class="dropdown-menu">
-            <li><a href="#"><%# link_to t('views.navbar.dropdown.'), _path %></a></li>
+            <li><a href="#"><%= link_to t('views.navbar.dropdown.delivery_men'), delivery_men_path %></a></li>
+            <li><a href="#"><%= link_to t('views.navbar.dropdown.orders'), orders_path %></a></li>
+            <li><a href="#"><%= link_to t('views.navbar.dropdown.deliveries'), deliveries_path %></a></li>
           </ul>
         </li>
       </ul>
