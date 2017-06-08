@@ -17,7 +17,6 @@ class OrdersController < ApplicationController
 
   def new
     @order = Order.new
-    #throw 1
     respond_with(@order)
   end
 
