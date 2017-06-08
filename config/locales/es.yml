@@ -27,6 +27,9 @@ es:
   deliveries:
     index:
       title: "Repartos"
+  products:
+    index:
+      title: "Productos"
   views:
     application:
       title: "Plataforma de seguimiento de pedidos"
@@ -37,7 +40,7 @@ es:
         title: "Configuración"
         delivery_men: "Repartidores"
         orders: "Pedidos"
-        deliveries: "Repartos"
+        deliveries: "Repartos"        
     errors:
       messages:
         unprocessable_entity:          "Entidad no procesable"

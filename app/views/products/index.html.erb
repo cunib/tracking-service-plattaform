@@ -1,0 +1,62 @@
+<div class="page-header">
+  <div class="row">
+    <h1 class="col-md-10"> <%= t '.title' %></h1>
+    <div class="actions col-md-2">
+      <%= link_to icon('plus'), new_product_path, 
+        class: 'btn btn-success', data: { toggle: 'tooltip', container: 'body' }, 
+        title: t('product.actions.new', default: t('global.actions.new')) %>
+      <a class="btn btn-info" role="button" data-toggle="collapse"
+        href="#collapse_search_form" aria-expanded="false" aria-controls="collapse_search_form">
+        <%= icon "filter" %>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <%= render 'filter', q: @q %>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th><%= t 'activerecord.attributes.product.name' %></th>
+      <th><%= t 'activerecord.attributes.product.description' %></th>
+      <th><%= t 'activerecord.attributes.product.price' %></th>
+      <th class="actions"><%= t '.actions', default: t('global.index.actions') %></th>
+    </tr>
+    </thead>
+
+    <tbody>
+      <% @products.each do |product| -%>
+        <tr>
+          <td><%= product.name %></td>
+          <td><%= product.description %></td>
+          <td><%= product.price %></td>
+          <td>
+            <div class="btn-toolbar btn-group-xs">
+              <%= link_to icon('eye-open'), product,
+                class: 'btn btn-link',
+                title: t('products.actions.show', default: t('global.actions.show')),
+                data: { toggle: 'tooltip', container: 'body', placement: 'left' } %>
+              <%= link_to icon('pencil'), edit_product_path(product),
+                class: 'btn btn-link',
+                title: t('products.actions.edit', default: t('global.actions.edit')),
+                data: { toggle: 'tooltip', container: 'body', placement: 'left' } %>
+              <%= link_to icon('trash'), product,  method: :delete,
+                class: 'btn btn-link text-danger',
+                title: t('products.actions.destroy', default: t('global.actions.destroy')),
+                data: { toggle: 'tooltip', container: 'body', placement: 'left', 
+                        confirm: t('products.actions.confirm_destroy', 
+                        default: t('global.actions.confirm_destroy'))} %>
+            </div>
+          </td>
+        </tr>
+      <% end -%>
+    </tbody>
+  </table>
+
+  <%= render partial:'shared/pager', locals: { model: @products } %>
+
+</div>
