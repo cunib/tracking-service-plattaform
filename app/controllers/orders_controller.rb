@@ -40,11 +40,12 @@ class OrdersController < ApplicationController
   end
 
   private
+
     def set_order
       @order = Order.find(params[:id])
     end
 
     def order_params
-      params.require(:order).permit(:start_date, :end_date, :address)
+      params.require(:order).permit(:start_date, :end_date, :address, :business_id)
     end
 end
