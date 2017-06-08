@@ -16,7 +16,7 @@
 /doc/app
 
 # Config files
-/config/database.yml
+config/database.yml
 .env
 
 # Tests
