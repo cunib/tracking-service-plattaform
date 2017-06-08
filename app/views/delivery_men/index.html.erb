@@ -22,6 +22,7 @@
     <thead>
     <tr>
       <th><%= t 'activerecord.attributes.delivery_man.nickname' %></th>
+      <th><%= t 'activerecord.attributes.business.name' %></th>
       <th class="actions"><%= t '.actions', default: t('global.index.actions') %></th>
     </tr>
     </thead>
@@ -30,6 +31,7 @@
       <% @delivery_men.each do |delivery_man| -%>
         <tr>
           <td><%= delivery_man.nickname %></td>
+          <td><%= delivery_man.business %></td>
           <td>
             <div class="btn-toolbar btn-group-xs">
               <%= link_to icon('eye-open'), delivery_man,
