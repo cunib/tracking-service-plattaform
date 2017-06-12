@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170608152201) do
+ActiveRecord::Schema.define(version: 20170612210335) do
 
   create_table "businesses", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
@@ -51,8 +51,17 @@ ActiveRecord::Schema.define(version: 20170608152201) do
     t.datetime "updated_at",                           null: false
   end
 
+  create_table "traces", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.datetime "date"
+    t.integer  "delivery_man_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["delivery_man_id"], name: "index_traces_on_delivery_man_id", using: :btree
+  end
+
   add_foreign_key "deliveries", "delivery_men"
   add_foreign_key "delivery_men", "businesses"
   add_foreign_key "orders", "businesses"
   add_foreign_key "orders", "deliveries"
+  add_foreign_key "traces", "delivery_men"
 end
