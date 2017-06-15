@@ -24,6 +24,11 @@ es:
         name: "Nombre"
         description: "Descripcion"
         price: "Precio"
+      user:
+        name: "Nombre"
+        email: "Correo electrónico"
+        password: "Contraseña"
+        password_confirmation: "Confirmar contraseña"
     errors:
       models:
         business:

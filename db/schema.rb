@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170612211534) do
+ActiveRecord::Schema.define(version: 20170615020345) do
 
   create_table "businesses", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
@@ -64,6 +64,15 @@ ActiveRecord::Schema.define(version: 20170612211534) do
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.index ["delivery_man_id"], name: "index_traces_on_delivery_man_id", using: :btree
+  end
+
+  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "name"
+    t.string   "email"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.string   "password_digest"
+    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
   end
 
   add_foreign_key "deliveries", "delivery_men"

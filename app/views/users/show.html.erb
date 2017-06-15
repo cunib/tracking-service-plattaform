@@ -1,0 +1,28 @@
+<div class="page-header">
+  <div class="row">
+    <div class="col-md-10">
+      <h1><%= t '.title', default: t('global.show.title') %></h1>
+    </div>
+    <div class="col-md-2">
+      <div class="actions">
+        <%= link_to icon('chevron-left'), users_path, 
+          class: 'btn btn-default', data: { toggle: 'tooltip', container: 'body' }, 
+          title: t('.back', default: t('global.actions.back')) %>
+        <%= link_to icon('pencil'), edit_user_path(@user), 
+          class: 'btn btn-primary', data: { toggle: 'tooltip', container: 'body' }, 
+          title: t('.back', default: t('global.actions.edit')) %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <dl class="dl-horizontal">
+        <dt><%= t 'activerecord.attributes.user.name' %></dt>
+        <dd><%= @user.name %></dd>
+        <dt><%= t 'activerecord.attributes.user.email' %></dt>
+        <dd><%= @user.email %></dd>
+    </dl>
+  </div>
+</div>

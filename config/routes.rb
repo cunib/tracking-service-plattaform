@@ -5,5 +5,6 @@ Rails.application.routes.draw do
   resources :orders, path: 'ordenes'
   resources :deliveries, path: 'repartos'
   resources :products, path: 'productos'
+  resources :users, path: 'usuarios'
 
 end

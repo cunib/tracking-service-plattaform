@@ -1,0 +1,19 @@
+<%= simple_form_for(@user) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <div class="row">
+      <%= f.input :name, wrapper_html: { class: 'col-md-6' }, placeholder: 'Your name' %>
+      <%= f.input :email, wrapper_html: { class: 'col-md-6' }, placeholder: 'user@domain.com' %>
+    </div>
+    <div class="row">
+      <%= f.input :password, wrapper_html: { class: 'col-md-6' } %>
+      <%= f.input :password_confirmation, wrapper_html: { class: 'col-md-6' } %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, class: 'btn btn-success', 
+      value: t('.submit', default: t('global.form.actions.submit')) %>
+  </div>
+<% end %>

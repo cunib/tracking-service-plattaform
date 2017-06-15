@@ -30,6 +30,9 @@ es:
   products:
     index:
       title: "Productos"
+  users:
+    index:
+      title: "Usuarios"
   views:
     application:
       title: "Plataforma de seguimiento de pedidos"
@@ -40,7 +43,8 @@ es:
         title: "Configuración"
         delivery_men: "Repartidores"
         orders: "Pedidos"
-        deliveries: "Repartos"        
+        deliveries: "Repartos"   
+        users: "Usuarios"     
     errors:
       messages:
         unprocessable_entity:          "Entidad no procesable"
