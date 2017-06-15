@@ -42,6 +42,8 @@ gem 'config', '~> 1.3.0'
 # State machine
 gem 'stateful_enum', '~> 0.4.0'
 
+gem 'geocoder', '~> 1.4.4'
+
 group :development do
   gem 'rails-erd',              '~> 1.4.6'
   gem 'better_errors',          '~> 1.1.0'
