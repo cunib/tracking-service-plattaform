@@ -22,4 +22,24 @@ class Order < ApplicationRecord
   end
 
   belongs_to :business
+  belongs_to :position, dependent: :destroy
+
+  geocoded_by :address
+
+  after_validation :geocode, if: ->(obj) { obj.address.present? and obj.address_changed? }
+  after_create :save_position
+
+  def latitude=(latitude)
+    position.latitude = latitude
+  end
+
+  def longitude=(longitude)
+    position.longitude = longitude
+  end
+
+  private
+
+  def save_position
+    position.save
+  end
 end

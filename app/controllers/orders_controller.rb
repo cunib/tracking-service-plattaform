@@ -25,6 +25,7 @@ class OrdersController < ApplicationController
 
   def create
     @order = Order.new(order_params)
+    @order.position = Position.create
     @order.save
     respond_with(@order)
   end
