@@ -10,13 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170612211534) do
+ActiveRecord::Schema.define(version: 20170615142612) do
 
   create_table "businesses", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
     t.string   "address"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "product_id"
+    t.index ["product_id"], name: "index_businesses_on_product_id", using: :btree
   end
 
   create_table "deliveries", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -39,8 +41,10 @@ ActiveRecord::Schema.define(version: 20170612211534) do
     t.integer "business_id"
     t.integer "delivery_id"
     t.integer "status",      default: 0, null: false
+    t.integer "product_id"
     t.index ["business_id"], name: "index_orders_on_business_id", using: :btree
     t.index ["delivery_id"], name: "index_orders_on_delivery_id", using: :btree
+    t.index ["product_id"], name: "index_orders_on_product_id", using: :btree
   end
 
   create_table "paths", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -66,10 +70,12 @@ ActiveRecord::Schema.define(version: 20170612211534) do
     t.index ["delivery_man_id"], name: "index_traces_on_delivery_man_id", using: :btree
   end
 
+  add_foreign_key "businesses", "products"
   add_foreign_key "deliveries", "delivery_men"
   add_foreign_key "delivery_men", "businesses"
   add_foreign_key "orders", "businesses"
   add_foreign_key "orders", "deliveries"
+  add_foreign_key "orders", "products"
   add_foreign_key "paths", "deliveries"
   add_foreign_key "traces", "delivery_men"
 end

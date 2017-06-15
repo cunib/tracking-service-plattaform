@@ -21,5 +21,11 @@ class Order < ApplicationRecord
     end
   end
 
+  def can_cancel?
+    created? || development? || sended? 
+  end
+
+  has_many :products
   belongs_to :business
+
 end
