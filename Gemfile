@@ -7,6 +7,9 @@ gem 'mysql2',                 '~> 0.4.4'
 # Use Puma as the app server
 gem 'puma',                   '~> 3.6.0'
 
+gem 'geocoder'
+gem 'gmaps4rails'
+
 # Assets
 gem 'uglifier',                 '>= 1.3.0'
 gem 'turbolinks',               '~> 5.0.0'

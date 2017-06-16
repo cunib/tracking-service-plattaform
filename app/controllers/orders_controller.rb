@@ -41,6 +41,7 @@ class OrdersController < ApplicationController
 
   def cancel
     @order.cancel
+    respond_with(@order)
   end
 
   private

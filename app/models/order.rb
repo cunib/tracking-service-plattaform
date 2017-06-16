@@ -9,7 +9,7 @@ class Order < ApplicationRecord
     end
 
     event :cancel do
-      transition [:suspended, :development, :sended] => :canceled
+      transition [:created, :suspended, :development, :sended] => :canceled
     end
 
     event :dispatch do
