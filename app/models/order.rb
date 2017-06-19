@@ -25,6 +25,10 @@ class Order < ApplicationRecord
     created? || development? || sended? 
   end
 
+  def can_suspend?
+    created? || development? || sended? 
+  end
+
   has_many :products
   belongs_to :business
 

@@ -58,6 +58,12 @@
                   title: t('orders.actions.cancel', default: t('global.actions.cancel')),
                   data: { toggle: 'tooltip', container: 'body', placement: 'left' } %>
                 <% end %>
+                <% if order.can_suspend? %>      
+                  <%= link_to icon('exclamation-sign'), suspend_path(order),
+                  class: 'btn btn-link', method: :post,
+                  title: t('orders.actions.suspend', default: t('global.actions.suspend')),
+                  data: { toggle: 'tooltip', container: 'body', placement: 'left' } %>
+                <% end %>
             </div>
           </td>
         </tr>
