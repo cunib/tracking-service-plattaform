@@ -36,6 +36,8 @@ es:
       disable:         "Deshabilitar"
       confirm_destroy: "¿Está seguro que desea borrar el elemento seleccionado?"
       back:            "Volver"
+      cancel:          "Cancelar"
+      suspend:         "Suspender" 
     form:
       actions:
         submit: "Guardar cambios"

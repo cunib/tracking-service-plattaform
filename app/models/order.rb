@@ -9,7 +9,7 @@ class Order < ApplicationRecord
     end
 
     event :cancel do
-      transition [:suspended, :development, :sended] => :canceled
+      transition [:created, :suspended, :development, :sended] => :canceled
     end
 
     event :dispatch do
@@ -21,6 +21,15 @@ class Order < ApplicationRecord
     end
   end
 
+  def can_cancel?
+    created? || development? || sended? 
+  end
+
+  def can_suspend?
+    created? || development? || sended? 
+  end
+
+  has_many :products
   belongs_to :business
   belongs_to :position, dependent: :destroy
 
