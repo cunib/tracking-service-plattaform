@@ -16,6 +16,7 @@ es:
         address: "Dirección"
         start_date: "Fecha de inicio"
         end_date: "Fecha de fin"
+        status: "Estado"
       delivery:
         delivery_man: "Repartidor"
         start_date: "Fecha de inicio"
