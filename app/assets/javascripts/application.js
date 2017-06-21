@@ -17,3 +17,4 @@
 //= require select2_simple_form
 //= require nprogress
 //= require nprogress-turbolinks
+//= require plugins
