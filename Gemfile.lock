@@ -94,6 +94,8 @@ GEM
       activesupport (>= 4.2.0)
     graphviz (0.4.0)
     i18n (0.8.4)
+    js-initializers (0.0.3)
+      rails (> 3.1)
     kaminari (0.17.0)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
@@ -245,6 +247,7 @@ DEPENDENCIES
   faker
   geocoder (~> 1.4.4)
   graphviz
+  js-initializers (~> 0.0.1)
   kaminari (~> 0.17.0)
   listen (~> 3.0.5)
   mysql2 (~> 0.4.4)

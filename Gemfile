@@ -18,6 +18,9 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-jquery-ujs',       '~> 1.0'
 end
 
+## Js
+gem 'js-initializers', '~> 0.0.1'
+
 # Use SCSS for stylesheets
 gem 'sass-rails',           '~> 5.0.6'
 gem 'bootstrap-sass', '~> 3.3.6'
