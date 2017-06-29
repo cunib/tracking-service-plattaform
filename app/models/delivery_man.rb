@@ -6,4 +6,8 @@ class DeliveryMan < ApplicationRecord
   def to_s
     nickname
   end
+
+  def last_trace
+    trace if trace.changed?
+  end
 end

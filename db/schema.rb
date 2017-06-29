@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170615142612) do
+ActiveRecord::Schema.define(version: 20170628224203) do
 
   create_table "businesses", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
@@ -31,7 +31,9 @@ ActiveRecord::Schema.define(version: 20170615142612) do
   create_table "delivery_men", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string  "nickname"
     t.integer "business_id"
+    t.integer "trace_id"
     t.index ["business_id"], name: "index_delivery_men_on_business_id", using: :btree
+    t.index ["trace_id"], name: "index_delivery_men_on_trace_id", using: :btree
   end
 
   create_table "orders", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -75,20 +77,24 @@ ActiveRecord::Schema.define(version: 20170615142612) do
 
   create_table "traces", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.datetime "date"
-    t.integer  "delivery_man_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.index ["delivery_man_id"], name: "index_traces_on_delivery_man_id", using: :btree
+    t.integer  "delivery_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "position_id"
+    t.index ["delivery_id"], name: "index_traces_on_delivery_id", using: :btree
+    t.index ["position_id"], name: "index_traces_on_position_id", using: :btree
   end
 
   add_foreign_key "businesses", "products"
   add_foreign_key "deliveries", "delivery_men"
   add_foreign_key "delivery_men", "businesses"
+  add_foreign_key "delivery_men", "traces"
   add_foreign_key "orders", "businesses"
   add_foreign_key "orders", "deliveries"
   add_foreign_key "orders", "positions"
   add_foreign_key "orders", "products"
   add_foreign_key "paths", "deliveries"
   add_foreign_key "paths", "positions"
-  add_foreign_key "traces", "delivery_men"
+  add_foreign_key "traces", "deliveries"
+  add_foreign_key "traces", "positions"
 end
