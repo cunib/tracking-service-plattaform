@@ -1,19 +1,17 @@
 (function($) {
   var mapInitializers = [];
-  var defaultZoom = 15;
+  var path = [];
+  var defaultZoom = 16;
   var defaultMapCenter = { lat: -34.913283, lng: -57.951501 };
   var unintentialSubmitBlocker = 'onkeypress="if (event.keyCode === 13) { event.preventDefault(); return false; }"';
   var infoWindowContentTemplate = '<div class="window-info">' +
                                   '</div>';
-  var searchInputTemplate = '<input class="map-search-box map-control" ' + unintentialSubmitBlocker + '>';
-  var mapContainerTemplate = '<div class="map-container"><div class="map-canvas" style="width:800px; height:600px"></div></div>';
+  var mapContainerTemplate = '<div class="map-container"><div class="map-canvas" style="width:1000px; height:600px"></div></div>';
 
   var referenceContainer = 'div.references'
 
   var colors = ['33659a', 'b2c9a9', '9f0303', '3f8764', '00a5e6', 'bada55', '0355ba', 'd6fa39', 'b810cb', 'ed123a', '4d2121', '3cb5ba', '268f09']
   var chars = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ0123456789*"
-
-  var FOOTER_TEXT = "En esta primera etapa de lanzamiento, el mapa da cuenta de la Convocatoria Ordinaria 2015 y la Convocatoria Específica 2015. Próximamente se sumarán los Cursos de la Escuela de Oficios, Proyectos y Programas de las Facultades, y Convocatorias Nacionales de Voluntariado y Extensión dependientes de la SPU. Este trabajo ya está en proceso de elaboración conjunta entre la Secretaría de Extensión de la UNLP y las Unidades Académicas."
 
   function condition() {
     return ($('[data-google-maps]').length > 0) && ($('.map-container').length == 0);
@@ -34,23 +32,34 @@
     return infoWindow;
   }
 
-  function addMarker(map, position, title, colorId, label, doNotOpenInfoWindow) {
+  function addMarker(map, position, title, id, doNotOpenInfoWindow) {
     var marker = new google.maps.Marker({
       map: map,
       position: position,
       title: title,
       animation: google.maps.Animation.DROP,
-      icon: 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=' + label.id + '|' + colors[parseInt(colorId)-1]  + '|FFFFFF',
-      draggable: false
+      icon: '',
+      draggable: false,
+      visible: false
     });
-    createInfoWindow(map, marker, title, label.title, doNotOpenInfoWindow);
+    createInfoWindow(map, marker, title, title, doNotOpenInfoWindow);
     marker.addListener('click', handleMarkerClick);
     return marker;
   }
 
-  function randomIntFromInterval(min,max, colorId)
+  function addPolyline(map, path) {
+    var polyline = new google.maps.Polyline({
+        map: map,
+        path: path,
+        strokeColor: '#0000FF',
+        strokeOpacity: 0.7,
+        strokeWeight: 3
+    });
+  }
+
+  function randomIntFromInterval(min, max, colorId)
   {
-    return colors[Math.floor(colorId*(max-min+1)+min)];
+    return colors[Math.floor(Math.random() * min) + max];
   }
 
   function createContentWindow(map, marker, content, remainClosed) {
@@ -88,19 +97,35 @@
     this.get('infoWindow').open(this.getMap(), this);
   }
 
-  function loadMarkers(markers, communityCenterMarkers, map) {
+  function updatePositions(url, map) {
+    $.ajax({
+      url: url,
+      type: 'GET',
+      dataType: 'json',
+      async: false,
+      success: function (data) {
+        loadMarkers(data, map);
+      }
+    });
+  }
+
+  function loadMarkers(markers, map) {
     try {
       var bounds = map.get('bounds') || new google.maps.LatLngBounds();
-      debugger;
-//     communityCenterMarkers.forEach(function(marker) {
-//       var m = addFixedMarker(map, marker, true);
-//       bounds.extend(m.getPosition());
-//     });
-//     markers.forEach(function(marker) {
-//       var m = addMarker(map, marker.position, marker.title, marker.subject_area, marker.academic_unit, true);
-//       bounds.extend(m.getPosition());
-//     });
-      map.fitBounds(bounds);
+     markers.forEach(function(marker) {
+       var m = addMarker(map, marker.position, marker.title, marker.id, true);
+       bounds.extend(m.getPosition());
+     });
+      $.map(markers, function(marker) {
+        path.push(
+          new google.maps.LatLng(
+            marker.position.lat,
+            marker.position.lng
+          )
+        )
+      });
+      addPolyline(map, path);
+      map.panToBounds(bounds);
       map.set('bounds', bounds);
     } catch(e) {
       if (window.console && console.error) {
@@ -112,6 +137,7 @@
   function createMapInitializer(target, container) {
     var canvas = container.find('.map-canvas');
     var markersList = container.find('.map-markers-list');
+    var markers = [];
 
     return {
       init: function() {
@@ -121,7 +147,7 @@
           mapTypeId: google.maps.MapTypeId.ROADMAP
         });
         // Add markers specified by the input
-        loadMarkers(target.data('markers'), target.data('community-center-markers'), map);
+        updatePositions(target.data('url'), map);
       },
       target: target,
       container: container
