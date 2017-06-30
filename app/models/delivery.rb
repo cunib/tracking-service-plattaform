@@ -8,4 +8,17 @@ class Delivery < ApplicationRecord
   def last_positions
     traces.map(&:position)
   end
+
+  def serialized_positions
+    traces.map do |trace|
+      {
+        title: trace.date.to_s,
+        position: {
+          lat: trace.position.latitude,
+          lng: trace.position.longitude
+        },
+        id: trace.id
+      }
+    end
+  end
 end

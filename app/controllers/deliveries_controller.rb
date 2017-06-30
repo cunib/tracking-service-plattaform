@@ -1,5 +1,6 @@
 class DeliveriesController < ApplicationController
-  before_action :set_delivery, only: [:show, :edit, :update, :destroy]
+  before_action :set_delivery, only: [:show, :edit, :update, :destroy, :positions]
+  respond_to :json, only: :positions
 
   respond_to :html
 
@@ -37,6 +38,11 @@ class DeliveriesController < ApplicationController
   def destroy
     @delivery.destroy
     respond_with(@delivery)
+  end
+
+  def positions
+    @positions = @delivery.serialized_positions
+    respond_with @positions, location: index_path
   end
 
   private

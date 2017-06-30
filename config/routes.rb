@@ -1,15 +1,19 @@
 Rails.application.routes.draw do
   root 'businesses#index'
-  
+
   resources :businesses, path: 'negocios'
   resources :delivery_men, path: 'repartidores'
-  
+
   resources :orders, path: 'ordenes'
-  
-  resources :deliveries, path: 'repartos'
-  
+
+  resources :deliveries, path: 'repartos' do
+    member do
+      get 'posiciones', action: :positions, as: :positions
+    end
+  end
+
   resources :products, path: 'productos'
-  
+
   post '/cancel_order/:id', as: :cancel, to: 'orders#cancel'
   post '/suspend_order/:id', as: :suspend, to: 'orders#suspend'
 
