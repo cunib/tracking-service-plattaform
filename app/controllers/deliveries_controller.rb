@@ -13,7 +13,13 @@ class DeliveriesController < ApplicationController
   end
 
   def show
-    respond_with(@delivery)
+    @markers = []
+    @delivery
+    respond_to do |format|
+      format.html
+      format.json { render json: { projects: {}, markers: @markers, 
+                                   community_center_markers: [] } }
+    end
   end
 
   def new
@@ -46,11 +52,12 @@ class DeliveriesController < ApplicationController
   end
 
   private
-    def set_delivery
-      @delivery = Delivery.find(params[:id])
-    end
 
-    def delivery_params
-      params.require(:delivery).permit(:start_date, :end_date, :delivery_man_id)
-    end
+  def set_delivery
+    @delivery = Delivery.find(params[:id])
+  end
+
+  def delivery_params
+    params.require(:delivery).permit(:start_date, :end_date, :delivery_man_id)
+  end
 end

@@ -19,14 +19,37 @@
 <div class="row">
   <div class="col-md-12">
     <dl class="dl-horizontal">
-        <dt><%= t 'activerecord.attributes.delivery.business' %></dt>
-        <dd><%= @delivery.business %></dd>
-        <dt><%= t 'activerecord.attributes.delivery.address' %></dt>
-        <dd><%= @delivery.address %></dd>
         <dt><%= t 'activerecord.attributes.delivery.start_date' %></dt>
         <dd><%= @delivery.start_date %></dd>
         <dt><%= t 'activerecord.attributes.delivery.end_date' %></dt>
         <dd><%= @delivery.end_date %></dd>
     </dl>
+  </div>
+</div>
+<div class="block-group">
+  <div class="block left-column col-3">
+    <div class="list">
+      <% if @delivery.orders.any? %>
+        <ul>
+          <% @delivery.orders.each do |order| %>
+            <li>
+              <%# link_to project.title, project_path(project, back_url: project_call_projects_path(@project_call)) %>
+            </li>
+          <% end %>
+        </ul>
+      <% else %>
+        <div class="no-results">
+          <p>El reparto no tiene ordenes asociadas.</p>
+        </div>
+      <% end -%>
+      <div class="list-footer">
+        <%# link_to("Más resultados", "javascript:;", id: "more") %>
+      </div>
+    </div>
+  </div>
+  <div class="right-column block col-7">
+    <div data-google-maps="<%= Settings.google_maps.javascript_api_key %>" 
+         data-url="<%= positions_delivery_path(Delivery.first.id) %>">
+    </div>
   </div>
 </div>

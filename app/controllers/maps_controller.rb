@@ -1,7 +1,6 @@
 class MapsController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy, :cancel, :suspend]
 
-
   def index
     @markers = []
     respond_to do |format|
