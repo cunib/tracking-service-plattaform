@@ -18,12 +18,13 @@ es:
   orders:
     index:
       title: "Pedidos"
-      actions:
+      actions:     
     filter:
       business: "Negocio"
       address: "Dirección"
       start_date: "Fecha de inicio"
       end_date: "Fecha de fin"
+      status: "Estado"
   deliveries:
     index:
       title: "Repartos"

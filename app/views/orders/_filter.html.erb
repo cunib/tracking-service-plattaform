@@ -2,26 +2,35 @@
   <div class="search">
     <%= search_form_for(@q) do |f| -%>
       <div class="row">
+        <%= f.input :business_id, as: :select2, collection: Business.all,
+                    required: false,
+                    label: t('.business'),
+                    wrapper_html: { class: 'col-md-3' }
+        %>
+        <%= f.input :status, as: :select2, collection: Order.statuses,
+                    required: false,
+                    label: t('.status'),
+                    wrapper_html: { class: 'col-md-3' }
+        %>
         <%= f.input :start_date,
                     required: false,
-                    label: t('.name'),
-                    wrapper_html: { class: 'col-md-3' }
+                    label: t('.start_date'),
+                    wrapper_html: { class: 'col-md-3' },
+                    as: :date,
+                    html5: true 
         %>
         <%= f.input :end_date,
                     required: false,
-                    label: t('.name'),
-                    wrapper_html: { class: 'col-md-3' }
-        %>
+                    label: t('.end_date'),
+                    wrapper_html: { class: 'col-md-3' },
+                    as: :date,
+                    html5: true 
+        %>        
         <%= f.input :address,
                     required: false,
-                    label: t('.name'),
+                    label: t('.address'),
                     wrapper_html: { class: 'col-md-3' }
-        %>
-        <%= f.input :business_id, as: :select2, collection: Business.all,
-                    required: false,
-                    label: t('.name'),
-                    wrapper_html: { class: 'col-md-3' }
-        %>
+        %>                
       </div>
       <div class="row">
         <div class="col-md-12 text-right">
