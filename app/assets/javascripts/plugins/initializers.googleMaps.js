@@ -2,11 +2,14 @@
   var mapInitializers = [];
   var path = [];
   var defaultZoom = 16;
+  var lastPosition;
+  var polyline;
+  var marker;
   var defaultMapCenter = { lat: -34.913283, lng: -57.951501 };
   var unintentialSubmitBlocker = 'onkeypress="if (event.keyCode === 13) { event.preventDefault(); return false; }"';
   var infoWindowContentTemplate = '<div class="window-info">' +
                                   '</div>';
-  var mapContainerTemplate = '<div class="map-container"><div class="map-canvas" style="width:1000px; height:600px"></div></div>';
+  var mapContainerTemplate = '<div class="map-container"><div class="map-canvas" style="width:800px; height:400px"></div></div>';
 
   var referenceContainer = 'div.references'
 
@@ -32,15 +35,18 @@
     return infoWindow;
   }
 
-  function addMarker(map, position, title, id, doNotOpenInfoWindow) {
-    var marker = new google.maps.Marker({
+  function addMarker(map, position, title, id, doNotOpenInfoWindow, iconVisible) {
+    if (marker != null) {
+      marker.setMap(null);
+    }
+    marker = new google.maps.Marker({
       map: map,
       position: position,
       title: title,
-      animation: google.maps.Animation.DROP,
+      animation: google.maps.Animation.BOUNCE,
       icon: '',
       draggable: false,
-      visible: false
+      visible: iconVisible
     });
     createInfoWindow(map, marker, title, title, doNotOpenInfoWindow);
     marker.addListener('click', handleMarkerClick);
@@ -48,13 +54,18 @@
   }
 
   function addPolyline(map, path) {
-    var polyline = new google.maps.Polyline({
-        map: map,
-        path: path,
-        strokeColor: '#0000FF',
-        strokeOpacity: 0.7,
-        strokeWeight: 3
-    });
+    if (polyline != null) {
+      var polyPath = polyline.getPath();
+      polyPath.push(path[path.length - 1]);
+    } else {
+      polyline = new google.maps.Polyline({
+          map: map,
+          path: path,
+          strokeColor: '#0000FF',
+          strokeOpacity: 0.7,
+          strokeWeight: 3
+      });
+    }
   }
 
   function randomIntFromInterval(min, max, colorId)
@@ -98,35 +109,51 @@
   }
 
   function updatePositions(url, map) {
+    var currentPosition;
     $.ajax({
       url: url,
       type: 'GET',
       dataType: 'json',
       async: false,
       success: function (data) {
-        loadMarkers(data, map);
+        currentPosition = data[data.length - 1].position;
+        // load markers in the map only if the position changed
+        if (lastPositionChange(currentPosition, lastPosition)) {
+          drawTrace(data, map);
+          lastPosition = data[data.length - 1].position
+        }
       }
     });
   }
 
-  function loadMarkers(markers, map) {
+  function lastPositionChange(currentPosition, lastPosition) {
+    if ((lastPosition != null) && (currentPosition != null)) {
+      return ((currentPosition.lat != lastPosition.lat) && (currentPosition.lng != lastPosition.lng))
+    } else {
+      return true
+    }
+  }
+
+  function drawTrace(traces, map) {
+    var marker;
     try {
       var bounds = map.get('bounds') || new google.maps.LatLngBounds();
-     markers.forEach(function(marker) {
-       var m = addMarker(map, marker.position, marker.title, marker.id, true);
-       bounds.extend(m.getPosition());
-     });
-      $.map(markers, function(marker) {
+      var tracesLength = traces.length;
+      marker = traces[tracesLength - 1]
+      var m = addMarker(map, marker.position, marker.title, marker.id, true, true);
+      bounds.extend(m.getPosition());
+      $.map(traces, function(trace) {
         path.push(
           new google.maps.LatLng(
-            marker.position.lat,
-            marker.position.lng
+            trace.position.lat,
+            trace.position.lng
           )
         )
       });
       addPolyline(map, path);
       map.panToBounds(bounds);
       map.set('bounds', bounds);
+      map.setCenter(traces[tracesLength - 1].position);
     } catch(e) {
       if (window.console && console.error) {
         console.error(e);
@@ -146,8 +173,10 @@
           zoom: defaultZoom,
           mapTypeId: google.maps.MapTypeId.ROADMAP
         });
-        // Add markers specified by the input
-        updatePositions(target.data('url'), map);
+        // Update traces every 5 seconds
+        window.setInterval(function(){
+          updatePositions(target.data('url'), map);
+        }, 5000);
       },
       target: target,
       container: container
