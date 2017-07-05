@@ -39,7 +39,14 @@
         <ul>
           <% @delivery.orders.each do |order| %>
             <li>
-              <%# link_to project.title, project_path(project, back_url: project_call_projects_path(@project_call)) %>
+              <div class="row">
+                <div class="col-md-12">
+                  <dl class="dl-horizontal">
+                      <dt><%= t 'activerecord.attributes.order.address' %></dt>
+                      <dd><%= order.address %></dd>
+                  </dl>
+                </div>
+              </div>
             </li>
           <% end %>
         </ul>
@@ -58,7 +65,8 @@
       <button type="button" class="toggle-btn toggle-btn-hide" > &lt; </button>
     </div>
     <div data-google-maps="<%= Settings.google_maps.javascript_api_key %>" 
-         data-url="<%= positions_delivery_path(Delivery.first.id) %>">
+         data-url="<%= positions_delivery_path(@delivery) %>"
+         markers="<%= @markers %>">
     </div>
   </div>
 </div>

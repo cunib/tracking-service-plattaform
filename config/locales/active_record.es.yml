@@ -13,6 +13,7 @@ es:
         nickname: "Apodo"
       order:
         business: "Negocio"
+        delivery: "Reparto"
         address: "Dirección"
         start_date: "Fecha de inicio"
         end_date: "Fecha de fin"
