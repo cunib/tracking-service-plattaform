@@ -5,6 +5,8 @@
     <div class="row">
       <%= f.input :business_id, as: :select2, collection: Business.all,
         wrapper_html: { class: 'col-md-6' } %>
+      <%= f.input :delivery_man_id, as: :select2, collection: DeliveryMan.all,
+        wrapper_html: { class: 'col-md-6' } %>
       <%= f.input :address, wrapper_html: { class: 'col-md-6' } %>
     </div>
     <div class="row">

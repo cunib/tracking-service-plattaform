@@ -17,12 +17,18 @@
 </div>
 
 <div class="row">
-  <div class="col-md-12">
+  <div class="col-md-6">
     <dl class="dl-horizontal">
         <dt><%= t 'activerecord.attributes.delivery.start_date' %></dt>
         <dd><%= @delivery.start_date %></dd>
         <dt><%= t 'activerecord.attributes.delivery.end_date' %></dt>
         <dd><%= @delivery.end_date %></dd>
+    </dl>
+  </div>
+  <div class="col-md-6">
+    <dl class="dl-horizontal">
+        <dt><%= t 'activerecord.attributes.delivery.delivery_man' %></dt>
+        <dd><%= @delivery.delivery_man %></dd>
     </dl>
   </div>
 </div>
@@ -48,6 +54,9 @@
     </div>
   </div>
   <div class="right-column block col-7">
+    <div class="toggle-control">
+      <button type="button" class="toggle-btn toggle-btn-hide" > &lt; </button>
+    </div>
     <div data-google-maps="<%= Settings.google_maps.javascript_api_key %>" 
          data-url="<%= positions_delivery_path(Delivery.first.id) %>">
     </div>

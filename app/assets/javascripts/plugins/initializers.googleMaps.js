@@ -9,7 +9,7 @@
   var unintentialSubmitBlocker = 'onkeypress="if (event.keyCode === 13) { event.preventDefault(); return false; }"';
   var infoWindowContentTemplate = '<div class="window-info">' +
                                   '</div>';
-  var mapContainerTemplate = '<div class="map-container"><div class="map-canvas" style="width:800px; height:400px"></div></div>';
+  var mapContainerTemplate = '<div class="map-container"><div class="map-canvas" style="height:500px"></div></div>';
 
   var referenceContainer = 'div.references'
 

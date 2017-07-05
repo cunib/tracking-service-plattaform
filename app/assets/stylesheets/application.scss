@@ -21,6 +21,117 @@
 @import "bootstrap";
 $icon-font-path: "bootstrap-sass/assets/fonts/bootstrap/";
 
+//Map context
+
+.block-group,.block,.block-group:after,.block:after,.block-group:before,.block:before{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}
+.block-group{*zoom:1}
+.block-group:before,.block-group:after{display:table;content:"";line-height:0}
+.block-group:after{clear:both}
+.block-group{list-style-type:none;padding:0;margin:0}
+.block-group>.block-group{clear:none;float:left;margin:0 !important}
+.block{float:left;width:100%; margin-top: 10px; padding: 0px 5px 0px 5px;}
+
+.more-info {
+  font-size: 11px;
+}
+
+.search-box {
+  padding: 10px 0px 10px 10px;
+}
+
+.col-1 { width: 10%; }
+.col-2 { width: 20%; }
+.col-3 { width: 30%; }
+.col-4 { width: 40%; }
+.col-5 { width: 50%; }
+.col-6 { width: 60%; }
+.col-7 { width: 70%; }
+.col-8 { width: 80%; }
+.col-9 { width: 90%; }
+.col-10 { width: 100%; }
+
+.left-column { height: 400px; padding-left: 10px; padding-right: 0px; font-size: 13px; }
+.right-column { padding: 0px; position: relative; }
+
+.toggle-control {
+  width: 2%;
+  height: 500px;
+  position: absolute;
+  z-index: 99;
+}
+
+.toggle-btn {
+  height: 100%;
+  color: #102a12;
+  font-size: 12px;
+  background: #ffffff;
+  text-decoration: none;
+  border: none;
+  opacity: 0.9;
+}
+
+.toggle-btn:hover {
+  background: #ebebeb;
+  text-decoration: none;
+}
+
+.toggle-btn:focus { outline:0; }
+
+.list ul {
+  list-style-type: none;
+  margin: 0px;
+  padding: 0px;
+  height: 375px;
+  overflow-y: scroll;
+}
+
+.list li {
+  border-bottom: 1px solid #ccc;
+}
+
+.list li:last-child {
+  border: none;
+}
+
+.list li a {
+  padding: 5px;
+  text-decoration: none;
+  font-size: 13px;
+  color: #000;
+  display: block;
+
+  -webkit-transition: font-size 0.3s ease, background-color 0.3s ease;
+  -moz-transition: font-size 0.3s ease, background-color 0.3s ease;
+  -o-transition: font-size 0.3s ease, background-color 0.3s ease;
+  -ms-transition: font-size 0.3s ease, background-color 0.3s ease;
+  transition: font-size 0.3s ease, background-color 0.3s ease;
+}
+
+.list li a:hover {
+  background: #f6f6f6;
+}
+
+.list-footer {
+  padding: 0px;
+  margin: 0px;
+  height: 30px;
+}
+
+.list .no-results {
+  height: 375px;
+  display: inline-block;
+}
+
+.description {
+  overflow-y: scroll;
+  padding: 0px 10px 0px 10px;
+}
+
+.description p {
+  line-height: 140%
+}
+
+//
 
 .app-title {
   color: #2d3e50 !important;  
