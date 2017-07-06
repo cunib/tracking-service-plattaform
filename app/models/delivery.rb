@@ -21,4 +21,21 @@ class Delivery < ApplicationRecord
       }
     end
   end
+
+  def serialized_orders
+    orders.map do |order|
+      {
+        title: order.address,
+        position: {
+          lat: order.position.latitude,
+          lng: order.position.longitude
+        },
+        id: order.id
+      }
+    end
+  end
+
+  def to_s
+    "##{id}-#{start_date.to_s}"
+  end
 end

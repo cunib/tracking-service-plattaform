@@ -32,6 +32,7 @@ class Order < ApplicationRecord
   has_many :products
   belongs_to :business
   belongs_to :position, dependent: :destroy
+  belongs_to :delivery
 
   geocoded_by :address
 

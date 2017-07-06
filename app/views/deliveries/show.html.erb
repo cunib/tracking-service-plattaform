@@ -66,7 +66,7 @@
     </div>
     <div data-google-maps="<%= Settings.google_maps.javascript_api_key %>" 
          data-url="<%= positions_delivery_path(@delivery) %>"
-         markers="<%= @markers %>">
+         data-orders-positions-markers="<%= @markers.to_json %>">
     </div>
   </div>
 </div>

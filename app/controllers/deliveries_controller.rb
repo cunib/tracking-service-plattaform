@@ -13,12 +13,10 @@ class DeliveriesController < ApplicationController
   end
 
   def show
-    @markers = []
-    @delivery
+    @markers = @delivery.serialized_orders
     respond_to do |format|
       format.html
-      format.json { render json: { projects: {}, markers: @markers, 
-                                   community_center_markers: [] } }
+      format.json { render json: { markers: @markers } }
     end
   end
 

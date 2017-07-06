@@ -48,7 +48,7 @@
       draggable: false,
       visible: iconVisible
     });
-    createInfoWindow(map, marker, title, title, doNotOpenInfoWindow);
+    //createInfoWindow(map, marker, title, title, doNotOpenInfoWindow);
     marker.addListener('click', handleMarkerClick);
     return marker;
   }
@@ -77,9 +77,9 @@
     var infoWindowContent = $(infoWindowContentTemplate);
     if (marker.title) {
       $('<strong/>').text(marker.title).appendTo(infoWindowContent)
-      content.forEach(function(project) {
-        $('<p/>').text("* " + project).appendTo(infoWindowContent)
-      });
+      //content.forEach(function(project) {
+      //  $('<p/>').text("* " + project).appendTo(infoWindowContent)
+      //});
     }
     // Create, store a ref to and open the InfoWindow
     var infoWindow = new google.maps.InfoWindow({ content: infoWindowContent.get(0), maxWidth: 240 });
@@ -93,13 +93,13 @@
   function addFixedMarker(map, marker, doNotOpenInfoWindow) {
     var m = new google.maps.Marker({
       map: map,
-      position: JSON.parse(marker.position),
+      position: marker.position,
       title: marker.title,
       animation: google.maps.Animation.DROP,
       icon: 'https://maps.google.com/mapfiles/kml/shapes/schools_maps.png',
       draggable: false
     });
-    createContentWindow(map, m, marker.projects, doNotOpenInfoWindow);
+    createContentWindow(map, m, m.title, doNotOpenInfoWindow);
     m.addListener('click', handleMarkerClick);
     return m;
   }
@@ -161,11 +161,26 @@
     }
   }
 
+  function loadMarkers(markers, map) {
+    try {
+      var bounds = map.get('bounds') || new google.maps.LatLngBounds();
+      markers.forEach(function(marker) {
+        var m = addFixedMarker(map, marker, true);
+        bounds.extend(m.getPosition());
+      });
+      //map.fitBounds(bounds);
+      map.set('bounds', bounds);
+    } catch(e) {
+      if (window.console && console.error) {
+        console.error(e);
+      }
+    }
+  }
+
+
   function createMapInitializer(target, container) {
     var canvas = container.find('.map-canvas');
-    var markersList = container.find('.map-markers-list');
-    var markers = [];
-
+    var markers = target.data('orders-positions-markers');
     return {
       init: function() {
         var map = new google.maps.Map(canvas.get(0), {
@@ -173,6 +188,8 @@
           zoom: defaultZoom,
           mapTypeId: google.maps.MapTypeId.ROADMAP
         });
+        //Load orders delivery position markers
+        loadMarkers(markers, map)
         // Update traces every 5 seconds
         window.setInterval(function(){
           updatePositions(target.data('url'), map);
@@ -189,75 +206,6 @@
       options[object.id] = object.attributes.name;
     });
     return options;
-  }
-
-  function academicUnitOptions() {
-    options = {}
-    return $('.references').data('academic-units').sort(function(a,b){ return a.id - b.id });
-  }
-
-  function referenceList(container, subjectAreaOptions, academicUnitOptions) {
-    var $container = $(container);
-    $('<div/>').addClass('block col-10 ref-title').text("Puntos fijos").appendTo($container);
-    var  wrapper = $('<div/>')
-      .addClass('block col-3 reference-wrapper image-wrapper')
-      .appendTo($container);
-    $('<img class="home-ref">')
-      .attr('src', 'https://maps.google.com/mapfiles/kml/shapes/schools_maps.png')
-      .appendTo(wrapper);
-        var span = $('<span/>').attr('title', "Centros Comunitarios de Extensión").appendTo(wrapper);
-        $('<div/>').addClass('reference-text').text("Centros Comunitarios de Extensión").appendTo(span);
-    $('<div/>').addClass('block col-10 ref-title').text("Áreas temáticas").appendTo($container);
-    $.each(subjectAreaOptions, function(k, v) {
-      if(k != "") {
-        var  wrapper = $('<div/>')
-          .addClass('block col-2 reference-wrapper')
-          .appendTo($container);
-        $('<div/>')
-          .addClass('circle')
-          .css("background-color", "#" + colors[parseInt(k)-1])
-          .appendTo(wrapper);
-        var span = $('<span/>').attr('title', v).appendTo(wrapper);
-        $('<div/>').addClass('reference-text').text(v).appendTo(span);
-      }
-    });
-    $('<div/>').addClass('block col-10 ref-title').text("Unidades Académicas").appendTo($container);
-    $.each(academicUnitOptions, function(index, object) {
-        var  wrapper = $('<div/>')
-          .addClass('block col-2 reference-wrapper')
-          .appendTo($container);
-        $('<div/>')
-          .addClass('ref')
-          .text(object.id)
-          .appendTo(wrapper)
-        var span = $('<span/>').attr('title', object.attributes.name).appendTo(wrapper);
-        $('<div/>').addClass('reference-text')
-          .text(object.attributes.name)
-          .appendTo(span);
-    });
-    $('<div/>')
-      .addClass('block col-12 footer-text')
-      .text(FOOTER_TEXT)
-      .appendTo($container);
-  }
-
-  function checkProjectCallType(url, projectCallId) {
-    var $filterSubjectArea = $('#filter_subject_area_id');
-    $.ajax({
-      url: url,
-      type: 'POST',
-      dataType: 'json',
-      beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
-      data: { project_call_id: projectCallId },
-      success: function (data) {
-        if (data.project_call_type == 'specific') {
-          $filterSubjectArea.hide();
-        }
-        else {
-          $filterSubjectArea.show()
-        }
-      }
-    }); 
   }
 
   function initializer() {
