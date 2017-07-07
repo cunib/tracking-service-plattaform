@@ -1,7 +1,7 @@
 (function($) {
   var mapInitializers = [];
   var path = [];
-  var defaultZoom = 16;
+  var defaultZoom = 15;
   var lastPosition;
   var polyline;
   var marker;
@@ -168,7 +168,7 @@
         var m = addFixedMarker(map, marker, true);
         bounds.extend(m.getPosition());
       });
-      //map.fitBounds(bounds);
+      map.fitBounds(bounds);
       map.set('bounds', bounds);
     } catch(e) {
       if (window.console && console.error) {
@@ -188,6 +188,7 @@
           zoom: defaultZoom,
           mapTypeId: google.maps.MapTypeId.ROADMAP
         });
+        map.setCenter(new google.maps.LatLng(-34.913283, -57.951501))
         //Load orders delivery position markers
         loadMarkers(markers, map)
         // Update traces every 5 seconds
