@@ -39,6 +39,8 @@ class Order < ApplicationRecord
   after_validation :geocode, if: ->(obj) { obj.address.present? and obj.address_changed? }
   after_create :save_position
 
+  #validate :position_present
+
   def latitude=(latitude)
     position.latitude = latitude
   end
@@ -48,6 +50,13 @@ class Order < ApplicationRecord
   end
 
   private
+
+  def position_present
+    if (position.latitude.nil? && position.longitude.nil?)
+      errors.add :position, :geocode_fail
+      throw :abort
+    end
+  end
 
   def save_position
     position.save
