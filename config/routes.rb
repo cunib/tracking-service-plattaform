@@ -1,3 +1,5 @@
+require 'api_constraints'
+
 Rails.application.routes.draw do
   root 'businesses#index'
 
@@ -18,4 +20,14 @@ Rails.application.routes.draw do
   post '/suspend_order/:id', as: :suspend, to: 'orders#suspend'
 
   get '/mapas', as: :index, to: 'maps#index'
+
+  # API
+  namespace :api, defaults: { format: 'json' } do
+    scope module: :v1, constraints: ApiConstraints.new(version: 1, default: true) do
+      resources :orders, only: [:index]
+      resources :businesses, only: [:index]
+    end
+  end
+
+  match '*path', to: 'application#handle_404', via: :all
 end
