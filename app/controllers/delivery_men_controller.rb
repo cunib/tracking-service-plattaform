@@ -40,11 +40,12 @@ class DeliveryMenController < ApplicationController
   end
 
   private
-    def set_delivery_man
-      @delivery_man = DeliveryMan.find(params[:id])
-    end
 
-    def delivery_man_params
-      params.require(:delivery_man).permit(:nickname, :business_id)
-    end
+  def set_delivery_man
+    @delivery_man = DeliveryMan.find(params[:id])
+  end
+
+  def delivery_man_params
+    params.require(:delivery_man).permit(:nickname, :business_id)
+  end
 end
