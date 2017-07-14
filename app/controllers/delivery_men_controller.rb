@@ -25,6 +25,7 @@ class DeliveryMenController < ApplicationController
 
   def create
     @delivery_man = DeliveryMan.new(delivery_man_params)
+    @delivery_man.trace = Trace.create
     @delivery_man.save
     respond_with(@delivery_man)
   end

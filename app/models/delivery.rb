@@ -37,7 +37,7 @@ class Delivery < ApplicationRecord
 
   def update_trace(positions)
     if active?
-      positions.each { |p| traces << Trace.create latitude: p.latitude, longitude. p.longitude }
+      positions.each { |p| traces << create_trace(p[:latitude], p[:longitude]) }
     end
   end
 
@@ -49,5 +49,12 @@ class Delivery < ApplicationRecord
 
   def to_s
     "##{id}-#{start_date.to_s}"
+  end
+
+  private
+
+  def create_trace(latitude, longitude)
+    position = Position.create latitude: latitude, longitude: longitude
+    Trace.create delivery_id: self.id, date: DateTime.now, position: position
   end
 end

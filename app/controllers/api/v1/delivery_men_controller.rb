@@ -13,7 +13,7 @@ module  Api
       end
 
       def new_positions
-        if @delivery_man.update_positions params[:positions]
+        if @delivery_man.update_trace delivery_man_params.to_h[:positions]
           render nothing: true, status: :ok
         else
           render nothing: true, status: :service_unavailable

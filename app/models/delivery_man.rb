@@ -1,7 +1,7 @@
 class DeliveryMan < ApplicationRecord
   belongs_to :business
   has_many :deliveries
-  has_one :trace
+  belongs_to :trace
 
   def to_s
     nickname
@@ -13,7 +13,7 @@ class DeliveryMan < ApplicationRecord
 
   def update_trace(positions)
     last_position = positions.last
-    updated = trace.position.update latitude: last_position.latitude, longitude: last_position.longitude
+    updated = trace.update_position last_position[:latitude], last_position[:longitude]
     current_delivery.update_trace(positions)
     updated
   end
