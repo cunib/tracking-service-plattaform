@@ -25,6 +25,7 @@ class DeliveryMenController < ApplicationController
 
   def create
     @delivery_man = DeliveryMan.new(delivery_man_params)
+    @delivery_man.trace = Trace.create
     @delivery_man.save
     respond_with(@delivery_man)
   end
@@ -40,11 +41,12 @@ class DeliveryMenController < ApplicationController
   end
 
   private
-    def set_delivery_man
-      @delivery_man = DeliveryMan.find(params[:id])
-    end
 
-    def delivery_man_params
-      params.require(:delivery_man).permit(:nickname, :business_id)
-    end
+  def set_delivery_man
+    @delivery_man = DeliveryMan.find(params[:id])
+  end
+
+  def delivery_man_params
+    params.require(:delivery_man).permit(:nickname, :business_id)
+  end
 end

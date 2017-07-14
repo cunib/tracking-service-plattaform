@@ -41,6 +41,11 @@ GEM
       erubis (~> 2.7.0)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.0, >= 1.0.3)
+    active_model_serializers (0.10.6)
+      actionpack (>= 4.1, < 6)
+      activemodel (>= 4.1, < 6)
+      case_transform (>= 0.2)
+      jsonapi-renderer (>= 0.1.1.beta1, < 0.2)
     activejob (5.0.3)
       activesupport (= 5.0.3)
       globalid (>= 0.3.6)
@@ -69,6 +74,8 @@ GEM
       sass (>= 3.3.4)
     builder (3.2.3)
     byebug (9.0.6)
+    case_transform (0.2)
+      activesupport
     choice (0.2.0)
     coderay (1.1.1)
     concurrent-ruby (1.0.5)
@@ -96,6 +103,7 @@ GEM
     i18n (0.8.4)
     js-initializers (0.0.3)
       rails (> 3.1)
+    jsonapi-renderer (0.1.2)
     kaminari (0.17.0)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
@@ -237,6 +245,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_model_serializers (~> 0.10.6)
   better_errors (~> 1.1.0)
   binding_of_caller
   bootstrap-sass (~> 3.3.6)
