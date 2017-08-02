@@ -9,7 +9,7 @@ module  Api
 
       def active_delivery_orders
         @delivery_orders = @delivery_man.deliveries.last.orders
-        render json: @delivery_orders, each_serializer: OrdersSerializer
+        render json: @delivery_orders, include: [:position, :delivery, :business], key_transform: :underscore
       end
 
       def new_positions

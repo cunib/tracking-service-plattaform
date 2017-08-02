@@ -47,8 +47,16 @@ class Delivery < ApplicationRecord
     active
   end
 
+  def deliver
+    update_attribute start_date: DateTime.now
+  end
+
+  def finalize
+    update_attribute end_date: DateTime.now
+  end
+
   def to_s
-    "##{id}-#{start_date.to_s}"
+    "#{delivery_man}-##{id}-#{start_date.to_s}"
   end
 
   private
