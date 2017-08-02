@@ -12,6 +12,9 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li><%= link_to t('views.navbar.bussines'), businesses_path %></li>
+        <li><%= link_to t('views.navbar.dropdown.delivery_men'), delivery_men_path %></li>
+        <li><%= link_to t('views.navbar.dropdown.orders'), orders_path %></li>
+        <li><%= link_to t('views.navbar.dropdown.deliveries'), deliveries_path %></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" 
                                               aria-haspopup="true" aria-expanded="false">
@@ -19,9 +22,7 @@
             <span class="caret"></span>
           </a>
           <ul class="dropdown-menu">
-            <li><a href="#"><%= link_to t('views.navbar.dropdown.delivery_men'), delivery_men_path %></a></li>
-            <li><a href="#"><%= link_to t('views.navbar.dropdown.orders'), orders_path %></a></li>
-            <li><a href="#"><%= link_to t('views.navbar.dropdown.deliveries'), deliveries_path %></a></li>
+        <li><%= link_to t('views.navbar.dropdown.strategy'), '#' %></li>
           </ul>
         </li>
       </ul>
