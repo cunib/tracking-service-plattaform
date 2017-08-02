@@ -14,6 +14,8 @@ es:
       order:
         business: "Negocio"
         delivery: "Reparto"
+        business_id: "Negocio"
+        delivery_id: "Reparto"
         address: "Dirección"
         start_date: "Fecha de inicio"
         end_date: "Fecha de fin"

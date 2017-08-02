@@ -21,6 +21,8 @@ Rails.application.routes.draw do
 
   get '/mapas', as: :index, to: 'maps#index'
 
+  get '/realizar-pedido', as: :make_purchase, to: 'purchases#make_purchase'
+
   # API
   namespace :api, defaults: { format: 'json' } do
     scope module: :v1, constraints: ApiConstraints.new(version: 1, default: true) do
