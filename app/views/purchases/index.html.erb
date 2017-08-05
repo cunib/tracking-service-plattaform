@@ -1,0 +1,13 @@
+<div class="container">
+  <div class="row">
+    <% @businesses.each do |business| %>
+      <div class="col-sm-4">
+        <div class="panel panel-primary">
+          <div class="panel-heading"><%= business %></div>
+          <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
+          <div class="panel-footer"><%= business.address %></div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div><br><br>

@@ -19,9 +19,9 @@ Rails.application.routes.draw do
   post '/cancel_order/:id', as: :cancel, to: 'orders#cancel'
   post '/suspend_order/:id', as: :suspend, to: 'orders#suspend'
 
-  get '/mapas', as: :index, to: 'maps#index'
+  #get '/mapas', as: :index, to: 'maps#index'
 
-  get '/realizar-pedido', as: :make_purchase, to: 'purchases#make_purchase'
+  get '/seguilo', as: :trackit_index, to: 'purchases#index'
 
   # API
   namespace :api, defaults: { format: 'json' } do
