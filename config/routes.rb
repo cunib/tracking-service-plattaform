@@ -3,7 +3,11 @@ require 'api_constraints'
 Rails.application.routes.draw do
   root 'businesses#index'
 
-  resources :businesses, path: 'negocios'
+  resources :businesses, path: 'locales' do
+    get '/realizar-pedido', as: :make_order, to: 'businesses#make_order'
+    resources :products, path: 'productos', path_names: { new: 'nuevo' }
+  end
+
   resources :delivery_men, path: 'repartidores'
 
   resources :orders, path: 'ordenes'
@@ -13,8 +17,6 @@ Rails.application.routes.draw do
       get 'posiciones', action: :positions, as: :positions
     end
   end
-
-  resources :products, path: 'productos'
 
   post '/cancel_order/:id', as: :cancel, to: 'orders#cancel'
   post '/suspend_order/:id', as: :suspend, to: 'orders#suspend'

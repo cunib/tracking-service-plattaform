@@ -1,0 +1,21 @@
+<%= simple_form_for(@order) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <div class="row">
+      <div class="col-md-6">
+        <%= f.input :business_id, value: @business %>
+        <%= f.input :product_ids, as: :select2, multiple: true, collection: @business.products %>
+        <%= f.input :address %>
+      </div>
+      <div class="col-md-6">
+        <%= f.input :start_date, as: :date, html5: true %>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, class: 'btn btn-success', 
+      value: t('.submit', default: t('global.form.actions.submit')) %>
+  </div>
+<% end %>

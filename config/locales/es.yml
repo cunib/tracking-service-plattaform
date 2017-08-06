@@ -5,7 +5,8 @@ es:
   businesses:
     index:
       title: "Negocios"
-      actions:
+    actions:
+      add_products: "Agregar productos"
     filter:
       name: "Nombre"
       address: "Dirección"
@@ -31,6 +32,7 @@ es:
   products:
     index:
       title: "Productos"
+      secondary_title: "del local %{model}"
   views:
     application:
       title: "Plataforma de seguimiento de pedidos"

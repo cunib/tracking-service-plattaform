@@ -5,11 +5,11 @@
     </div>
     <div class="col-md-2">
       <div class="actions">
-        <%= link_to icon('chevron-left'), products_path, 
-          class: 'btn btn-default', data: { toggle: 'tooltip', container: 'body' }, 
+        <%= link_to icon('chevron-left'), business_products_path(@business),
+          class: 'btn btn-default', data: { toggle: 'tooltip', container: 'body' },
           title: t('.back', default: t('global.actions.back')) %>
-        <%= link_to icon('eye-open'), @product, 
-          class: 'btn btn-default', data: { toggle: 'tooltip', container: 'body' }, 
+        <%= link_to icon('eye-open'), business_product_path(@business, @product),
+          class: 'btn btn-default', data: { toggle: 'tooltip', container: 'body' },
           title: t('.show', default: t('global.actions.show')) %>
       </div>
     </div>

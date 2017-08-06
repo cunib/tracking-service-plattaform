@@ -48,6 +48,9 @@
                 data: { toggle: 'tooltip', container: 'body', placement: 'left', 
                         confirm: t('businesses.actions.confirm_destroy', 
                         default: t('global.actions.confirm_destroy'))} %>
+              <%= link_to icon('plus'), [business, :products], class: 'btn btn-link',
+                      title: t('businesses.actions.add_products'),
+                      data: { toggle: 'tooltip', container: 'body', placement: 'left' } %>
             </div>
           </td>
         </tr>
