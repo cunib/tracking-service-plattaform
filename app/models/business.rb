@@ -7,4 +7,8 @@ class Business < ApplicationRecord
   	name
   end
 
+  def deliveries
+    Delivery.where(delivery_man_id: delivery_men.pluck(:id))
+  end
+
 end

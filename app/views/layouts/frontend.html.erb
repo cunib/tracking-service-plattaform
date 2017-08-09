@@ -17,12 +17,14 @@
     <%= csrf_meta_tags %>
   </head>
   <body class="frontend-body">
-    <%= render 'shared/frontend/header' %>
+      <%= render 'shared/frontend/header' %>
+      <%= render 'shared/frontend/navbar' %> 
+    <div id="content" class="container">
 
-    <%= render 'shared/frontend/navbar' %> 
 
-    <%= yield %>
+      <%= yield %>
 
-    <%= render 'shared/frontend/footer' %> 
+    </div>
+      <%= render 'shared/frontend/footer' %> 
   </body>
 </html>

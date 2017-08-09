@@ -4,7 +4,7 @@ class DeliveryMenController < ApplicationController
   respond_to :html
 
   def index
-    @delivery_men = DeliveryMan.all
+    @delivery_men = @business.delivery_men
     @q = @delivery_men.search(session_params)
     @q.sorts = ["created_at desc"]
     @delivery_men = @q.result.page(page_param)

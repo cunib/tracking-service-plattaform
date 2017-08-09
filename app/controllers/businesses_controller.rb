@@ -1,6 +1,7 @@
 class BusinessesController < ApplicationController
-  before_action :set_business, only: [:show, :edit, :update, :destroy]
+  before_action :set_business, only: [:show, :edit, :update, :destroy, :make_order]
 
+  layout 'frontend', only: :make_order
   respond_to :html
 
   def index
@@ -39,12 +40,23 @@ class BusinessesController < ApplicationController
     respond_with(@business)
   end
 
-  private
-    def set_business
-      @business = Business.find(params[:id])
-    end
+  def make_order
+    @products = @business.products
+    @order = Order.new
+    @q = @products.search(session_params)
+    @q.sorts = ["created_at desc"]
+    @products = @q.result.page(page_param)
+    respond_with(@order)
+  end
 
-    def business_params
-      params.require(:business).permit(:name, :address)
-    end
+  private
+
+  def set_business
+    business_param = params[:id] || params[:business_id]
+    @business = Business.find(business_param)
+  end
+
+  def business_params
+    params.require(:business).permit(:name, :address)
+  end
 end

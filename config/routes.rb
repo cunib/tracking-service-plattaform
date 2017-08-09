@@ -5,7 +5,21 @@ Rails.application.routes.draw do
 
   resources :businesses, path: 'locales' do
     get '/realizar-pedido', as: :make_order, to: 'businesses#make_order'
+
     resources :products, path: 'productos', path_names: { new: 'nuevo' }
+
+    resources :orders, path: 'ordenes'
+
+    resources :delivery_men, path: 'repartidores'
+
+    resources :deliveries, path: 'repartos' do
+      member do
+        get 'posiciones', action: :positions, as: :positions
+      end
+    end
+
+    post '/cancel_order/:id', as: :cancel, to: 'orders#cancel'
+    post '/suspend_order/:id', as: :suspend, to: 'orders#suspend'
   end
 
   resources :delivery_men, path: 'repartidores'

@@ -1,5 +1,6 @@
 class PurchasesController < ApplicationController
   respond_to :html
+  skip_before_filter :set_business
 
   layout "frontend"
 

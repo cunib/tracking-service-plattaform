@@ -1,6 +1,5 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
-  before_action :set_business, only: [:index, :create, :new, :edit, :show, :update, :destroy]
 
   respond_to :html
 
@@ -42,10 +41,6 @@ class ProductsController < ApplicationController
   end
 
   private
-
-  def set_business
-    @business = Business.find(params[:business_id])
-  end
 
   def set_product
     @product = Product.find(params[:id])

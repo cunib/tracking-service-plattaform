@@ -4,7 +4,7 @@ class OrdersController < ApplicationController
   respond_to :html
 
   def index
-    @orders = Order.all
+    @orders = @business.orders
     @q = @orders.search(session_params)
     @q.sorts = ["created_at desc"]
     @orders = @q.result.page(page_param)
@@ -52,11 +52,11 @@ class OrdersController < ApplicationController
 
   private
 
-    def set_order
-      @order = Order.find(params[:id])
-    end
+  def set_order
+    @order = Order.find(params[:id])
+  end
 
-    def order_params
-      params.require(:order).permit(:start_date, :end_date, :address, :business_id, :delivery_id)
-    end
+  def order_params
+    params.require(:order).permit(:start_date, :end_date, :address, :business_id, :delivery_id)
+  end
 end

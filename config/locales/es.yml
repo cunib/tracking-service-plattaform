@@ -37,13 +37,15 @@ es:
     application:
       title: "Plataforma de seguimiento de pedidos"
     navbar:
-      app_title: "Plataforma de seguimiento de pedidos"
+      app_title: "<b>%{business}</b> - <small>Plataforma de seguimiento de pedidos</small>"
       bussines: "Negocios"
       dropdown: 
         title: "Configuración"
         delivery_men: "Repartidores"
         orders: "Pedidos"
         deliveries: "Repartos"        
+        edit_business: "Editar local"
+        products: "Productos"
     errors:
       messages:
         unprocessable_entity:          "Entidad no procesable"

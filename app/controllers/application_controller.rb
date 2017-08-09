@@ -2,6 +2,7 @@ require "application_responder"
 
 class ApplicationController < ActionController::Base
   self.responder = ApplicationResponder
+  before_action :set_business
   respond_to :html
 
   protect_from_forgery with: :exception
@@ -41,6 +42,10 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+  def set_business
+    @business = Business.find params[:business_id]
+  end
 
   def log_error(exception, section = nil)
     if Rails.env.production?

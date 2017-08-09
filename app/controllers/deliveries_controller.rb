@@ -5,7 +5,7 @@ class DeliveriesController < ApplicationController
   respond_to :html
 
   def index
-    @deliveries = Delivery.all
+    @deliveries = @business.deliveries
     @q = @deliveries.search(session_params)
     @q.sorts = ["created_at desc"]
     @deliveries = @q.result.page(page_param)
