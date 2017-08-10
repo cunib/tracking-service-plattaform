@@ -6,7 +6,7 @@ es:
     index:
       title: "Negocios"
     actions:
-      add_products: "Agregar productos"
+      access: "Acceder al local"
     filter:
       name: "Nombre"
       address: "Dirección"

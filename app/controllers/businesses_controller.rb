@@ -49,6 +49,10 @@ class BusinessesController < ApplicationController
     respond_with(@order)
   end
 
+  def business_sellection
+
+  end
+
   private
 
   def set_business
