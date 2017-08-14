@@ -8,7 +8,7 @@ class OrdersController < ApplicationController
     @q = @orders.search(session_params)
     @q.sorts = ["created_at desc"]
     @orders = @q.result.page(page_param)
-    respond_with(@orders)
+    respond_with(@orders, location: [@business, :orders])
   end
 
   def show
@@ -27,12 +27,12 @@ class OrdersController < ApplicationController
     @order = Order.new(order_params)
     @order.position = Position.create
     @order.save
-    respond_with(@order)
+    respond_with(@order, location: [@business, :orders])
   end
 
   def update
     @order.update(order_params)
-    respond_with(@order)
+    respond_with(@order, location: [@business, :order])
   end
 
   def destroy
@@ -42,12 +42,13 @@ class OrdersController < ApplicationController
 
   def cancel
     @order.cancel
-    respond_with(@order)
+    respond_with(@order, location: [@business, :orders])
+
   end
 
   def suspend
     @order.suspend
-    respond_with(@order)
+    respond_with(@order, location: [@business, :orders])
   end
 
   private

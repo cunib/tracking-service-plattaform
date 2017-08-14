@@ -1,4 +1,4 @@
-<%= simple_form_for(@order) do |f| %>
+<%= simple_form_for([@business, @order]) do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
@@ -9,7 +9,7 @@
         <%= f.input :address %>
       </div>
       <div class="col-md-6">
-        <%= f.input :product_ids, as: :select2, multiple: true, collection: Product.all %>
+        <%# f.input :product_ids, as: :select2, multiple: true, collection: @business.products %>
         <%= f.input :start_date, as: :date, html5: true %>
       </div>
     </div>

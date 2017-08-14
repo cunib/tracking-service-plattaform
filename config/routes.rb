@@ -8,7 +8,12 @@ Rails.application.routes.draw do
 
     resources :products, path: 'productos', path_names: { new: 'nuevo' }
 
-    resources :orders, path: 'ordenes'
+    resources :orders, path: 'ordenes' do
+      member do
+        post :cancel, as: :cancel, to: 'orders#cancel'
+        post :suspend, as: :suspend, to: 'orders#suspend'
+      end
+    end
 
     resources :delivery_men, path: 'repartidores'
 
@@ -18,22 +23,20 @@ Rails.application.routes.draw do
       end
     end
 
-    post '/cancel_order/:id', as: :cancel, to: 'orders#cancel'
-    post '/suspend_order/:id', as: :suspend, to: 'orders#suspend'
   end
 
-  resources :delivery_men, path: 'repartidores'
+# resources :delivery_men, path: 'repartidores'
+#
+# resources :orders, path: 'ordenes'
+#
+# resources :deliveries, path: 'repartos' do
+#   member do
+#     get 'posiciones', action: :positions, as: :positions
+#   end
+# end
 
-  resources :orders, path: 'ordenes'
-
-  resources :deliveries, path: 'repartos' do
-    member do
-      get 'posiciones', action: :positions, as: :positions
-    end
-  end
-
-  post '/cancel_order/:id', as: :cancel, to: 'orders#cancel'
-  post '/suspend_order/:id', as: :suspend, to: 'orders#suspend'
+#  post '/cancel_order/:id', as: :cancel, to: 'orders#cancel'
+#  post '/suspend_order/:id', as: :suspend, to: 'orders#suspend'
 
   #get '/mapas', as: :index, to: 'maps#index'
 
