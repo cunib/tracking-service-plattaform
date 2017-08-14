@@ -13,12 +13,14 @@ es:
   delivery_men:
     index:
       title: "Repartidores"
+      secondary_title: "del local %{model}"
       actions:
     filter:
       nickname: "Apodo"
   orders:
     index:
       title: "Pedidos"
+      secondary_title: "del local %{model}"
       actions:     
     filter:
       business: "Negocio"
@@ -29,6 +31,7 @@ es:
   deliveries:
     index:
       title: "Repartos"
+      secondary_title: "del local %{model}"
   products:
     index:
       title: "Productos"

@@ -1,6 +1,8 @@
 <div class="page-header">
   <div class="row">
-    <h1 class="col-md-10"> <%= t '.title' %></h1>
+    <h1 class="col-md-10"> <%= t '.title' %>
+      <small><%= t '.secondary_title', model: @business %></small>
+    </h1>
     <div class="actions col-md-2">
       <%= link_to icon('plus'), new_business_order_path(@business),
         class: 'btn btn-success', data: { toggle: 'tooltip', container: 'body' }, 

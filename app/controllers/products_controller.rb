@@ -8,16 +8,14 @@ class ProductsController < ApplicationController
     @q = @products.search(session_params)
     @q.sorts = ["created_at desc"]
     @products = @q.result.page(page_param)
-    respond_with(@products)
+    respond_with(@products, location: [@business, :products])
   end
 
   def show
-    respond_with(@product)
   end
 
   def new
     @product = Product.new
-    respond_with(@product)
   end
 
   def edit

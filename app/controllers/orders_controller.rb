@@ -37,7 +37,7 @@ class OrdersController < ApplicationController
 
   def destroy
     @order.destroy
-    respond_with(@order)
+    respond_with(@order, location: [@business, :orders])
   end
 
   def cancel
