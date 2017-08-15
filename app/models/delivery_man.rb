@@ -1,7 +1,7 @@
 class DeliveryMan < ApplicationRecord
   belongs_to :business
   has_many :deliveries
-  belongs_to :trace
+  belongs_to :trace, optional: true
 
   def to_s
     nickname

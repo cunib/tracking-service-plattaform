@@ -5,10 +5,10 @@
     </div>
     <div class="col-md-2">
       <div class="actions">
-        <%= link_to icon('chevron-left'), delivery_men_path, 
+        <%= link_to icon('chevron-left'), business_delivery_men_path(@business), 
           class: 'btn btn-default', data: { toggle: 'tooltip', container: 'body' }, 
           title: t('.back', default: t('global.actions.back')) %>
-        <%= link_to icon('pencil'), edit_delivery_man_path(@delivery_man), 
+        <%= link_to icon('pencil'), edit_business_delivery_man_path(@business, @delivery_man), 
           class: 'btn btn-primary', data: { toggle: 'tooltip', container: 'body' }, 
           title: t('.back', default: t('global.actions.edit')) %>
       </div>

@@ -2,7 +2,7 @@
   <div class="row">
     <h1 class="col-md-10"> <%= t '.title' %></h1>
     <div class="actions col-md-2">
-      <%= link_to icon('plus'), new_delivery_man_path, 
+      <%= link_to icon('plus'), new_business_delivery_man_path(@business), 
         class: 'btn btn-success', data: { toggle: 'tooltip', container: 'body' }, 
         title: t('delivery_men.actions.new', default: t('global.actions.new')) %>
       <a class="btn btn-info" role="button" data-toggle="collapse"
@@ -34,15 +34,15 @@
           <td><%= delivery_man.business %></td>
           <td>
             <div class="btn-toolbar btn-group-xs">
-              <%= link_to icon('eye-open'), delivery_man,
+              <%= link_to icon('eye-open'), business_delivery_man_path(@business, delivery_man),
                 class: 'btn btn-link',
                 title: t('delivery_men.actions.show', default: t('global.actions.show')),
                 data: { toggle: 'tooltip', container: 'body', placement: 'left' } %>
-              <%= link_to icon('pencil'), edit_delivery_man_path(delivery_man),
+              <%= link_to icon('pencil'), edit_business_delivery_man_path(@business, delivery_man),
                 class: 'btn btn-link',
                 title: t('delivery_men.actions.edit', default: t('global.actions.edit')),
                 data: { toggle: 'tooltip', container: 'body', placement: 'left' } %>
-              <%= link_to icon('trash'), delivery_man,  method: :delete,
+              <%= link_to icon('trash'), business_delivery_man_path(@business, delivery_man),  method: :delete,
                 class: 'btn btn-link text-danger',
                 title: t('delivery_men.actions.destroy', default: t('global.actions.destroy')),
                 data: { toggle: 'tooltip', container: 'body', placement: 'left', 
