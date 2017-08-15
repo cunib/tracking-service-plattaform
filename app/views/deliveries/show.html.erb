@@ -5,10 +5,10 @@
     </div>
     <div class="col-md-2">
       <div class="actions">
-        <%= link_to icon('chevron-left'), deliveries_path, 
+        <%= link_to icon('chevron-left'), business_deliveries_path(@business), 
           class: 'btn btn-default', data: { toggle: 'tooltip', container: 'body' }, 
           title: t('.back', default: t('global.actions.back')) %>
-        <%= link_to icon('pencil'), edit_delivery_path(@delivery), 
+        <%= link_to icon('pencil'), edit_business_delivery_path(@business, @delivery), 
           class: 'btn btn-primary', data: { toggle: 'tooltip', container: 'body' }, 
           title: t('.back', default: t('global.actions.edit')) %>
       </div>
@@ -67,7 +67,7 @@
       <button type="button" class="toggle-btn toggle-btn-hide" > &lt; </button>
     </div>
     <div data-google-maps="<%= Settings.google_maps.javascript_api_key %>" 
-         data-url="<%= positions_delivery_path(@delivery) %>"
+         data-url="<%= positions_business_delivery_path(@business, @delivery) %>"
          data-orders-positions-markers="<%= @markers.to_json %>">
     </div>
   </div>

@@ -9,7 +9,7 @@ class DeliveriesController < ApplicationController
     @q = @deliveries.search(session_params)
     @q.sorts = ["created_at desc"]
     @deliveries = @q.result.page(page_param)
-    respond_with(@deliveries)
+    respond_with(@deliveries, locales: [@business, :deliveries])
   end
 
   def show
@@ -22,7 +22,6 @@ class DeliveriesController < ApplicationController
 
   def new
     @delivery = Delivery.new
-    respond_with(@delivery)
   end
 
   def edit
@@ -31,22 +30,22 @@ class DeliveriesController < ApplicationController
   def create
     @delivery = Delivery.new(delivery_params)
     @delivery.save
-    respond_with(@delivery)
+    respond_with(@delivery, location: [@business, :deliveries])
   end
 
   def update
     @delivery.update(delivery_params)
-    respond_with(@delivery)
+    respond_with(@delivery, location: [@business, :delivery])
   end
 
   def destroy
     @delivery.destroy
-    respond_with(@delivery)
+    respond_with(@delivery, location: [@business, :deliveries])
   end
 
   def positions
     @positions = @delivery.serialized_positions
-    respond_with @positions, location: index_path
+    respond_with @positions, location: [@business, :delivery]
   end
 
   private
