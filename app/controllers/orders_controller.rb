@@ -2,6 +2,7 @@ class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy, :cancel, :suspend]
 
   respond_to :html
+  layout 'frontend', only: :new_order
 
   def index
     @orders = @business.orders
@@ -43,12 +44,23 @@ class OrdersController < ApplicationController
   def cancel
     @order.cancel
     respond_with(@order, location: [@business, :orders])
-
   end
 
   def suspend
     @order.suspend
     respond_with(@order, location: [@business, :orders])
+  end
+
+  def new_order
+    @products = @business.products
+    @order = Order.new
+    @q = @products.search(session_params)
+    @q.sorts = ["created_at desc"]
+    @products = @q.result.page(page_param)
+  end
+
+  def create_order
+    #Aca se debería devolver un hash para el seguimiento de la orden
   end
 
   private

@@ -4,7 +4,6 @@ Rails.application.routes.draw do
   root 'businesses#index'
 
   resources :businesses, path: 'locales' do
-    get '/realizar-pedido', as: :make_order, to: 'businesses#make_order'
 
     resources :products, path: 'productos', path_names: { new: 'nuevo' }
 
@@ -40,7 +39,13 @@ Rails.application.routes.draw do
 
   #get '/mapas', as: :index, to: 'maps#index'
 
-  get '/seguilo', as: :trackit_index, to: 'purchases#index'
+  scope 'seguilo' do
+    get '/', as: :trackit_index, to: 'purchases#index'
+    resources :businesses, path: 'locales', only: [] do
+
+      get '/realizar-pedido', as: :new_order, to: 'orders#new_order'
+    end
+  end
 
   # API
   namespace :api, defaults: { format: 'json' } do

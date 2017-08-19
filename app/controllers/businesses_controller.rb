@@ -1,7 +1,6 @@
 class BusinessesController < ApplicationController
   before_action :set_business, only: [:show, :edit, :update, :destroy, :make_order]
 
-  layout 'frontend', only: :make_order
   respond_to :html
 
   def index
@@ -38,15 +37,6 @@ class BusinessesController < ApplicationController
   def destroy
     @business.destroy
     respond_with(@business)
-  end
-
-  def make_order
-    @products = @business.products
-    @order = Order.new
-    @q = @products.search(session_params)
-    @q.sorts = ["created_at desc"]
-    @products = @q.result.page(page_param)
-    respond_with(@order)
   end
 
   def business_sellection
