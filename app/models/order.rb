@@ -37,7 +37,7 @@ class Order < ApplicationRecord
   geocoded_by :address
 
   after_validation :geocode, if: ->(obj) { obj.address.present? and obj.address_changed? }
-  after_create :save_position
+  after_save :save_position, if: ->(obj) { obj.address.present? and obj.address_changed? }
 
   #validate :position_present
 
@@ -47,6 +47,14 @@ class Order < ApplicationRecord
 
   def longitude=(longitude)
     position.longitude = longitude
+  end
+
+  def latitude
+    position.latitude
+  end
+
+  def longitude
+    position.longitude
   end
 
   private

@@ -10,13 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170711011540) do
+ActiveRecord::Schema.define(version: 20170820211017) do
 
   create_table "businesses", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
     t.string   "address"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "position_id"
+    t.index ["position_id"], name: "index_businesses_on_position_id", using: :btree
   end
 
   create_table "deliveries", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -83,6 +85,7 @@ ActiveRecord::Schema.define(version: 20170711011540) do
     t.index ["position_id"], name: "index_traces_on_position_id", using: :btree
   end
 
+  add_foreign_key "businesses", "positions"
   add_foreign_key "deliveries", "delivery_men"
   add_foreign_key "delivery_men", "businesses"
   add_foreign_key "delivery_men", "traces"
