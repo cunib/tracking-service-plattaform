@@ -25,6 +25,7 @@ class BusinessesController < ApplicationController
 
   def create
     @business = Business.new(business_params)
+    @business.position = Position.create
     @business.save
     respond_with(@business)
   end
