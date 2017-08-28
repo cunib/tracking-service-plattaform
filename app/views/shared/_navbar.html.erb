@@ -7,13 +7,13 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-    <% if @business.present? %>
+    <% if @business.present? && @business.persisted? %>
       <%= link_to t('views.navbar.app_title', business: @business).html_safe, business_orders_path(@business), class: 'navbar-brand app-title' %>
     <% else %>
       <%= link_to t('views.application.title'), root_path, class: 'navbar-brand app-title' %>
     <% end %>
     </div>
-    <% if @business.present? %>
+    <% if @business.present? && @business.persisted? %>
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
           <li><%= link_to t('views.navbar.dropdown.products'), business_products_path(@business) %></li>
