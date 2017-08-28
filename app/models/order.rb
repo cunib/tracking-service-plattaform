@@ -34,12 +34,18 @@ class Order < ApplicationRecord
   belongs_to :position, dependent: :destroy
   belongs_to :delivery
 
+  scope :ready_to_send, -> { where(status: :development) }
+
   geocoded_by :address
 
   after_validation :geocode, if: ->(obj) { obj.address.present? and obj.address_changed? }
   after_save :save_position, if: ->(obj) { obj.address.present? and obj.address_changed? }
 
   #validate :position_present
+
+  def to_s
+    address
+  end
 
   def latitude=(latitude)
     position.latitude = latitude

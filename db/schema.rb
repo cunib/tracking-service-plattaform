@@ -10,14 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170820211017) do
+ActiveRecord::Schema.define(version: 20170828214950) do
 
   create_table "businesses", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
     t.string   "address"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
     t.integer  "position_id"
+    t.string   "path_strategy"
     t.index ["position_id"], name: "index_businesses_on_position_id", using: :btree
   end
 
@@ -25,6 +26,7 @@ ActiveRecord::Schema.define(version: 20170820211017) do
     t.date    "start_date"
     t.date    "end_date"
     t.integer "delivery_man_id"
+    t.string  "path_strategy"
     t.index ["delivery_man_id"], name: "index_deliveries_on_delivery_man_id", using: :btree
   end
 

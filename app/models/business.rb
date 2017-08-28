@@ -4,6 +4,8 @@ class Business < ApplicationRecord
   has_many :products
   belongs_to :position, dependent: :destroy
 
+  validates :name, :address, :path_strategy, presence: true
+
   def to_s
   	name
   end
