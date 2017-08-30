@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170828214950) do
+ActiveRecord::Schema.define(version: 20170830110621) do
 
   create_table "businesses", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
@@ -36,6 +36,14 @@ ActiveRecord::Schema.define(version: 20170828214950) do
     t.integer "trace_id"
     t.index ["business_id"], name: "index_delivery_men_on_business_id", using: :btree
     t.index ["trace_id"], name: "index_delivery_men_on_trace_id", using: :btree
+  end
+
+  create_table "ordered_products", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "order_id"
+    t.integer "product_id"
+    t.float   "amount",     limit: 24
+    t.index ["order_id"], name: "index_ordered_products_on_order_id", using: :btree
+    t.index ["product_id"], name: "index_ordered_products_on_product_id", using: :btree
   end
 
   create_table "orders", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -91,6 +99,8 @@ ActiveRecord::Schema.define(version: 20170828214950) do
   add_foreign_key "deliveries", "delivery_men"
   add_foreign_key "delivery_men", "businesses"
   add_foreign_key "delivery_men", "traces"
+  add_foreign_key "ordered_products", "orders"
+  add_foreign_key "ordered_products", "products"
   add_foreign_key "orders", "businesses"
   add_foreign_key "orders", "deliveries"
   add_foreign_key "orders", "positions"

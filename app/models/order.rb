@@ -29,7 +29,8 @@ class Order < ApplicationRecord
     created? || development? || sended? 
   end
 
-  has_many :products
+  has_many :ordered_products
+  has_many :products, through: :ordered_products
   belongs_to :business
   belongs_to :position, dependent: :destroy
   belongs_to :delivery

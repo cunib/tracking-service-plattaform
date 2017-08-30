@@ -26,6 +26,7 @@ class OrdersController < ApplicationController
 
   def create
     @order = Order.new(order_params)
+    throw 1
     @order.position = Position.create
     @order.save
     respond_with(@order, location: [@business, :orders])
@@ -70,6 +71,6 @@ class OrdersController < ApplicationController
   end
 
   def order_params
-    params.require(:order).permit(:start_date, :end_date, :address, :business_id, :delivery_id)
+    params.require(:order).permit(:start_date, :end_date, :address, :business_id, :delivery_id, product_ids: [])
   end
 end
