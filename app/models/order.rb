@@ -34,7 +34,7 @@ class Order < ApplicationRecord
   belongs_to :position, dependent: :destroy
   belongs_to :delivery
 
-  scope :ready_to_send, -> { where(status: :development) }
+  scope :ready_to_send, -> { where(status: :development, delivery_id: nil) }
 
   geocoded_by :address
 

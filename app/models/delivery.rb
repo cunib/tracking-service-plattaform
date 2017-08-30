@@ -1,5 +1,5 @@
 class Delivery < ApplicationRecord
-  has_many :orders
+  has_many :orders, dependent: :restrict_with_error
   has_many :traces
   has_many :paths
   has_many :redord, class_name: 'Path'

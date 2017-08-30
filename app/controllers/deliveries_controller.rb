@@ -29,7 +29,7 @@ class DeliveriesController < ApplicationController
 
   def create
     @delivery = Delivery.new(delivery_params)
-    @delivery.save
+    dispatch_orders if @delivery.save
     respond_with(@delivery, location: [@business, :deliveries])
   end
 
@@ -49,6 +49,10 @@ class DeliveriesController < ApplicationController
   end
 
   private
+
+  def dispatch_orders
+    @delivery.orders.each { |order| order.dispatch! }
+  end
 
   def set_delivery
     @delivery = Delivery.find(params[:id])
