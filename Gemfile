@@ -49,6 +49,9 @@ gem 'geocoder', '~> 1.4.4'
 
 gem 'active_model_serializers', '~> 0.10.6'
 
+# Dijkstra strategy
+gem 'dijkstra'
+
 group :development do
   gem 'rails-erd',              '~> 1.4.6'
   gem 'better_errors',          '~> 1.1.0'
