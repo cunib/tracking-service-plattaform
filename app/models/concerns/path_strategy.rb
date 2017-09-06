@@ -1,5 +1,5 @@
 class PathStrategy < OpenStruct
-  STRATEGY_TYPES = %w(ShortestPathStrategy)
+  STRATEGY_TYPES = %w(DijkstraPathStrategy)
 
   def self.strategy_types
     STRATEGY_TYPES
