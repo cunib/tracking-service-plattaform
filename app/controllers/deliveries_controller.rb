@@ -28,8 +28,8 @@ class DeliveriesController < ApplicationController
   end
 
   def create
-    @delivery = Delivery.new(delivery_params)
-    dispatch_orders if @delivery.save
+    @delivery = Delivery.new(delivery_params.merge(path_strategy: @business.path_strategy))
+    send_orders if @delivery.save
     respond_with(@delivery, location: [@business, :deliveries])
   end
 
@@ -50,8 +50,8 @@ class DeliveriesController < ApplicationController
 
   private
 
-  def dispatch_orders
-    @delivery.orders.each { |order| order.dispatch! }
+  def send_orders
+    @delivery.orders.each { |order| order.send! }
   end
 
   def set_delivery
