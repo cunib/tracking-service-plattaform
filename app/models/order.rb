@@ -1,5 +1,5 @@
 class Order < ApplicationRecord
-  enum status: { created: 0, development: 1, sended: 2, canceled: 3, finalized: 4, suspended: 5 } do
+  enum status: { created: 0, development: 1, ready_to_send: 2, sended: 3, canceled: 4, finalized: 5, suspended: 6 } do
     event :process do
       transition [:created, :suspended] => :development
     end
@@ -12,8 +12,12 @@ class Order < ApplicationRecord
       transition [:created, :suspended, :development, :sended] => :canceled
     end
 
+    event :send do
+      transition [:suspended, :ready_to_send] => :sended
+    end
+
     event :dispatch do
-      transition [:suspended, :development] => :sended
+      transition [:suspended, :development] => :ready_to_send
     end
 
     event :finalize do
@@ -21,13 +25,8 @@ class Order < ApplicationRecord
     end
   end
 
-  def can_cancel?
-    created? || development? || sended? 
-  end
-
-  def can_suspend?
-    created? || development? || sended? 
-  end
+  scope :sended, -> { where(status: :sended) }
+  scope :ready_to_send, -> { where(status: :ready_to_send, delivery_id: nil) }
 
   has_many :ordered_products
   has_many :products, through: :ordered_products
@@ -35,7 +34,6 @@ class Order < ApplicationRecord
   belongs_to :position, dependent: :destroy
   belongs_to :delivery
 
-  scope :ready_to_send, -> { where(status: :development, delivery_id: nil) }
 
   geocoded_by :address
 
@@ -43,6 +41,14 @@ class Order < ApplicationRecord
   after_save :save_position, if: ->(obj) { obj.address.present? and obj.address_changed? }
 
   #validate :position_present
+
+  def can_cancel?
+    !(canceled? || finalized?)
+  end
+
+  def can_suspend?
+    !(canceled? || finalized? || suspended?)
+  end
 
   def to_s
     address
