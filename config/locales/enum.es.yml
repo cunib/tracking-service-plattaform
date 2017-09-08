@@ -2,9 +2,10 @@ es:
   enum:
     order:
       status:
-        created:  "<span class='label label-success'> Creado </span>"
-        development:  "<span class='label label-success'> En desarrollo </span>"
+        created:  "<span class='label label-info'> Creado </span>"
+        development:  "<span class='label label-info'> En desarrollo </span>"
         sended: "<span class='label label-success'> Enviado </span>"
         canceled:  "<span class='label label-danger'>Cancelado</span>"
-        finalized:  "<span class='label label-info'> Finalizado </span>"
+        finalized:  "<span class='label label-success'> Finalizado </span>"
         suspended:  "<span class='label label-danger'> Suspendido </span>"
+        ready_to_send:  "<span class='label label-success'> Listo para enviar </span>"
