@@ -1,4 +1,4 @@
-class PathStrategy < OpenStruct
+class PathStrategy
   STRATEGY_TYPES = %w(DijkstraPathStrategy)
 
   def self.strategy_types
