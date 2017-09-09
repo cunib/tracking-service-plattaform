@@ -12,7 +12,7 @@ class Order < ApplicationRecord
       transition [:created, :suspended, :development, :sended] => :canceled
     end
 
-    event :send do
+    event :mark_as_sended do
       transition [:suspended, :ready_to_send] => :sended
     end
 
