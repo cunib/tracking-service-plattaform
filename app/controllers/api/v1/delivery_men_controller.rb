@@ -8,8 +8,10 @@ module  Api
       end
 
       def active_delivery_orders
-        @delivery_orders = @delivery_man.deliveries.last.orders
-        render json: @delivery_orders, include: [:position, :delivery, :business], key_transform: :underscore
+        delivery = @delivery_man.active_delivery
+        path_information = orders_as_path(delivery) if delivery.present?
+        @orders = path_information.try(:path) || []
+        render json: @orders, include: [:position, :delivery, :business], key_transform: :underscore
       end
 
       def new_positions
@@ -21,6 +23,12 @@ module  Api
       end
 
       private
+
+      def orders_as_path(delivery)
+        delivery_orders = delivery.orders
+        strategy = delivery.path_strategy
+        strategy.constantize.new(@delivery_man.business, delivery_orders.to_a).build_path
+      end
 
       def set_delivery_man
         @delivery_man = DeliveryMan.find(params[:id])
