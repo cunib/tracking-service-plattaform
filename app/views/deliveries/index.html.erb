@@ -44,6 +44,12 @@
                 class: 'btn btn-link',
                 title: t('deliveries.actions.edit', default: t('global.actions.edit')),
                 data: { toggle: 'tooltip', container: 'body', placement: 'left' } %>
+              <% if delivery.can_activate? %>
+                <%= link_to icon('send'), activate_business_delivery_path(@business, delivery),
+                  class: 'btn btn-link', method: :post,
+                  title: t('deliveries.actions.activate', default: t('global.actions.activate')),
+                  data: { toggle: 'tooltip', container: 'body', placement: 'left' } %>
+              <% end %>
               <%= link_to icon('trash'), business_delivery_path(@business, delivery),  method: :delete,
                 class: 'btn btn-link text-danger',
                 title: t('deliveries.actions.destroy', default: t('global.actions.destroy')),

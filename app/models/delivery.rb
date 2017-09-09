@@ -5,6 +5,10 @@ class Delivery < ApplicationRecord
   has_many :redord, class_name: 'Path'
   belongs_to :delivery_man
 
+  scope :actives, -> { joins(:orders).merge(Order.sended) }
+
+  after_create :mark_orders_as_sended
+
   def last_positions
     traces.map(&:position)
   end
@@ -59,7 +63,21 @@ class Delivery < ApplicationRecord
     "#{delivery_man}-##{id}-#{start_date.to_s}"
   end
 
+  def activate
+    orders.each { |order| order.mark_as_sended! } unless active?
+  end
+
+  def can_activate?
+    can_activate = false
+    orders.each { |o| can_activate = can_activate || o.ready_to_send? }
+    can_activate
+  end
+
   private
+
+  def mark_orders_as_sended
+    orders.each { |order| }
+  end
 
   def create_trace(latitude, longitude)
     position = Position.create latitude: latitude, longitude: longitude

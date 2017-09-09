@@ -1,5 +1,5 @@
 class DeliveriesController < ApplicationController
-  before_action :set_delivery, only: [:show, :edit, :update, :destroy, :positions]
+  before_action :set_delivery, only: [:show, :edit, :update, :destroy, :positions, :delivery, :activate]
   respond_to :json, only: :positions
 
   respond_to :html
@@ -28,8 +28,7 @@ class DeliveriesController < ApplicationController
   end
 
   def create
-    @delivery = Delivery.new(delivery_params.merge(path_strategy: @business.path_strategy))
-    send_orders if @delivery.save
+    @delivery = Delivery.create(delivery_params.merge(path_strategy: @business.path_strategy))
     respond_with(@delivery, location: [@business, :deliveries])
   end
 
@@ -48,17 +47,18 @@ class DeliveriesController < ApplicationController
     respond_with @positions, location: [@business, :delivery]
   end
 
-  private
-
-  def send_orders
-    @delivery.orders.each { |order| order.send! }
+  def activate
+    @delivery.activate
+    respond_with(@delivery, location: [@business, :deliveries])
   end
+
+  private
 
   def set_delivery
     @delivery = Delivery.find(params[:id])
   end
 
   def delivery_params
-    params.require(:delivery).permit(:start_date, :end_date, :delivery_man_id, :path_strategy, order_ids: [])
+    params.require(:delivery).permit(:start_date, :end_date, :delivery_man_id, :path_strategy, :business_id, order_ids: [])
   end
 end

@@ -32,6 +32,8 @@ es:
     index:
       title: "Repartos"
       secondary_title: "del local %{model}"
+    actions:
+      activate: "Activar/Enviar"
   products:
     index:
       title: "Productos"

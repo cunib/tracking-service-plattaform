@@ -19,6 +19,7 @@ Rails.application.routes.draw do
     resources :deliveries, path: 'repartos' do
       member do
         get 'posiciones', action: :positions, as: :positions
+        post :activate, as: :activate, to: 'deliveries#activate'
       end
     end
 

@@ -18,6 +18,10 @@ class DeliveryMan < ApplicationRecord
     updated
   end
 
+  def active_delivery
+    Delivery.actives.where(delivery_man: self).first
+  end
+
   private
 
   def current_delivery
