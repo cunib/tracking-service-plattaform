@@ -26,8 +26,8 @@ class OrdersController < ApplicationController
 
   def create
     @order = Order.new(order_params)
-    throw 1
     @order.position = Position.create
+    @order.business = @business
     @order.save
     respond_with(@order, location: [@business, :orders])
   end
