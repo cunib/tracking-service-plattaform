@@ -11,20 +11,17 @@ class DeliveryMan < ApplicationRecord
     trace if trace.changed?
   end
 
-  def update_trace(positions)
-    last_position = positions.last
-    updated = trace.update_position last_position[:latitude], last_position[:longitude]
-    current_delivery.update_trace(positions)
-    updated
+  def update_trace(trace)
+    trace_updated = true
+    delivery_man_updated = trace.update_position trace.position.latitude, trace.position.longitude
+    if active_delivery.present?
+      trace_updated = Trace.create(trace.attributes.slice("date", "position_id").merge(delivery_id: 5)) && trace.save
+    end
+    delivery_man_updated && trace_updated
   end
 
   def active_delivery
     Delivery.actives.where(delivery_man: self).first
   end
 
-  private
-
-  def current_delivery
-    deliveries.last
-  end
 end

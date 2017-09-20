@@ -39,12 +39,6 @@ class Delivery < ApplicationRecord
     end
   end
 
-  def update_trace(positions)
-    if active?
-      positions.each { |p| traces << create_trace(p[:latitude], p[:longitude]) }
-    end
-  end
-
   def active?
     active = false
     orders.each { |o| active = active || o.sended? }

@@ -61,9 +61,9 @@ Rails.application.routes.draw do
       resources :delivery_men, only: [:show] do
         member do
           get 'active_delivery_orders', action: :active_delivery_orders, as: :active_delivery_orders
-          post 'new_positions', action: :new_positions, as: :new_positions
         end
       end
+      resources :traces, only: [:create]
     end
   end
 
