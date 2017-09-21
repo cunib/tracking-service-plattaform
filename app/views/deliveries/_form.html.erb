@@ -7,7 +7,7 @@
         <%= f.input :delivery_man_id, as: :select2, collection: DeliveryMan.all %>
         <%= f.input :start_date, as: :datetime, html5: true, input_html: { value: DateTime.now.strftime('yyyy-MM-ddThh:mm') } %>
         <%= f.input :end_date, as: :datetime, html5: true, disabled: true %>
-        <%= f.input :order_ids, as: :select2, collection: Order.ready_to_send, multiple: true, label_method: ->(order) { order.to_s } %>
+        <%= f.input :order_ids, as: :select2, collection: Order.readies, multiple: true, label_method: ->(order) { order.to_s } %>
         <%= f.hidden_field :path_strategy, value: @business.path_strategy %>
       </div>
     </div>

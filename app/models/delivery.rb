@@ -40,9 +40,7 @@ class Delivery < ApplicationRecord
   end
 
   def active?
-    active = false
-    orders.each { |o| active = active || o.sended? }
-    active
+    orders.where.not(status: :sended).empty?
   end
 
   def deliver
@@ -62,9 +60,7 @@ class Delivery < ApplicationRecord
   end
 
   def can_activate?
-    can_activate = false
-    orders.each { |o| can_activate = can_activate || o.ready_to_send? }
-    can_activate
+    orders.where.not(status: :ready_to_send).empty?
   end
 
   private

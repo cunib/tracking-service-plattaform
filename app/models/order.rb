@@ -25,8 +25,7 @@ class Order < ApplicationRecord
     end
   end
 
-  scope :sended, -> { where(status: :sended) }
-  scope :ready_to_send, -> { where(status: :ready_to_send, delivery_id: nil) }
+  scope :readies, -> { where(status: :ready_to_send, delivery_id: nil) }
 
   has_many :ordered_products
   has_many :products, through: :ordered_products
