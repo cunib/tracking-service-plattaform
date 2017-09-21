@@ -3,21 +3,17 @@ class Trace < ApplicationRecord
   belongs_to :delivery, optional: true
   has_one :delivery_man
 
-  after_create :default_values
-
-  def self.build_trace(params)
-    position = Position.create latitude: params[:latitude], longitude: params[:longitude]
-    Trace.new date: params[:date], position: position
-  end
+  before_validation :default_values, on: :create
 
   def update_position(latitude, longitude)
-    position.update(latitude: latitude, longitude: longitude)
+    unless position.update(latitude: latitude, longitude: longitude)
+      errors.add :base, :position_update_fail
+    end
   end
 
   private
 
   def default_values
-    position = position || Position.create
-    true
+    self.position = self.position || Position.create
   end
 end
