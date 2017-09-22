@@ -23,7 +23,7 @@ es:
         status: "Estado"
         product_ids: "Productos"
       delivery:
-        delivery_man: "Repartidor"
+        delivery_man_id: "Repartidor"
         start_date: "Fecha de inicio"
         end_date: "Fecha de fin"
         path_strategy: "Estrategia de recorrido"

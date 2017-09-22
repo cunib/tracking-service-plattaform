@@ -3,10 +3,12 @@ class Delivery < ApplicationRecord
   has_many :traces
   has_many :paths
   has_many :redord, class_name: 'Path'
-  belongs_to :delivery_man
+  belongs_to :delivery_man, optional: true
+  belongs_to :business
 
   scope :actives, -> { joins(:orders).merge(Order.sended) }
 
+  validates :orders, presence: true
   after_create :mark_orders_as_sended
 
   def last_positions
@@ -60,7 +62,8 @@ class Delivery < ApplicationRecord
   end
 
   def can_activate?
-    orders.where.not(status: :ready_to_send).empty?
+    return false unless delivery_man.present?
+    orders.where.not(status: :ready_to_send).empty? && delivery_man.active_delivery.blank?
   end
 
   private

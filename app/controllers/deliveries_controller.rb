@@ -7,7 +7,7 @@ class DeliveriesController < ApplicationController
   def index
     @deliveries = @business.deliveries
     @q = @deliveries.search(session_params)
-    @q.sorts = ["created_at desc"]
+    @q.sorts = ["created_at asc"]
     @deliveries = @q.result.page(page_param)
     respond_with(@deliveries, locales: [@business, :deliveries])
   end
@@ -28,7 +28,8 @@ class DeliveriesController < ApplicationController
   end
 
   def create
-    @delivery = Delivery.create(delivery_params.merge(path_strategy: @business.path_strategy))
+    @delivery = Delivery.create delivery_params
+      .merge(path_strategy: @business.path_strategy, business: @business)
     respond_with(@delivery, location: [@business, :deliveries])
   end
 
