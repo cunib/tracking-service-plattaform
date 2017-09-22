@@ -7,7 +7,13 @@
         <%= f.input :delivery_man_id, as: :select2, collection: DeliveryMan.all %>
         <%= f.input :start_date, as: :date, html5: true, input_html: { value: Date.today.strftime('yyyy-MM-dd') } %>
         <%= f.input :end_date, as: :datetime, html5: true, disabled: true %>
-        <%= f.input :order_ids, as: :select2, collection: Order.readies, multiple: true, label_method: ->(order) { order.to_s } %>
+        <% if f.object.persisted? %>
+          <%= f.input :order_ids, as: :select2, collection: Order.readies_and_selected(f.object.id), multiple: true, 
+            label_method: ->(order) { order.to_s }, i18n: { formatNoMatches: 'No existen pedidos listos para ser enviados.' } %>
+        <% else %>
+          <%= f.input :order_ids, as: :select2, collection: Order.readies, multiple: true, 
+            label_method: ->(order) { order.to_s }, i18n: { formatNoMatches: 'No existen pedidos listos para ser enviados.' } %>
+        <% end %>
         <%= f.hidden_field :path_strategy, value: @business.path_strategy %>
       </div>
     </div>

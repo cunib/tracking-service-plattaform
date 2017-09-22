@@ -26,6 +26,7 @@ class Order < ApplicationRecord
   end
 
   scope :readies, -> { where(status: :ready_to_send, delivery_id: nil) }
+  scope :readies_and_selected, ->(delivery_id) { where(status: :ready_to_send, delivery_id: [nil, delivery_id]) }
 
   has_many :ordered_products
   has_many :products, through: :ordered_products
