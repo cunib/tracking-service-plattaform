@@ -28,6 +28,8 @@ es:
       start_date: "Fecha de inicio"
       end_date: "Fecha de fin"
       status: "Estado"
+    actions:
+      track_order: "Seguí tu pedido"
   deliveries:
     index:
       title: "Repartos"

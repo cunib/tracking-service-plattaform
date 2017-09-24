@@ -1,4 +1,4 @@
-<%= simple_form_for([@business, @order]) do |f| %>
+<%= simple_form_for([@business, @order], url: business_create_order_path(@business))  do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">

@@ -2,7 +2,7 @@ class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy, :cancel, :suspend]
 
   respond_to :html
-  layout 'frontend', only: :new_order
+  layout 'frontend', only: [:new_order, :create_order, :track_order]
 
   def index
     @orders = @business.orders
@@ -61,7 +61,23 @@ class OrdersController < ApplicationController
   end
 
   def create_order
-    #Aca se debería devolver un hash para el seguimiento de la orden
+    @order = Order.new(order_params)
+    @order.position = Position.create
+    @order.business = @business
+    @order.save
+    if @order.errors.any?
+      flash[:alert] = I18n.t 'flash.orders.create_order.alert'
+      render :new_order
+    else
+      @show_trackit_link = true
+      @order = Order.new
+      flash.now[notice] = I18n.t('flash.orders.create_order.notice', hash_code: @order.hash_code).html_safe
+      render :new_order
+    end
+  end
+
+  def track_order
+
   end
 
   private

@@ -1,0 +1,14 @@
+<div class="page-header">
+  <div class="row">
+    <div class="col-md-10">
+      <h1><%= t '.title', default: t('global.track_order.title') %></h1>
+    </div>
+    <div class="col-md-2">
+      <div class="actions">
+        <%= link_to icon('chevron-left'), trackit_index_path, 
+          class: 'btn btn-default', data: { toggle: 'tooltip', container: 'body' }, 
+          title: t('.back', default: t('global.actions.back')) %>
+      </div>
+    </div>
+  </div>
+</div>
