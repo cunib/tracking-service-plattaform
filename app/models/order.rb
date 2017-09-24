@@ -28,7 +28,7 @@ class Order < ApplicationRecord
   scope :readies, -> { where(status: :ready_to_send, delivery_id: nil) }
   scope :readies_and_selected, ->(delivery_id) { where(status: :ready_to_send, delivery_id: [nil, delivery_id]) }
 
-  has_many :ordered_products
+  has_many :ordered_products, dependent: :destroy
   has_many :products, through: :ordered_products
   belongs_to :business
   belongs_to :position, dependent: :destroy
@@ -39,6 +39,7 @@ class Order < ApplicationRecord
 
   after_validation :geocode, if: ->(obj) { obj.address.present? and obj.address_changed? }
   after_save :save_position, if: ->(obj) { obj.address.present? and obj.address_changed? }
+  after_create :create_hash_code
 
   #validate :position_present
 
@@ -81,5 +82,9 @@ class Order < ApplicationRecord
 
   def save_position
     position.save
+  end
+
+  def create_hash_code
+    self.update hash_code: Digest::MD5.hexdigest("#{id}#{created_at}")[24..32]
   end
 end
