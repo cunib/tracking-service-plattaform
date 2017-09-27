@@ -24,6 +24,7 @@ es:
         product_ids: "Productos"
       delivery:
         delivery_man_id: "Repartidor"
+        delivery_man: "Repartidor"
         start_date: "Fecha de inicio"
         end_date: "Fecha de fin"
         path_strategy: "Estrategia de recorrido"

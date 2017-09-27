@@ -21,7 +21,8 @@ es:
     index:
       title: "Pedidos"
       secondary_title: "del local %{model}"
-      actions:     
+    track_order:
+      title: "Seguí tu pedido!"
     filter:
       business: "Negocio"
       address: "Dirección"

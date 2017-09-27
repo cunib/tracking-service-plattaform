@@ -70,13 +70,13 @@ class OrdersController < ApplicationController
       render :new_order
     else
       @show_trackit_link = true
-      @order = Order.new
       flash.now[notice] = I18n.t('flash.orders.create_order.notice', hash_code: @order.hash_code).html_safe
-      render :new_order
+      render :track_order
     end
   end
 
   def track_order
+    @order = @order || Order.find_by(hash_code: params[:hash_code])
 
   end
 

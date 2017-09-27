@@ -45,8 +45,8 @@ Rails.application.routes.draw do
     resources :businesses, path: 'locales', only: [] do
 
       get '/realizar-pedido', as: :new_order, to: 'orders#new_order'
+      get '/segui-tu-pedido/:hash_code', as: :track_order, to: 'orders#track_order'
       post '/crear-pedido', as: :create_order, to: 'orders#create_order'
-      get 'segui-tu-pedido', as: :track_order, to: 'orders#track_order'
     end
   end
 

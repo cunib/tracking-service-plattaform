@@ -7,7 +7,7 @@
       <div class="container">
         <%= msg.html_safe %> 
         <% if @show_trackit_link %>
-          <%= link_to "aquí", business_track_order_path(@business, @order) %>
+          <%= link_to "aquí", business_track_order_path(@business, @order.hash_code) %>
         <% end %>
       </div>
     <% end -%>

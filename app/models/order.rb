@@ -71,6 +71,17 @@ class Order < ApplicationRecord
     position.longitude
   end
 
+  def serialized
+    [{
+      title: address,
+      position: {
+        lat: latitude,
+        lng: longitude
+      },
+      id: id
+    }]
+  end
+
   private
 
   def position_present
