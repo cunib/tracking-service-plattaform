@@ -1,8 +1,9 @@
 class OrdersController < ApplicationController
-  before_action :set_order, only: [:show, :edit, :update, :destroy, :cancel, :suspend]
+  before_action :set_order, only: [:show, :edit, :update, :destroy, :cancel, :suspend, :positions]
 
   respond_to :html
-  layout 'frontend', only: [:new_order, :create_order, :track_order]
+  respond_to :json, only: :positions
+  layout 'frontend', only: [:new_order, :create_order, :track_order, :positions]
 
   def index
     @orders = @business.orders
@@ -76,8 +77,13 @@ class OrdersController < ApplicationController
   end
 
   def track_order
-    @order = @order || Order.find_by(hash_code: params[:hash_code])
+    @order = Order.find_by(hash_code: order_params[:hash_code]) unless params[:_reset].present? || params[:order].blank?
+    respond_with @order, location: [@business, :track_order], action: :track_order
+  end
 
+  def positions
+    @positions = @order.serialized_positions
+    respond_with @positions, location: [@business, :track_order]
   end
 
   private
@@ -87,6 +93,6 @@ class OrdersController < ApplicationController
   end
 
   def order_params
-    params.require(:order).permit(:start_date, :end_date, :address, :business_id, :delivery_id, product_ids: [])
+    params.require(:order).permit(:start_date, :end_date, :address, :business_id, :delivery_id, :hash_code, product_ids: [])
   end
 end

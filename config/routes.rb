@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       member do
         post :cancel, as: :cancel, to: 'orders#cancel'
         post :suspend, as: :suspend, to: 'orders#suspend'
+        get 'posiciones', action: :positions, as: :positions
       end
     end
 
@@ -25,27 +26,12 @@ Rails.application.routes.draw do
 
   end
 
-# resources :delivery_men, path: 'repartidores'
-#
-# resources :orders, path: 'ordenes'
-#
-# resources :deliveries, path: 'repartos' do
-#   member do
-#     get 'posiciones', action: :positions, as: :positions
-#   end
-# end
-
-#  post '/cancel_order/:id', as: :cancel, to: 'orders#cancel'
-#  post '/suspend_order/:id', as: :suspend, to: 'orders#suspend'
-
-  #get '/mapas', as: :index, to: 'maps#index'
-
   scope 'seguilo' do
     get '/', as: :trackit_index, to: 'purchases#index'
     resources :businesses, path: 'locales', only: [] do
 
       get '/realizar-pedido', as: :new_order, to: 'orders#new_order'
-      get '/segui-tu-pedido/:hash_code', as: :track_order, to: 'orders#track_order'
+      get '/segui-tu-pedido', as: :track_order, to: 'orders#track_order'
       post '/crear-pedido', as: :create_order, to: 'orders#create_order'
     end
   end

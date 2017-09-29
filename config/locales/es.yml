@@ -23,6 +23,7 @@ es:
       secondary_title: "del local %{model}"
     track_order:
       title: "Seguí tu pedido!"
+      hash_code: "Código de orden"
     filter:
       business: "Negocio"
       address: "Dirección"

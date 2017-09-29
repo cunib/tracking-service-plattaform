@@ -27,6 +27,7 @@ es:
     filters:
       submit:       "Filtrar"
       clear_filter: "Limpiar"
+      search_order: "Buscar orden"
     actions:
       new:             "Nuevo"
       show:            "Ver detalles"

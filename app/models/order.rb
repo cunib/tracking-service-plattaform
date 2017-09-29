@@ -82,6 +82,23 @@ class Order < ApplicationRecord
     }]
   end
 
+  def serialized_positions
+    if sended?
+      delivery.traces.map do |trace|
+        {
+          title: trace.date.to_s,
+          position: {
+            lat: trace.position.latitude,
+            lng: trace.position.longitude
+          },
+          id: trace.id
+        }
+      end
+    else
+      []
+    end
+  end
+
   private
 
   def position_present
