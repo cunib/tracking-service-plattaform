@@ -49,7 +49,7 @@
       <div class="col-md-6">
         <dl class="dl-horizontal well well-sm">
             <dt><%= t 'activerecord.attributes.delivery.delivery_man' %></dt>
-            <dd><%= @order.delivery.try :delivery_man || "Repartidor no asignado" %></dd>
+            <dd><%= @order.delivery.try(:delivery_man) || "Repartidor no asignado" %></dd>
         </dl>
       </div>
     </div>

@@ -22,6 +22,7 @@ es:
         end_date: "Fecha de fin"
         status: "Estado"
         product_ids: "Productos"
+        hash_code: "Código"
       delivery:
         delivery_man_id: "Repartidor"
         delivery_man: "Repartidor"

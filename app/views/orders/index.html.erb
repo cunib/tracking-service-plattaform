@@ -27,6 +27,7 @@
       <th><%= t 'activerecord.attributes.order.address' %></th>
       <th><%= t 'activerecord.attributes.order.start_date' %></th>
       <th><%= t 'activerecord.attributes.order.end_date' %></th>
+      <th><%= t 'activerecord.attributes.order.hash_code' %></th>
       <th><%= t 'activerecord.attributes.order.status' %></th>
       <th class="actions"><%= t '.actions', default: t('global.index.actions') %></th>
     </tr>
@@ -39,6 +40,7 @@
           <td><%= order.address %></td>
           <td><%= order.start_date %></td>
           <td><%= order.end_date %></td>
+          <td><%= order.hash_code %></td>
           <td><%= raw t "enum.order.status.#{order.status}" %></td>
           <td>
             <div class="btn-toolbar btn-group-xs">
