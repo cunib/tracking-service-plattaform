@@ -194,7 +194,7 @@
         // Update traces every 5 seconds
         window.setInterval(function(){
           updatePositions(target.data('url'), map);
-        }, 5000);
+        }, 1000);
       },
       target: target,
       container: container
