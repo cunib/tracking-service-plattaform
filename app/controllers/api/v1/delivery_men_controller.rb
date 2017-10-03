@@ -11,7 +11,7 @@ module  Api
         delivery = @delivery_man.active_delivery
         path_information = orders_as_path(delivery) if delivery.present?
         @orders = path_information.try(:path) || []
-        render json: @orders, include: [:position, :delivery, :business], key_transform: :underscore
+        render json: @orders, include: [:position, :delivery, :business, :ordered_products], key_transform: :underscore
       end
 
       private
