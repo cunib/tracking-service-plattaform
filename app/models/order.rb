@@ -73,7 +73,7 @@ class Order < ApplicationRecord
 
   def serialized
     [{
-      title: address,
+      title: I18n.t('orders.map.title', address: address),
       position: {
         lat: latitude,
         lng: longitude

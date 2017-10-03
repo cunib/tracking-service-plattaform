@@ -24,6 +24,8 @@ es:
     track_order:
       title: "Seguí tu pedido!"
       hash_code: "Código de orden"
+    map:
+      title: "Dirección de entrega: %{address}"
     filter:
       business: "Negocio"
       address: "Dirección"
