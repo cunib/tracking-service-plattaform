@@ -23,6 +23,8 @@ es:
         status: "Estado"
         product_ids: "Productos"
         hash_code: "Código"
+        customer_full_name: "Nombre y apellido del comprador"
+        customer_email: "Email del comprador"
       delivery:
         delivery_man_id: "Repartidor"
         delivery_man: "Repartidor"

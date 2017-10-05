@@ -32,6 +32,8 @@ es:
       start_date: "Fecha de inicio"
       end_date: "Fecha de fin"
       status: "Estado"
+      customer_full_name: "Nombre o apellido del comprador"
+      customer_email: "Email del comprador"
     actions:
       track_order: "Seguí tu pedido"
   deliveries:

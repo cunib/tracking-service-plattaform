@@ -4,12 +4,16 @@
   <div class="form-inputs">
     <div class="row">
       <div class="col-md-6">
-        <%= f.input :delivery_id, as: :select2, collection: Delivery.all %>
-        <%= f.input :address %>
+        <%= f.input :customer_full_name %>
+        <%= f.input :customer_email %>
       </div>
       <div class="col-md-6">
         <%= f.input :product_ids, as: :select2, multiple: true, collection: @business.products %>
+        <%= f.input :address %>
+      </div>
+      <div class="col-md-6">
         <%= f.input :start_date, as: :date, html5: true, input_html: { value: Date.today } %>
+        <%= f.input :delivery_id, as: :select2, collection: Delivery.all %>
       </div>
     </div>
   </div>

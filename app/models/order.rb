@@ -41,7 +41,7 @@ class Order < ApplicationRecord
   after_save :save_position, if: ->(obj) { obj.address.present? and obj.address_changed? }
   after_create :create_hash_code
 
-  #validate :position_present
+  validate :address, :customer_full_name, :customer_email
 
   def can_cancel?
     !(canceled? || finalized?)

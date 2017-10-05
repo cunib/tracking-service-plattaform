@@ -93,6 +93,8 @@ class OrdersController < ApplicationController
   end
 
   def order_params
-    params.require(:order).permit(:start_date, :end_date, :address, :business_id, :delivery_id, :hash_code, product_ids: [])
+    params.require(:order).permit(:start_date, :end_date, :address, :business_id, 
+                                  :delivery_id, :hash_code, :customer_full_name,
+                                  :customer_email, product_ids: [])
   end
 end
