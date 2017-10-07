@@ -39,6 +39,8 @@ es:
       back:            "Volver"
       cancel:          "Cancelar"
       suspend:         "Suspender" 
+      dispatch:        "Lista para enviar"
+      process:         "Procesar"
     form:
       actions:
         submit: "Guardar cambios"

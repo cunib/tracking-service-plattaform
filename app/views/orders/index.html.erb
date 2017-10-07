@@ -58,16 +58,28 @@
                 data: { toggle: 'tooltip', container: 'body', placement: 'left', 
                         confirm: t('orders.actions.confirm_destroy', 
                         default: t('global.actions.confirm_destroy'))} %>
+                <% if order.can_process? %>
+                  <%= link_to icon('compressed'), process_business_order_path(@business, order),
+                  class: 'btn btn-link', method: :post,
+                  title: t('orders.actions.process', default: t('global.actions.process')),
+                  data: { toggle: 'tooltip', container: 'body', placement: 'left' } %>
+                <% end %>
+                <% if order.can_dispatch? %>
+                  <%= link_to icon('send'), dispatch_business_order_path(@business, order),
+                  class: 'btn btn-link', method: :post,
+                  title: t('orders.actions.dispatch', default: t('global.actions.dispatch')),
+                  data: { toggle: 'tooltip', container: 'body', placement: 'left' } %>
+                <% end %>
+                <% if order.can_suspend? %>
+                  <%= link_to icon('exclamation-sign'), suspend_business_order_path(@business, order),
+                  class: 'btn btn-link', method: :post,
+                  title: t('orders.actions.suspend', default: t('global.actions.suspend')),
+                  data: { toggle: 'tooltip', container: 'body', placement: 'left' } %>
+                <% end %>
                 <% if order.can_cancel? %>
                   <%= link_to icon('remove'), cancel_business_order_path(@business, order),
                   class: 'btn btn-link', method: :post,
                   title: t('orders.actions.cancel', default: t('global.actions.cancel')),
-                  data: { toggle: 'tooltip', container: 'body', placement: 'left' } %>
-                <% end %>
-                <% if order.can_suspend? %>      
-                  <%= link_to icon('exclamation-sign'), suspend_business_order_path(@business, order),
-                  class: 'btn btn-link', method: :post,
-                  title: t('orders.actions.suspend', default: t('global.actions.suspend')),
                   data: { toggle: 'tooltip', container: 'body', placement: 'left' } %>
                 <% end %>
             </div>

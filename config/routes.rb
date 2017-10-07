@@ -9,8 +9,10 @@ Rails.application.routes.draw do
 
     resources :orders, path: 'ordenes' do
       member do
-        post :cancel, as: :cancel, to: 'orders#cancel'
+        post :process, as: :process, to: 'orders#process_order'
+        post :dispatch, as: :dispatch, to: 'orders#dispatch_order'
         post :suspend, as: :suspend, to: 'orders#suspend'
+        post :cancel, as: :cancel, to: 'orders#cancel'
         get 'posiciones', action: :positions, as: :positions
       end
     end
