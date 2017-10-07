@@ -29,6 +29,8 @@
     <dl class="dl-horizontal well well-sm">
         <dt><%= t 'activerecord.attributes.delivery.delivery_man' %></dt>
         <dd><%= @delivery.delivery_man %></dd>
+        <dt><%= t 'activerecord.attributes.delivery.status' %></dt>
+        <dd><%= raw t "enum.delivery.status.#{@delivery.status}" %></dd>
     </dl>
   </div>
 </div>

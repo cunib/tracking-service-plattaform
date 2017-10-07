@@ -24,6 +24,7 @@
       <th><%= t 'activerecord.attributes.delivery.delivery_man' %></th>
       <th><%= t 'activerecord.attributes.delivery.start_date' %></th>
       <th><%= t 'activerecord.attributes.delivery.end_date' %></th>
+      <th><%= t 'activerecord.attributes.delivery.status' %></th>
       <th class="actions"><%= t '.actions', default: t('global.index.actions') %></th>
     </tr>
     </thead>
@@ -34,6 +35,7 @@
           <td><%= delivery.delivery_man %></td>
           <td><%= delivery.start_date %></td>
           <td><%= delivery.end_date %></td>
+          <td><%= raw t "enum.delivery.status.#{delivery.status}" %></td>
           <td>
             <div class="btn-toolbar btn-group-xs">
               <%= link_to icon('eye-open'), business_delivery_path(@business, delivery),

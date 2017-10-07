@@ -1,4 +1,7 @@
 class Delivery < ApplicationRecord
+  attr_accessor :status
+  enum statuses: [:active, :finalized]
+
   has_many :orders, dependent: :restrict_with_error
   has_many :traces
   has_many :paths
@@ -10,6 +13,10 @@ class Delivery < ApplicationRecord
 
   validates :orders, presence: true
   after_create :mark_orders_as_sended
+
+  def status
+    active? ? :active : :finalized
+  end
 
   def last_positions
     traces.map(&:position)

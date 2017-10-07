@@ -32,6 +32,8 @@ es:
         end_date: "Fecha de fin"
         path_strategy: "Estrategia de recorrido"
         order_ids: "Ordenes"
+
+        status: "Estado"
       product:
         name: "Nombre"
         description: "Descripcion"
