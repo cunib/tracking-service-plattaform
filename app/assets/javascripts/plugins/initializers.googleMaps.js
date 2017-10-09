@@ -1,7 +1,7 @@
 (function($) {
   var mapInitializers = [];
   var path = [];
-  var defaultZoom = 15;
+  var defaultZoom = 14;
   var lastPosition;
   var polyline;
   var marker;
@@ -24,7 +24,7 @@
     var infoWindowContent = $(infoWindowContentTemplate);
     if (title) {
       infoWindowContent.html(title);
-      $('<strong/>').text(" en " + ubication).appendTo(infoWindowContent)
+      $('<strong/>').text(" Repartidor: ").prependTo(infoWindowContent)
     }
     // Create, store a ref to and open the InfoWindow
     var infoWindow = new google.maps.InfoWindow({ content: infoWindowContent.get(0), maxWidth: 240 });
@@ -44,11 +44,11 @@
       position: position,
       title: title,
       animation: google.maps.Animation.BOUNCE,
-      icon: '',
+      icon: 'https://png.icons8.com/scooter/color/48',
       draggable: false,
       visible: iconVisible
     });
-    //createInfoWindow(map, marker, title, title, doNotOpenInfoWindow);
+    createInfoWindow(map, marker, title, title, doNotOpenInfoWindow);
     marker.addListener('click', handleMarkerClick);
     return marker;
   }
@@ -77,7 +77,6 @@
     var infoWindowContent = $(infoWindowContentTemplate);
     if (marker.title) {
       $('<strong/>').text(marker.title).appendTo(infoWindowContent)
-      //content.forEach(function(project) {
       //  $('<p/>').text("* " + project).appendTo(infoWindowContent)
       //});
     }
@@ -96,7 +95,7 @@
       position: marker.position,
       title: marker.title,
       animation: google.maps.Animation.DROP,
-      icon: 'https://maps.google.com/mapfiles/kml/shapes/schools_maps.png',
+      icon: 'https://png.icons8.com/home-address-filled/ios7/32',
       draggable: false
     });
     createContentWindow(map, m, m.title, doNotOpenInfoWindow);
@@ -154,6 +153,7 @@
       map.panToBounds(bounds);
       map.set('bounds', bounds);
       map.setCenter(traces[tracesLength - 1].position);
+      map.setZoom(defaultZoom);
     } catch(e) {
       if (window.console && console.error) {
         console.error(e);

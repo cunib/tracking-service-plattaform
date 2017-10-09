@@ -86,7 +86,7 @@ class Order < ApplicationRecord
     if sended?
       delivery.traces.map do |trace|
         {
-          title: trace.date.to_s,
+          title: delivery.delivery_man.nickname,
           position: {
             lat: trace.position.latitude,
             lng: trace.position.longitude
