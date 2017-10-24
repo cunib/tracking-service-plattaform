@@ -40,6 +40,8 @@ es:
     index:
       title: "Repartos"
       secondary_title: "del local %{model}"
+    show:
+      show_order: "Ir a la orden"
     actions:
       activate: "Activar/Enviar"
   products:

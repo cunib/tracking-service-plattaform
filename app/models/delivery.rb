@@ -15,7 +15,15 @@ class Delivery < ApplicationRecord
   after_create :mark_orders_as_sended
 
   def status
-    active? ? :active : :finalized
+    if active?
+      :active
+    else
+      if ready_to_send?
+        :ready_to_send
+      else
+        :finalized
+      end
+    end
   end
 
   def last_positions
@@ -49,7 +57,11 @@ class Delivery < ApplicationRecord
   end
 
   def active?
-    orders.where.not(status: :sended).empty?
+    orders.where(status: [:sended]).any?
+  end
+
+  def ready_to_send?
+    orders.where(status: [:ready_to_send]).count == orders.count
   end
 
   def deliver
@@ -65,12 +77,15 @@ class Delivery < ApplicationRecord
   end
 
   def activate
-    orders.each { |order| order.mark_as_sended! } unless active?
+    result = false
+    orders.each { |order| result = order.mark_as_sended! } unless active?
+    errors.add :base, :not_activated unless result
+    self
   end
 
   def can_activate?
     return false unless delivery_man.present?
-    orders.where.not(status: :ready_to_send).empty? && delivery_man.active_delivery.blank?
+    ready_to_send? && delivery_man.active_delivery.blank?
   end
 
   private
