@@ -9,6 +9,14 @@ es:
         finalized:  "<span class='label label-success'> Finalizado </span>"
         suspended:  "<span class='label label-danger'> Suspendido </span>"
         ready_to_send:  "<span class='label label-success'> Listo para enviar </span>"
+      string_status:
+        created:  "Creado"
+        development:  "En desarrollo"
+        sended: "Enviado"
+        canceled:  "Cancelado"
+        finalized:  "Finalizado"
+        suspended:  "Suspendido"
+        ready_to_send:  "Listo para enviar"
     delivery:
       status:
         active:  "<span class='label label-info'> En reparto </span>"

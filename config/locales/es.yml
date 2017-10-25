@@ -24,6 +24,7 @@ es:
     track_order:
       title: "Seguí tu pedido!"
       hash_code: "Código de orden"
+      status: "Su pedido aún no se encuentra <b>%{status}</b>. En breve podrá seguir el recorrido que realiza el mismo en un mapa (deberá recargar la página)."
     map:
       title: "Dirección de entrega: %{address}"
     filter:

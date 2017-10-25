@@ -27,8 +27,14 @@
         <dd><%= @order.start_date %></dd>
         <dt><%= t 'activerecord.attributes.order.end_date' %></dt>
         <dd><%= @order.end_date %></dd>
+        <dt><%= t 'activerecord.attributes.order.hash_code' %></dt>
+        <dd><%= @order.hash_code %></dd>
         <dt><%= t 'activerecord.attributes.order.status' %></dt>
         <dd><%= raw t "enum.order.status.#{@order.status}" %></dd>
+        <% if @order.delivery.present? %>
+          <dt><%= t 'activerecord.attributes.order.delivery' %></dt>
+        <dd><%= link_to "Acceder al reparto", business_delivery_path(@business, @order.delivery) %></dd>
+        <% end %>
     </dl>
   </div>
 </div>

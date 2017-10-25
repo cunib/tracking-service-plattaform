@@ -72,7 +72,7 @@
         </div>
       </div>
       <div class="right-column block col-7">
-        <% if @order.delivery.present? %>
+        <% if @order.delivery.present? && @order.sended? %>
           <div class="toggle-control">
             <button type="button" class="toggle-btn toggle-btn-hide" > &lt; </button>
           </div>
@@ -85,7 +85,11 @@
             <div class="col-md-11 col-md-offset-1">
               <div class="alert alert-info" role="alert">
                 <%= icon('info-sign') %>
-                <%= "Su pedido aún no se encuentra en proceso de envio. En breve podrá seguir el recorrido que realiza el mismo en un mapa (deberá recargar la página)." %>
+                <% if @order.finalized? %>
+                  <%= "¡Su pedido ha sido entregado!." %>
+                <% else %>
+                  <%= t(".status", status: t("enum.order.string_status.#{@order.status}")).html_safe %>
+                <% end %>
               </div>
             </div>
           </div>
