@@ -16,7 +16,7 @@ module  Api
         end
       end
 
-      def mark_as_finalized
+      def mark_as_suspended
         if @order.suspend
           render nothing: true, status: :ok
         else
