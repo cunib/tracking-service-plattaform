@@ -13,18 +13,18 @@
   </div>
 </div>
 
-<div>
-  <div class="search">
+<div class="row">
+  <div class="col-md-4 search">
     <%= simple_form_for(:order, url: business_track_order_path(@business), method: 'GET') do |f| -%>
       <div class="row">
         <%= f.input :hash_code,
                     required: false,
                     label: t('.hash_code'),
-                    wrapper_html: { class: 'col-md-4' }
+                    wrapper_html: { class: 'col-md-12' }
         %>
       </div>
       <div class="row">
-        <div class="col-md-4 text-right">
+        <div class="col-md-12 text-right">
           <%= f.submit t('global.filters.search_order'), class: 'btn btn-info btn-sm' %>
           <%= link_to icon('remove'),
                       business_track_order_path(@business, _reset: 'reset'),
@@ -35,30 +35,34 @@
       </div>
     <% end -%>
   </div>
+  <% if @order.present? %>
+    <div class="col-md-4">
+      <dl class="dl-horizontal well well-sm">
+          <dt><%= t 'activerecord.attributes.order.start_date' %></dt>
+          <dd><%= @order.start_date %></dd>
+          <dt><%= t 'activerecord.attributes.order.end_date' %></dt>
+          <dd><%= @order.end_date %></dd>
+      </dl>
+    </div>
+    <div class="col-md-4">
+      <dl class="dl-horizontal well well-sm">
+          <dt><%= t 'activerecord.attributes.delivery.delivery_man' %></dt>
+          <dd><%= @order.delivery.try(:delivery_man) || "Repartidor no asignado" %></dd>
+      </dl>
+    </div>
+  <% end %>
 </div>
 <% if @order.present? %>
-    <div class="row">
-      <div class="col-md-6">
-        <dl class="dl-horizontal well well-sm">
-            <dt><%= t 'activerecord.attributes.order.start_date' %></dt>
-            <dd><%= @order.start_date %></dd>
-            <dt><%= t 'activerecord.attributes.order.end_date' %></dt>
-            <dd><%= @order.end_date %></dd>
-        </dl>
-      </div>
-      <div class="col-md-6">
-        <dl class="dl-horizontal well well-sm">
-            <dt><%= t 'activerecord.attributes.delivery.delivery_man' %></dt>
-            <dd><%= @order.delivery.try(:delivery_man) || "Repartidor no asignado" %></dd>
-        </dl>
-      </div>
-    </div>
     <div class="block-group">
       <div class="block left-column col-3">
+      <h4><%= t '.order_details' %></h4>
         <div class="list">
           <div class="row">
             <div class="col-md-12">
-              <dl class="dl-horizontal well well-sm order-list">
+              <dl class="dl-horizontal order-list">
+                <dt><%= t 'activerecord.attributes.order.customer_full_name' %></dt>
+                <dt><%= t 'activerecord.attributes.order.customer_email' %></dt>
+                <dt><%= t 'activerecord.attributes.order.product_ids' %></dt>
                 <dt><%= t 'activerecord.attributes.order.address' %></dt>
                 <dd><%= @order.address %></dd>
                 <dt><%= t 'activerecord.attributes.order.status' %></dt>
