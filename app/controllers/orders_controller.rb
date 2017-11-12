@@ -1,6 +1,7 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy, :cancel, 
-                                   :suspend, :process_order, :dispatch_order, :positions]
+                                   :suspend, :process_order, :dispatch_order, :positions,
+                                  :mark_as_sended_order]
 
   respond_to :html
   respond_to :json, only: :positions
@@ -43,6 +44,12 @@ class OrdersController < ApplicationController
     @order.destroy
     respond_with(@order, location: [@business, :orders])
   end
+
+  def mark_as_sended_order
+    @order.mark_as_sended
+    respond_with(@order, location: [@business, :orders])
+  end
+
 
   def process_order
     @order.process

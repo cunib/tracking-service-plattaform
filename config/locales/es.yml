@@ -37,6 +37,7 @@ es:
       customer_full_name: "Nombre o apellido del comprador"
       customer_email: "Email del comprador"
     actions:
+      mark_as_sended: "Enviar"
       track_order: "Seguí tu pedido"
   deliveries:
     index:

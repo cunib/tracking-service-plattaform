@@ -63,9 +63,15 @@
                   data: { toggle: 'tooltip', container: 'body', placement: 'left' } %>
                 <% end %>
                 <% if order.can_dispatch? %>
-                  <%= link_to icon('send'), dispatch_business_order_path(@business, order),
+                  <%= link_to icon('ok'), dispatch_business_order_path(@business, order),
                   class: 'btn btn-link', method: :post,
                   title: t('orders.actions.dispatch', default: t('global.actions.dispatch')),
+                  data: { toggle: 'tooltip', container: 'body', placement: 'left' } %>
+                <% end %>
+                <% if order.can_mark_as_sended? %>
+                  <%= link_to icon('send'), mark_as_sended_business_order_path(@business, order),
+                  class: 'btn btn-link', method: :post,
+                  title: t('orders.actions.mark_as_sended', default: t('global.actions.process')),
                   data: { toggle: 'tooltip', container: 'body', placement: 'left' } %>
                 <% end %>
                 <% if order.can_suspend? %>

@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     resources :orders, path: 'ordenes' do
       member do
         post :process, as: :process, to: 'orders#process_order'
+        post :mark_as_sended, as: :mark_as_sended, to: 'orders#mark_as_sended_order'
         post :dispatch, as: :dispatch, to: 'orders#dispatch_order'
         post :suspend, as: :suspend, to: 'orders#suspend'
         post :cancel, as: :cancel, to: 'orders#cancel'
