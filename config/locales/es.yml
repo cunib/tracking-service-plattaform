@@ -33,6 +33,8 @@ es:
       order_details: "Detalles del pedido"
     map:
       title: "Dirección de entrega: %{address}"
+    new_order:
+      title: "Pedido para el local %{business}"
     filter:
       business: "Negocio"
       address: "Dirección"

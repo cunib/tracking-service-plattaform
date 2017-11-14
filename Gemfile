@@ -18,6 +18,10 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-jquery-ujs',       '~> 1.0'
 end
 
+# Datepicker with bootstrap
+gem 'momentjs-rails', '>= 2.9.0'
+gem 'bootstrap3-datetimepicker-rails', '~> 4.17.43'
+
 ## Js
 gem 'js-initializers', '~> 0.0.1'
 

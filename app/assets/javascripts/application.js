@@ -18,3 +18,5 @@
 //= require nprogress
 //= require nprogress-turbolinks
 //= require plugins
+//= require moment
+//= require bootstrap-datetimepicker

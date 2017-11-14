@@ -4,6 +4,6 @@ class Product < ApplicationRecord
   has_many :orders, through: :ordered_products
 
   def to_s
-    name
+    "#{name} - $#{price}"
   end
 end

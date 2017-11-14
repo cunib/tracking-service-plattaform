@@ -23,11 +23,11 @@ ActiveRecord::Schema.define(version: 20171004222322) do
   end
 
   create_table "deliveries", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.date    "start_date"
-    t.date    "end_date"
-    t.integer "delivery_man_id"
-    t.string  "path_strategy"
-    t.integer "business_id"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.integer  "delivery_man_id"
+    t.string   "path_strategy"
+    t.integer  "business_id"
     t.index ["business_id"], name: "index_deliveries_on_business_id", using: :btree
     t.index ["delivery_man_id"], name: "index_deliveries_on_delivery_man_id", using: :btree
   end
@@ -49,8 +49,8 @@ ActiveRecord::Schema.define(version: 20171004222322) do
   end
 
   create_table "orders", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.date     "start_date"
-    t.date     "end_date"
+    t.datetime "start_date"
+    t.datetime "end_date"
     t.string   "address"
     t.integer  "business_id"
     t.integer  "delivery_id"

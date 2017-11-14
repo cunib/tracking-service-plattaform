@@ -1,3 +1,17 @@
+<div class="page-header">
+  <div class="row">
+    <h1 class="col-md-10"> <%= t '.title', business: @business %></h1>
+    <div class="actions col-md-2">
+      <%= link_to icon('plus'), new_business_delivery_path(@business), 
+        class: 'btn btn-success', data: { toggle: 'tooltip', container: 'body' }, 
+        title: t('deliveries.actions.new', default: t('global.actions.new')) %>
+      <a class="btn btn-info" role="button" data-toggle="collapse"
+        href="#collapse_search_form" aria-expanded="false" aria-controls="collapse_search_form">
+        <%= icon "filter" %>
+      </a>
+    </div>
+  </div>
+</div>
 <%= simple_form_for([@business, @order], url: business_create_order_path(@business))  do |f| %>
   <%= f.error_notification %>
 
@@ -9,8 +23,9 @@
         <%= f.input :address %>
       </div>
       <div class="col-md-6">
-        <%= f.input :product_ids, as: :select2, multiple: true, collection: @business.products %>
-        <%= f.input :start_date, as: :date, html5: true %>
+        <%= f.input :product_ids, as: :select2, multiple: true, collection: @business.products,
+          label_method: ->(product) { product.to_s } %>
+        <%= f.input :start_date, as: :datetime_picker, html5: true %>
       </div>
     </div>
   </div>
