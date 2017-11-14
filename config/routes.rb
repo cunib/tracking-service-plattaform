@@ -18,7 +18,11 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :delivery_men, path: 'repartidores'
+    resources :delivery_men, path: 'repartidores' do
+      member do
+        get 'repartos', action: :deliveries, as: :deliveries
+      end
+    end
 
     resources :deliveries, path: 'repartos' do
       member do

@@ -1,5 +1,5 @@
 class DeliveryMenController < ApplicationController
-  before_action :set_delivery_man, only: [:show, :edit, :update, :destroy]
+  before_action :set_delivery_man, only: [:show, :edit, :update, :destroy, :deliveries]
 
   respond_to :html
 
@@ -36,6 +36,10 @@ class DeliveryMenController < ApplicationController
   def destroy
     @delivery_man.destroy
     respond_with(@delivery_man, location: [@business, :delivery_men])
+  end
+  
+  def deliveries
+    @delivery_man.deliveries
   end
 
   private

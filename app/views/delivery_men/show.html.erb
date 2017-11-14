@@ -18,11 +18,29 @@
 
 <div class="row">
   <div class="col-md-12">
-    <dl class="dl-horizontal">
-        <dt><%= t 'activerecord.attributes.delivery_man.nickname' %></dt>
-        <dd><%= @delivery_man.nickname %></dd>
-        <dt><%= t 'activerecord.attributes.delivery_man.business' %></dt>
-        <dd><%= @delivery_man.business %></dd>
-    </dl>
+    <fieldset class="">
+      <legend>Entregas asignadas</legend>
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th><%= t 'activerecord.attributes.delivery.start_date' %></th>
+              <th><%= t 'activerecord.attributes.delivery.end_date' %></th>
+              <th><%= t 'activerecord.attributes.delivery.status' %></th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% @delivery_man.deliveries.each do |delivery| -%>
+              <tr>
+                <td><%= delivery.start_date %></td>
+                <td><%= delivery.end_date %></td>
+                <td><%= raw t "enum.order.status.#{delivery.status}" %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </fieldset>
   </div>
 </div>

@@ -23,6 +23,7 @@
   <table class="table table-striped">
     <thead>
     <tr>
+      <th><%= t 'activerecord.attributes.order.customer_full_name' %></th>
       <th><%= t 'activerecord.attributes.order.address' %></th>
       <th><%= t 'activerecord.attributes.order.start_date' %></th>
       <th><%= t 'activerecord.attributes.order.end_date' %></th>
@@ -35,6 +36,7 @@
     <tbody>
       <% @orders.each do |order| -%>
         <tr>
+          <td><%= order.customer_full_name %></td>
           <td><%= order.address %></td>
           <td><%= order.start_date %></td>
           <td><%= order.end_date %></td>

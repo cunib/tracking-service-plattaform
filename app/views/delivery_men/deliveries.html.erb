@@ -1,0 +1,49 @@
+<div class="page-header">
+  <div class="row">
+    <div class="col-md-10">
+      <h1><%= t '.title', default: t('global.show.title') %></h1>
+    </div>
+    <div class="col-md-2">
+      <div class="actions">
+        <%= link_to icon('chevron-left'), business_delivery_men_path(@business), 
+          class: 'btn btn-default', data: { toggle: 'tooltip', container: 'body' }, 
+          title: t('.back', default: t('global.actions.back')) %>
+    </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th><%= t 'activerecord.attributes.delivery.start_date' %></th>
+            <th><%= t 'activerecord.attributes.delivery.end_date' %></th>
+            <th><%= t 'activerecord.attributes.delivery.status' %></th>
+            <th class="actions"><%= t '.actions', default: t('global.index.actions') %></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @delivery_man.deliveries.each do |delivery| -%>
+            <tr>
+              <td><%= delivery.start_date %></td>
+              <td><%= delivery.end_date %></td>
+              <td><%= raw t "enum.delivery.status.#{delivery.status}" %></td>
+              <td>
+                <div class="btn-toolbar btn-group-xs">
+                  <%= link_to icon('eye-open'), business_delivery_path(@business, delivery),
+                    class: 'btn btn-link',
+                    title: t('delivery_men.actions.deliveries.show', default: t('global.actions.show')),
+                    data: { toggle: 'tooltip', container: 'body', placement: 'left' } %>
+                </div>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -14,7 +14,12 @@ es:
     index:
       title: "Repartidores"
       secondary_title: "del local %{model}"
-      actions:
+    deliveries:
+      title: "Entregas asignadas"
+    actions:
+      deliveries: "Repartos"
+      deliveries:
+        show: "Ver reparto"
     filter:
       nickname: "Apodo"
   orders:

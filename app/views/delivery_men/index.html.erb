@@ -34,9 +34,9 @@
           <td><%= delivery_man.business %></td>
           <td>
             <div class="btn-toolbar btn-group-xs">
-              <%= link_to icon('eye-open'), business_delivery_man_path(@business, delivery_man),
+              <%= link_to icon('list-alt'), deliveries_business_delivery_man_path(@business, delivery_man),
                 class: 'btn btn-link',
-                title: t('delivery_men.actions.show', default: t('global.actions.show')),
+                title: t('delivery_men.actions.deliveries', default: t('global.actions.deliveries')),
                 data: { toggle: 'tooltip', container: 'body', placement: 'left' } %>
               <%= link_to icon('pencil'), edit_business_delivery_man_path(@business, delivery_man),
                 class: 'btn btn-link',
