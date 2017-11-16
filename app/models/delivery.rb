@@ -9,7 +9,9 @@ class Delivery < ApplicationRecord
   belongs_to :delivery_man, optional: true
   belongs_to :business
 
-  scope :actives, -> { joins(:orders).merge(Order.sended) }
+  scope :actives, -> { joins("LEFT OUTER JOIN orders on orders.delivery_id = deliveries.id")
+    .merge(Order.sended)
+    .or(joins("LEFT OUTER JOIN orders on orders.delivery_id = deliveries.id").merge(Order.suspended)) }
 
   validates :orders, presence: true
   after_create :mark_orders_as_sended
@@ -84,6 +86,7 @@ class Delivery < ApplicationRecord
   end
 
   def can_activate?
+    byebug
     return false unless delivery_man.present?
     ready_to_send? && delivery_man.active_delivery.blank?
   end
