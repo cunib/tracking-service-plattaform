@@ -10,7 +10,7 @@ class OrdersController < ApplicationController
   def index
     @orders = @business.orders
     @q = @orders.search(session_params)
-    @q.sorts = ["created_at desc"]
+    @q.sorts = ["start_date desc"]
     @orders = @q.result.page(page_param)
     respond_with(@orders, location: [@business, :orders])
   end

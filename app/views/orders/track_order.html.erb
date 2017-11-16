@@ -61,8 +61,9 @@
             <div class="col-md-12">
               <dl class="dl-horizontal order-list">
                 <dt><%= t 'activerecord.attributes.order.customer_full_name' %></dt>
+                <dd><%= @order.customer_full_name %></dd>
                 <dt><%= t 'activerecord.attributes.order.customer_email' %></dt>
-                <dt><%= t 'activerecord.attributes.order.product_ids' %></dt>
+                <dd><%= @order.customer_email %></dd>
                 <dt><%= t 'activerecord.attributes.order.address' %></dt>
                 <dd><%= @order.address %></dd>
                 <dt><%= t 'activerecord.attributes.order.status' %></dt>
@@ -71,7 +72,10 @@
             </div>
           </div>
           <div class="list-footer">
-            <%# link_to("Más resultados", "javascript:;", id: "more") %>
+            <h4>Productos</h4>
+            <% @order.products.each do |product| %>
+              <p><%= product %></p>
+            <% end %>
           </div>
         </div>
       </div>

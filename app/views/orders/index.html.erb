@@ -39,7 +39,7 @@
           <td><%= order.customer_full_name %></td>
           <td><%= order.address %></td>
           <td><%= order.start_date %></td>
-          <td><%= order.end_date %></td>
+          <td><%= order.end_date || '-' %></td>
           <td><%= order.hash_code %></td>
           <td><%= raw t "enum.order.status.#{order.status}" %></td>
           <td>
