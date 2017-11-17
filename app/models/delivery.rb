@@ -86,7 +86,6 @@ class Delivery < ApplicationRecord
   end
 
   def can_activate?
-    byebug
     return false unless delivery_man.present?
     ready_to_send? && delivery_man.active_delivery.blank?
   end
