@@ -4,7 +4,7 @@ es:
       business: "Business"
       delivery_man: "Repartidor"
       order: "Pedido"
-      delivery: "Reparto"
+      delivery: "Entrega"
     attributes:
       business:
         name: "Nombre"
@@ -14,17 +14,17 @@ es:
         nickname: "Apodo"
       order:
         business: "Negocio"
-        delivery: "Reparto"
+        delivery: "Entrega"
         business_id: "Negocio"
-        delivery_id: "Reparto"
+        delivery_id: "Entrega"
         address: "Dirección"
         start_date: "Fecha de inicio"
         end_date: "Fecha de fin"
         status: "Estado"
         product_ids: "Productos"
         hash_code: "Código"
-        customer_full_name: "Nombre y apellido del comprador"
-        customer_email: "Email del comprador"
+        customer_full_name: "Nombre y apellido"
+        customer_email: "Email"
       delivery:
         delivery_man_id: "Repartidor"
         delivery_man: "Repartidor"

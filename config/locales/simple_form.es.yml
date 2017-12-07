@@ -13,6 +13,8 @@ es:
     hints:
       order:
         hash_code: "Ingrese el código de orden entregado al realizar el pedido."
+      business:
+        path_strategy: "Seleccione la estrategia que se empleará para el calculo de recorrido de los repartos."
     # Examples
     # labels:
     #   defaults:

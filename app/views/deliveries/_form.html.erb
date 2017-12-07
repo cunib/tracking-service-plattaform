@@ -3,19 +3,17 @@
 
   <div class="form-inputs">
     <div class="row">
-      <div class="col-md-5">
-        <%= f.input :delivery_man_id, as: :select2, collection: DeliveryMan.all %>
-        <%= f.input :start_date, as: :datetime_picker, input_html: { value: Date.today.strftime('yyyy-MM-dd') } %>
-        <%= f.input :end_date, as: :datetime_picker, disabled: true %>
-        <% if f.object.persisted? %>
-          <%= f.input :order_ids, as: :select2, collection: Order.readies_and_selected(f.object.id), multiple: true, 
-            label_method: ->(order) { order.to_s }, i18n: { formatNoMatches: 'No existen pedidos listos para ser enviados.' } %>
-        <% else %>
-          <%= f.input :order_ids, as: :select2, collection: Order.readies, multiple: true, 
-            label_method: ->(order) { order.to_s }, i18n: { formatNoMatches: 'No existen pedidos listos para ser enviados.' } %>
-        <% end %>
-        <%= f.hidden_field :path_strategy, value: @business.path_strategy %>
-      </div>
+      <%= f.input :delivery_man_id, as: :select2, collection: DeliveryMan.all, wrapper_html: {class: 'col-md-3'} %>
+      <% if f.object.persisted? %>
+        <%= f.input :order_ids, as: :select2, collection: Order.readies_and_selected(f.object.id), multiple: true, 
+          label_method: ->(order) { order.to_s }, i18n: { formatNoMatches: 'No existen pedidos listos para ser enviados.' }, wrapper_html: {class: 'col-md-3'}  %>
+      <% else %>
+        <%= f.input :order_ids, as: :select2, collection: Order.readies, multiple: true, 
+          label_method: ->(order) { order.to_s }, i18n: { formatNoMatches: 'No existen pedidos listos para ser enviados.' }, wrapper_html: {class: 'col-md-3'}  %>
+      <% end %>
+      <%= f.input :start_date, as: :datetime_picker, input_html: { value: Date.today.strftime('yyyy-MM-dd') }, wrapper_html: {class: 'col-md-3'}  %>
+      <%= f.input :end_date, as: :datetime_picker, disabled: true, wrapper_html: {class: 'col-md-3'}  %>
+      <%= f.hidden_field :path_strategy, value: @business.path_strategy %>
     </div>
   </div>
 

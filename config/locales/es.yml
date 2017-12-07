@@ -5,36 +5,38 @@ es:
   businesses:
     index:
       title: "Negocios"
+    edit_strategy:
+      title: "Editar estrategia"
     actions:
-      access: "Acceder al local"
+      access: "Acceder al negocio"
     filter:
       name: "Nombre"
       address: "Dirección"
   delivery_men:
     index:
       title: "Repartidores"
-      secondary_title: "del local %{model}"
+      secondary_title: "del negocio %{model}"
     deliveries:
       title: "Entregas asignadas"
     actions:
-      deliveries: "Repartos"
+      deliveries: "Entregas"
       deliveries:
-        show: "Ver reparto"
+        show: "Ver entrega"
     filter:
       nickname: "Apodo"
   orders:
     index:
-      title: "Pedidos"
-      secondary_title: "del local %{model}"
+      title: "Ordenes"
+      secondary_title: "del negocio %{model}"
     track_order:
-      title: "Seguí tu pedido!"
+      title: "Seguí tu orden!"
       hash_code: "Código de orden"
-      status: "Su pedido aún no se encuentra <b>%{status}</b>. En breve podrá seguir el recorrido que realiza el mismo en un mapa (deberá recargar la página)."
-      order_details: "Detalles del pedido"
+      status: "Su orden aún no se encuentra <b>%{status}</b>. En breve podrá seguir el recorrido que realiza el mismo en un mapa (deberá recargar la página)."
+      order_details: "Detalles de la orden"
     map:
       title: "Dirección de entrega: %{address}"
     new_order:
-      title: "Pedido para el local %{business}"
+      title: "Ordene para el negocio %{business}"
     filter:
       business: "Negocio"
       address: "Dirección"
@@ -45,32 +47,37 @@ es:
       customer_email: "Email del comprador"
     actions:
       mark_as_sended: "Enviar"
-      track_order: "Seguí tu pedido"
+      track_order: "Seguí tu orden"
   deliveries:
     index:
-      title: "Repartos"
-      secondary_title: "del local %{model}"
+      title: "Entregas"
+      secondary_title: "del negocio %{model}"
     show:
       show_order: "Ir a la orden"
+    new:
+      title: "Nueva entrega para el negocio %{model}"
     actions:
       activate: "Activar/Enviar"
   products:
     index:
       title: "Productos"
-      secondary_title: "del local %{model}"
+      secondary_title: "del negocio %{model}"
+    new:
+      title: "Nuevo producto para el negocio %{business}"
   views:
     application:
-      title: "Plataforma de seguimiento de pedidos"
+      title: "Plataforma de seguimiento de ordenes"
     navbar:
-      app_title: "<b>%{business}</b> - <small>Plataforma de seguimiento de pedidos</small>"
+      app_title: "<b>%{business}</b> - <small>Plataforma de seguimiento de ordenes</small>"
       bussines: "Negocios"
       dropdown: 
         title: "Configuración"
         delivery_men: "Repartidores"
-        orders: "Pedidos"
-        deliveries: "Repartos"        
-        edit_business: "Editar local"
+        orders: "Ordenes"
+        deliveries: "Entregas"        
+        edit_business: "Editar negocio"
         products: "Productos"
+        edit_strategy: "Editar estrategia"
     errors:
       messages:
         unprocessable_entity:          "Entidad no procesable"

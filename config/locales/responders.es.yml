@@ -24,5 +24,5 @@ es:
         alert: 'Ha ocurrido un error en la actualización de estado'
         alert_html: '<i class="glyphicon glyphicon-exclamation-sign"></i> Ha ocurrido un error en la actualización de estado'        
       create_order:
-        alert: "El pedido no pudo ser creado, por favor chequee los errores a continuación y vuelva a intentarlo."
-        notice: "El pedido fue creado con éxito. Para seguir su pedido utilizá este código %{hash_code} en la sección <b>Seguí tu pedido</b> o hace click "
+        alert: "La orden no pudo ser creada, por favor chequee los errores a continuación y vuelva a intentarlo."
+        notice: "La orden fue creada con éxito. Para seguir su orden utilizá este código %{hash_code} en la sección <b>Seguí tu orden</b> o hace click "
