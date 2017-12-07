@@ -5,6 +5,10 @@ Rails.application.routes.draw do
 
   resources :businesses, path: 'locales' do
 
+    member do
+      get 'editar-estrategia', action: :edit_strategy, as: :edit_strategy
+    end
+
     resources :products, path: 'productos', path_names: { new: 'nuevo' }
 
     resources :orders, path: 'ordenes' do

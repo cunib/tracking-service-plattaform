@@ -1,5 +1,5 @@
 class BusinessesController < ApplicationController
-  before_action :set_business, only: [:show, :edit, :update, :destroy, :make_order]
+  before_action :set_business, only: [:show, :edit, :update, :destroy, :make_order, :edit_strategy]
 
   respond_to :html
 
@@ -21,6 +21,9 @@ class BusinessesController < ApplicationController
   end
 
   def edit
+  end
+
+  def edit_strategy
   end
 
   def create
