@@ -58,6 +58,14 @@ class Delivery < ApplicationRecord
     end
   end
 
+  def sended_orders
+    orders.sended
+  end
+
+  def not_sended_orders
+    orders.not_sended
+  end
+
   def active?
     orders.where(status: [:sended]).any?
   end
