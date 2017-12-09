@@ -1,4 +1,4 @@
-class DijkstraPathStrategy < PathStrategy
+class RandomPathStrategy < PathStrategy
  require 'node_with_distances'
 
  attr_accessor :path, :total_distance, :next_node, :nodes, :distance_hash
@@ -12,20 +12,7 @@ class DijkstraPathStrategy < PathStrategy
  end
 
   def build_path
-    while @path.size < @nodes.size
-      @distance_hash[next_node].each do |node_to, distance|
-        min_distance = 999999
-        unless @path.include?(node_to)
-          if distance < min_distance
-            min_distance = distance
-            @next_node = node_to
-          end
-          @total_distance = @total_distance + min_distance
-          @path << @next_node
-        end
-      end
-    end
-
+    @path = @nodes
     @path << @nodes.first
     @distance_hash[@next_node].each do |node_to, distance|
       if node_to == @next_node
@@ -37,6 +24,6 @@ class DijkstraPathStrategy < PathStrategy
   end
 
   def self.name
-    "Armado de recorrido más corto"
+    "Armado de recorrido Aleatorio"
   end
 end

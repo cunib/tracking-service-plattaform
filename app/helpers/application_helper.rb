@@ -10,4 +10,8 @@ module ApplicationHelper
   def render_value(value)
     value.present? ? value : t('value.blank')
   end
+
+  def label_for_strategy(strategy)
+    strategy.constantize.name
+  end
 end
