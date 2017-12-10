@@ -1,7 +1,7 @@
 (function($) {
   var mapInitializers = [];
   var path = [];
-  var defaultZoom = 14;
+  var defaultZoom = 16;
   var lastPosition;
   var polyline;
   var marker;
