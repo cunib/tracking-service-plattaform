@@ -92,6 +92,7 @@ class Order < ApplicationRecord
             lat: trace.position.latitude,
             lng: trace.position.longitude
           },
+          status: status,
           id: trace.id
         }
       end

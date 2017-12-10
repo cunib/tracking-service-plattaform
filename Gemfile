@@ -50,6 +50,7 @@ gem 'config', '~> 1.3.0'
 gem 'stateful_enum', '~> 0.4.0'
 
 gem 'geocoder', '~> 1.4.4'
+gem 'google_maps_service', '~> 0.4.1'
 
 gem 'active_model_serializers', '~> 0.10.6'
 

@@ -6,7 +6,9 @@ class Trace < ApplicationRecord
   before_validation :default_values, on: :create
 
   def update_position(latitude, longitude)
-    unless position.update(latitude: latitude, longitude: longitude)
+    if position.update(latitude: latitude, longitude: longitude)
+      date = DateTime.now
+    else
       errors.add :base, :position_update_fail
     end
   end

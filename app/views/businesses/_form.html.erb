@@ -6,7 +6,7 @@
       <%= f.input :name, wrapper_html: { class: 'col-md-5' } %>
       <%= f.input :address, wrapper_html: { class: 'col-md-4' } %>
       <%= f.input :path_strategy, as: :select2, collection: PathStrategy.strategy_types,
-        wrapper_html: { class: 'col-md-3' } %>
+        label_method: ->(strategy) { label_for_strategy(strategy) }, wrapper_html: { class: 'col-md-3' } %>
     </div>
   </div>
 
