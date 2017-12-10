@@ -61,7 +61,7 @@
       polyline = new google.maps.Polyline({
           map: map,
           path: path,
-          strokeColor: '#0000FF',
+          strokeColor: '#FF0000',
           strokeOpacity: 0.7,
           strokeWeight: 3
       });
@@ -90,12 +90,24 @@
   }
 
   function addFixedMarker(map, marker, doNotOpenInfoWindow) {
+    debugger;
+    var icon;
+    if (marker.status == "finalized") {
+      icon = '/destinationFinalized.png';
+    } else {
+      if (marker.status == "canceled") {
+        icon = '/destinationCanceled.png';
+      }
+      else {
+        icon = '/destination.png';
+      }
+    }
     var m = new google.maps.Marker({
       map: map,
       position: marker.position,
       title: marker.title,
       animation: google.maps.Animation.DROP,
-      icon: 'https://png.icons8.com/home-address-filled/ios7/32',
+      icon: icon,
       draggable: false
     });
     createContentWindow(map, m, m.title, doNotOpenInfoWindow);
@@ -109,7 +121,7 @@
       position: marker.position,
       title: marker.title,
       animation: google.maps.Animation.DROP,
-      icon: 'https://png.icons8.com/home-address-filled/ios7/32',
+      icon: '/pizza_business.png',
       draggable: false
     });
     createContentWindow(map, m, m.title, doNotOpenInfoWindow);
@@ -200,9 +212,9 @@
     }
     var polyline = new google.maps.Polyline({
       path: path,
-      strokeColor: '#FF0000',
+      strokeColor: '#68FF33',
       strokeOpacity: 0.8,
-      strokeWeight: 2,
+      strokeWeight: 3,
       fillColor: '#FF0000',
       fillOpacity: 0.35,
       map: map

@@ -53,6 +53,7 @@ class Delivery < ApplicationRecord
           lat: order.position.latitude,
           lng: order.position.longitude
         },
+        status: order.status,
         id: order.id
       }
     end
