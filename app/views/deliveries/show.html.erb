@@ -73,8 +73,11 @@
       <button type="button" class="toggle-btn toggle-btn-hide" > &lt; </button>
     </div>
     <div data-google-maps="<%= Settings.google_maps.javascript_api_key %>" 
+         data-recommended-path-url="<%= recommended_path_business_delivery_path(@business, @delivery) %>"
          data-url="<%= positions_business_delivery_path(@business, @delivery) %>"
-         data-orders-positions-markers="<%= @markers.to_json %>">
+         data-orders-positions-markers="<%= @markers.to_json %>"
+         data-business-marker="<%= @business_position %>"
+         >
     </div>
   </div>
 </div>

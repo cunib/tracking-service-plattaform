@@ -103,6 +103,20 @@
     return m;
   }
 
+  function addFixedBusinessMarker(map, marker, doNotOpenInfoWindow) {
+    var m = new google.maps.Marker({
+      map: map,
+      position: marker.position,
+      title: marker.title,
+      animation: google.maps.Animation.DROP,
+      icon: 'https://png.icons8.com/home-address-filled/ios7/32',
+      draggable: false
+    });
+    createContentWindow(map, m, m.title, doNotOpenInfoWindow);
+    m.addListener('click', handleMarkerClick);
+    return m;
+  }
+
   function handleMarkerClick() {
     this.get('infoWindow').open(this.getMap(), this);
   }
@@ -161,15 +175,58 @@
     }
   }
 
-  function loadMarkers(markers, map) {
+  function loadMarkers(markers, businessMarker, map) {
     try {
       var bounds = map.get('bounds') || new google.maps.LatLngBounds();
       markers.forEach(function(marker) {
         var m = addFixedMarker(map, marker, true);
         bounds.extend(m.getPosition());
       });
+      addFixedBusinessMarker(map, businessMarker, true);
       map.fitBounds(bounds);
       map.set('bounds', bounds);
+    } catch(e) {
+      if (window.console && console.error) {
+        console.error(e);
+      }
+    }
+  }
+
+  function drawPath(map, data) {
+    var bounds = map.get('bounds') || new google.maps.LatLngBounds();
+    var path = google.maps.geometry.encoding.decodePath(data[0].overview_polyline.points);
+    for (var i = 0; i < path.length; i++) {
+          bounds.extend(path[i]);
+    }
+    var polyline = new google.maps.Polyline({
+      path: path,
+      strokeColor: '#FF0000',
+      strokeOpacity: 0.8,
+      strokeWeight: 2,
+      fillColor: '#FF0000',
+      fillOpacity: 0.35,
+      map: map
+      // strokeColor: "#0000FF",
+      //       // strokeOpacity: 1.0,
+      //             // strokeWeight: 2
+      //
+    });
+    polyline.setMap(map);
+    map.fitBounds(bounds);
+  }
+
+  function loadRecommendedPath(map, url) {
+    try {
+      var recommendedPath;
+      $.ajax({
+        url: url,
+        type: 'GET',
+        dataType: 'json',
+        async: false,
+        success: function (data) {
+          drawPath(map, data);
+        }
+      });
     } catch(e) {
       if (window.console && console.error) {
         console.error(e);
@@ -181,6 +238,8 @@
   function createMapInitializer(target, container) {
     var canvas = container.find('.map-canvas');
     var markers = target.data('orders-positions-markers');
+    var businessMarker = target.data('business-marker');
+    var pathUrl = target.data('recommended-path-url');
     return {
       init: function() {
         var map = new google.maps.Map(canvas.get(0), {
@@ -188,9 +247,11 @@
           zoom: defaultZoom,
           mapTypeId: google.maps.MapTypeId.ROADMAP
         });
-        map.setCenter(new google.maps.LatLng(-34.913283, -57.951501))
+        map.setCenter(new google.maps.LatLng(-34.913283, -57.951501));
+        // Load recommended path
+        loadRecommendedPath(map, pathUrl);
         //Load orders delivery position markers
-        loadMarkers(markers, map)
+        loadMarkers(markers, businessMarker, map);
         // Update traces every 5 seconds
         window.setInterval(function(){
           updatePositions(target.data('url'), map);
@@ -226,7 +287,7 @@
     };
 
     // Load Google Maps API client script only once
-    $(document.body).append('<script async defer src="//maps.googleapis.com/maps/api/js?signed_in=true&libraries=places&key=' + apiKey + '&callback=initializeGoogleMaps">');
+    $(document.body).append('<script async defer src="//maps.googleapis.com/maps/api/js?signed_in=true&libraries=geometry&key=' + apiKey + '&callback=initializeGoogleMaps">');
   }
 
   Initializers.register('google-maps', initializer, condition);

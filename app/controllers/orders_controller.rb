@@ -100,8 +100,10 @@ class OrdersController < ApplicationController
   end
 
   def positions
-    @positions = @order.serialized_positions
-    respond_with @positions, location: [@business, :track_order]
+    if @order.sended?
+      @positions = @order.serialized_positions
+      respond_with @positions, location: [@business, :track_order]
+    end
   end
 
   private

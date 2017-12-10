@@ -1,6 +1,6 @@
 class DeliveriesController < ApplicationController
-  before_action :set_delivery, only: [:show, :edit, :update, :destroy, :positions, :delivery, :activate]
-  respond_to :json, only: :positions
+  before_action :set_delivery, only: [:show, :edit, :update, :destroy, :positions, :delivery, :activate, :recommended_path]
+  respond_to :json, only: [ :positions, :recommended_path ]
 
   respond_to :html
 
@@ -14,9 +14,10 @@ class DeliveriesController < ApplicationController
 
   def show
     @markers = @delivery.serialized_orders
+    @business_position = { title: @business.address, position: { lat: @business.position.latitude, lng: @business.position.longitude } }.to_json
     respond_to do |format|
       format.html
-      format.json { render json: { markers: @markers } }
+      format.json { render json: { markers: @markers, business_position: @business_position } }
     end
   end
 
@@ -53,7 +54,32 @@ class DeliveriesController < ApplicationController
     respond_with(@delivery, location: [@business, :deliveries])
   end
 
+  def recommended_path
+    gmaps = GoogleMapsService::Client.new
+    @routes = gmaps.directions(
+      "#{@business.address}",
+      "#{@business.address}",
+      waypoints: orders_as_path(@delivery),
+      mode: 'driving',
+      alternatives: false
+    )
+    respond_with @routes, location: [@business, :delivery]
+  end
+
   private
+
+  def orders_as_path(delivery)
+    delivery_orders = delivery.orders
+    strategy = delivery.path_strategy
+    orders = strategy.constantize.new(@business, delivery_orders.to_a).build_path.path
+    orders.pop
+    orders.shift
+    waypoints = []
+    orders.each do |order|
+      waypoints << order.address
+    end
+    waypoints
+  end
 
   def set_delivery
     @delivery = Delivery.find(params[:id])
