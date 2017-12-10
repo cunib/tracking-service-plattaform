@@ -1,13 +1,12 @@
 class DeliveriesController < ApplicationController
-  before_action :set_delivery, only: [:show, :edit, :update, :destroy, :positions, :delivery, :activate, :recommended_path]
+  before_action :set_delivery, only: [:show, :edit, :update, :destroy, :positions, 
+                                      :delivery, :activate, :recommended_path, :finalize]
   respond_to :json, only: [ :positions, :recommended_path ]
 
   respond_to :html
 
   def index
-    @deliveries = @business.deliveries
-    @q = @deliveries.search(session_params)
-    @q.sorts = ["created_at asc"]
+    load_filter
     @deliveries = @q.result.page(page_param)
     respond_with(@deliveries, locales: [@business, :deliveries])
   end
@@ -50,8 +49,15 @@ class DeliveriesController < ApplicationController
   end
 
   def activate
+    load_filter
     @delivery.activate
-    respond_with(@delivery, location: [@business, :deliveries])
+    respond_with(@delivery, location: [@business, :deliveries], action: :index)
+  end
+
+  def finalize
+    load_filter
+    @delivery.finalize
+    respond_with(@delivery, location: [@business, :deliveries], action: :index)
   end
 
   def recommended_path
@@ -67,6 +73,13 @@ class DeliveriesController < ApplicationController
   end
 
   private
+
+  def load_filter
+    @deliveries = @business.deliveries
+    @q = @deliveries.search(session_params)
+    @q.sorts = ["created_at asc"]
+    @deliveries = @q.result.page(page_param)
+  end
 
   def orders_as_path(delivery)
     delivery_orders = delivery.sended_orders

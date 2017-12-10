@@ -52,6 +52,12 @@
                   title: t('deliveries.actions.activate', default: t('global.actions.activate')),
                   data: { toggle: 'tooltip', container: 'body', placement: 'left' } %>
               <% end %>
+              <% if delivery.active? %>
+                <%= link_to icon('remove'), finalize_business_delivery_path(@business, delivery),
+                  class: 'btn btn-link', method: :post,
+                  title: t('deliveries.actions.activate', default: t('global.actions.activate')),
+                  data: { toggle: 'tooltip', container: 'body', placement: 'left' } %>
+              <% end %>
               <%= link_to icon('trash'), business_delivery_path(@business, delivery),  method: :delete,
                 class: 'btn btn-link text-danger',
                 title: t('deliveries.actions.destroy', default: t('global.actions.destroy')),

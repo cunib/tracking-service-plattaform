@@ -58,6 +58,7 @@ es:
       title: "Nueva entrega para el negocio %{model}"
     actions:
       activate: "Activar/Enviar"
+      finalize: "Finalizar"
   products:
     index:
       title: "Productos"

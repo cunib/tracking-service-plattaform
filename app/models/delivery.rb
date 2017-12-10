@@ -80,7 +80,11 @@ class Delivery < ApplicationRecord
   end
 
   def finalize
-    update_attribute end_date: DateTime.now
+    result = false
+    orders.each { |order| result = order.cancel! if order.sended? || order.suspended? }
+    update_attribute :end_date, DateTime.now
+    errors.add :base, :not_activated unless result
+    self
   end
 
   def to_s
@@ -90,6 +94,7 @@ class Delivery < ApplicationRecord
   def activate
     result = false
     orders.each { |order| result = order.mark_as_sended! } unless active?
+    update_attribute :start_date, DateTime.now
     errors.add :base, :not_activated unless result
     self
   end

@@ -33,6 +33,7 @@ Rails.application.routes.draw do
         get 'posiciones', action: :positions, as: :positions
         get 'recorrido-recomendado', action: :recommended_path, as: :recommended_path
         post :activate, as: :activate, to: 'deliveries#activate'
+        post :finalize, as: :finalize, to: 'deliveries#finalize'
       end
     end
 
