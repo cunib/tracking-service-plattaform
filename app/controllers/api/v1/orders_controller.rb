@@ -10,6 +10,7 @@ module  Api
 
       def mark_as_finalized
         if @order.finalize
+          @order.update end_date: DateTime.now
           render nothing: true, status: :ok
         else
           render nothing: true, status: :method_not_allowed
