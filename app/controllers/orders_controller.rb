@@ -68,6 +68,7 @@ class OrdersController < ApplicationController
 
   def cancel
     @order.cancel
+    @order.update end_date: DateTime.now if @order.errors.empty?
     respond_with(@order, location: [@business, :orders])
   end
 

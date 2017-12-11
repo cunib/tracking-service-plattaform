@@ -17,7 +17,7 @@
 </div>
 
 <div class="row">
-  <div class="col-md-12">
+  <div class="col-md-6">
     <dl class="dl-horizontal">
         <dt><%= t 'activerecord.attributes.order.business' %></dt>
         <dd><%= @order.business %></dd>
@@ -36,5 +36,11 @@
         <dd><%= link_to "Acceder al reparto", business_delivery_path(@business, @order.delivery) %></dd>
         <% end %>
     </dl>
+  </div>
+  <div class="col-md-6">
+    <h4>Productos</h4>
+    <% @order.products.each do |product| %>
+      <p><%= product %></p>
+    <% end %>
   </div>
 </div>
