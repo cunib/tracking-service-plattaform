@@ -96,7 +96,11 @@
                 <% if @order.finalized? %>
                   <%= "¡Su pedido ha sido entregado!." %>
                 <% else %>
-                  <%= t(".status", status: t("enum.order.string_status.#{@order.status}")).html_safe %>
+                  <% if @order.canceled? %>
+                    <%= "¡Su pedido ha sido cancelado!. Comuniquese con el local para conocer los detalles de la cancelación." %>
+                  <% else %>
+                    <%= t(".status", status: t("enum.order.string_status.#{@order.status}")).html_safe %>
+                  <% end %>
                 <% end %>
               </div>
             </div>
