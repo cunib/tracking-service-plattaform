@@ -5,7 +5,7 @@
     <div class="row">
       <%= f.input :delivery_man_id, as: :select2, collection: DeliveryMan.all, wrapper_html: {class: 'col-md-3'} %>
       <% if f.object.persisted? %>
-        <%= f.input :order_ids, as: :select2, collection: Order.readies_and_selected(f.object.id), multiple: true, 
+        <%= f.input :order_ids, as: :select2, collection: Order.readies + @delivery.orders, multiple: true, 
           label_method: ->(order) { order.to_s }, i18n: { formatNoMatches: 'No existen pedidos listos para ser enviados.' }, wrapper_html: {class: 'col-md-3'}  %>
       <% else %>
         <%= f.input :order_ids, as: :select2, collection: Order.readies, multiple: true, 
