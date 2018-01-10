@@ -26,8 +26,8 @@ class Order < ApplicationRecord
   end
 
   scope :readies, -> { where(status: :ready_to_send, delivery_id: nil) }
-  scope :readies_and_selected, ->(delivery_id) { where(status: :ready_to_send, delivery_id: [nil, delivery_id]) }
   scope :not_sended, -> { where.not(status: :sended) }
+  scope :sended_and_finalized, -> { where(status: [:finalized, :sended]) }
 
   has_many :ordered_products, dependent: :destroy
   has_many :products, through: :ordered_products

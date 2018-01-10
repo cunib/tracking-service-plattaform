@@ -59,8 +59,8 @@ class Delivery < ApplicationRecord
     end
   end
 
-  def sended_orders
-    orders.sended
+  def sended_and_finalized_orders
+    orders.sended_and_finalized
   end
 
   def not_sended_orders

@@ -82,7 +82,7 @@ class DeliveriesController < ApplicationController
   end
 
   def orders_as_path(delivery)
-    delivery_orders = delivery.sended_orders
+    delivery_orders = delivery.sended_and_finalized_orders
     strategy = delivery.path_strategy
     orders = strategy.constantize.new(@business, delivery_orders.to_a).build_path.path
     orders.pop
