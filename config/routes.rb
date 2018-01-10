@@ -56,6 +56,7 @@ Rails.application.routes.draw do
         member do
           post 'mark_as_finalized', action: :mark_as_finalized, as: :mark_as_finalized
           post 'mark_as_suspended', action: :mark_as_suspended, as: :mark_as_suspended
+          post 'mark_as_canceled', action: :mark_as_canceled, as: :mark_as_canceled
         end
       end
       resources :businesses, only: [:index]

@@ -25,6 +25,14 @@ module  Api
         end
       end
 
+      def mark_as_canceled
+        if @order.canceled
+          render nothing: true, status: :ok
+        else
+          render nothing: true, status: :method_not_allowed
+        end
+      end
+
       private
 
       def set_order
