@@ -11,7 +11,8 @@ module  Api
         delivery = @delivery_man.active_delivery
         path_information = orders_as_path(delivery) if delivery.present?
         @path_orders = path_information.try(:path) || []
-        @orders = @path_orders + delivery.not_sended_orders
+        not_sended_orders = delivery.try(:not_sended_orders) || []
+        @orders = @path_orders + not_sended_orders
         render json: @orders, include: [:position, :delivery, :business, :products, :ordered_products], key_transform: :underscore
       end
 

@@ -26,7 +26,7 @@ module  Api
       end
 
       def mark_as_canceled
-        if @order.canceled
+        if @order.cancel
           render nothing: true, status: :ok
         else
           render nothing: true, status: :method_not_allowed
