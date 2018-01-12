@@ -1,7 +1,7 @@
 module  Api
   module V1
     class OrdersController < Api::ApplicationController
-      before_action :set_order, only: [:mark_as_finalized, :mark_as_suspended]
+      before_action :set_order, only: [:mark_as_finalized, :mark_as_suspended, :mark_as_canceled]
 
       def index
         @orders = Order.all
