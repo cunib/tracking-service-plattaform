@@ -8,9 +8,12 @@ class PurchasesController < ApplicationController
     @businesses = Business.all
   end
 
+  def operations
+    @business = Business.find params[:business_id]
+  end
+
   def new_purchase
     @order = Order.new
     respond_with(@order)
   end
-
 end

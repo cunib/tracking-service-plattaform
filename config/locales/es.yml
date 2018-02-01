@@ -65,6 +65,9 @@ es:
       secondary_title: "del negocio %{model}"
     new:
       title: "Nuevo producto para el negocio %{business}"
+  purchases:
+    operations:
+      title: "Operar con el local %{business}"
   views:
     application:
       title: "Plataforma de seguimiento de ordenes"

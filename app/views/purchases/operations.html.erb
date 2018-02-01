@@ -1,0 +1,35 @@
+<div class="page-header">
+  <div class="row">
+    <div class="col-md-10">
+      <h1><%= t '.title', business: @business %></h1>
+    </div>
+    <div class="col-md-2">
+      <div class="actions">
+        <%= link_to icon('chevron-left'), trackit_index_path, 
+          class: 'btn btn-default', data: { toggle: 'tooltip', container: 'body' }, 
+          title: t('.back', default: t('global.actions.back')) %>
+    </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="panel panel-primary">
+          <div class="panel-heading"><%= link_to "Realizar pedido", business_new_order_path(@business), class: "link-title" %></div>
+          <div class="panel-body"><%= image_tag "order.png", 
+            class: "img-responsive", alt: "Realizar pedido", size: '340x100' %></div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="panel panel-primary">
+          <div class="panel-heading"><%= link_to "Seguí tu pedido", business_track_order_path(@business), class: "link-title" %></div>
+          <div class="panel-body"><%= image_tag "track.png", 
+            class: "img-responsive", alt: "Seguí tu pedido", size: '340x100' %></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

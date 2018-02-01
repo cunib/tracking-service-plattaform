@@ -42,7 +42,7 @@ Rails.application.routes.draw do
   scope 'seguilo' do
     get '/', as: :trackit_index, to: 'purchases#index'
     resources :businesses, path: 'locales', only: [] do
-
+      get '/operar', as: :operations, to: 'purchases#operations'
       get '/realizar-pedido', as: :new_order, to: 'orders#new_order'
       get '/segui-tu-pedido', as: :track_order, to: 'orders#track_order'
       post '/crear-pedido', as: :create_order, to: 'orders#create_order'

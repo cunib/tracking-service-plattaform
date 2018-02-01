@@ -44,7 +44,6 @@ class BusinessesController < ApplicationController
   end
 
   def business_sellection
-
   end
 
   private

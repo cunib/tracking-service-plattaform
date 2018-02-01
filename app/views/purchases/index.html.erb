@@ -3,7 +3,7 @@
     <% @businesses.each do |business| %>
       <div class="col-sm-4">
         <div class="panel panel-primary">
-          <div class="panel-heading"><%= link_to business, business_new_order_path(business), class: "link-title" %></div>
+          <div class="panel-heading"><%= link_to business, business_operations_path(business), class: "link-title" %></div>
           <div class="panel-body"><%= image_tag "#{business.name.parameterize.underscore}.png", 
             class: "img-responsive", alt: business.name, size: '340x200' %></div>
           <div class="panel-footer"><%= business.address %></div>
