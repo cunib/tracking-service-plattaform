@@ -35,7 +35,7 @@ class BusinessesController < ApplicationController
 
   def update
     @business.update(business_params)
-    respond_with(@business)
+    respond_with(@business, location: business_deliveries_path(@business))
   end
 
   def destroy
