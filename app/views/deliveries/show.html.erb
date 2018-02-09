@@ -47,7 +47,7 @@
                       <dt><%= t 'activerecord.attributes.order.address' %></dt>
                       <dd><%= order.address %></dd>
                       <dt><%= t 'activerecord.attributes.order.status' %></dt>
-                      <dd><%= raw t "enum.order.status.#{order.status}" %></dd>
+                      <dd id=<%= "order-status-#{order.id}" %>><%= raw t "enum.order.status.#{order.status}" %></dd>
                       <dd><span class='label label-default'>
                           <%= link_to "Ir al pedido", business_order_path(@business, order) %>
                         </span>

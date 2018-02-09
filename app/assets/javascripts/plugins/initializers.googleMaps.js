@@ -115,7 +115,15 @@
     m.set("id", m.id);
     createContentWindow(map, m, m.title, doNotOpenInfoWindow);
     m.addListener('click', handleMarkerClick);
+    updateStatusLabel(marker.id, marker.status);
     return m;
+  }
+
+  function updateStatusLabel(id, status) {
+    var statusContainer = $('#order-status-' + id + ' span');
+    var statusses = { sended: "<span class='label label-success'> Enviado </span>", canceled: "<span class='label label-danger'>Cancelado</span>", finalized: "<span class='label label-success'> Finalizado </span>", suspended: "<span class='label label-danger'> Suspendido </span>" };
+    statusContainer.replaceWith(statusses[status]);
+    debugger;
   }
 
   function addFixedBusinessMarker(map, marker, doNotOpenInfoWindow) {
