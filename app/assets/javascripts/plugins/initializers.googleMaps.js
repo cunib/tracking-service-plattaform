@@ -183,7 +183,9 @@
             //bounds.extend(m.getPosition());
             // reload recommended path if some order has been canceled
             if (updatedMarker.status == "canceled") {
-              polyline.setMap(null);
+              if (polyline != undefined) {
+                polyline.setMap(null);
+              }
               loadRecommendedPath(map, pathUrl);
             }
           }

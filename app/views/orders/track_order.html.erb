@@ -67,7 +67,7 @@
                 <dt><%= t 'activerecord.attributes.order.address' %></dt>
                 <dd><%= @order.address %></dd>
                 <dt><%= t 'activerecord.attributes.order.status' %></dt>
-                <dd><%= raw t "enum.order.status.#{@order.status}" %></dd>
+                <dd id=<%= "order-status-#{@order.id}" %>><%= raw t "enum.order.status.#{@order.status}" %></dd>
               </dl>
             </div>
           </div>
