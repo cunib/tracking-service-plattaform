@@ -79,6 +79,7 @@ class Order < ApplicationRecord
         lat: latitude,
         lng: longitude
       },
+      status: status,
       id: id
     }]
   end

@@ -19,6 +19,7 @@ Rails.application.routes.draw do
         post :suspend, as: :suspend, to: 'orders#suspend'
         post :cancel, as: :cancel, to: 'orders#cancel'
         get 'posiciones', action: :positions, as: :positions
+        get 'serialized_order', action: :serialized_order, as: :serialized_order
       end
     end
 
@@ -32,6 +33,7 @@ Rails.application.routes.draw do
       member do
         get 'posiciones', action: :positions, as: :positions
         get 'recorrido-recomendado', action: :recommended_path, as: :recommended_path
+        get 'serialized_orders', action: :serialized_orders, as: :serialized_orders
         post :activate, as: :activate, to: 'deliveries#activate'
         post :finalize, as: :finalize, to: 'deliveries#finalize'
       end

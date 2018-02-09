@@ -5,6 +5,8 @@
   var lastPosition;
   var polyline;
   var marker;
+  var fixedMarkers;
+  var addedMarkers = new Array();
   var defaultMapCenter = { lat: -34.913283, lng: -57.951501 };
   var unintentialSubmitBlocker = 'onkeypress="if (event.keyCode === 13) { event.preventDefault(); return false; }"';
   var infoWindowContentTemplate = '<div class="window-info">' +
@@ -45,7 +47,7 @@
       title: title,
       animation: google.maps.Animation.BOUNCE,
       icon: 'https://png.icons8.com/scooter/color/48',
-      draggable: false,
+      kraggable: false,
       visible: iconVisible
     });
     createInfoWindow(map, marker, title, title, doNotOpenInfoWindow);
@@ -90,7 +92,6 @@
   }
 
   function addFixedMarker(map, marker, doNotOpenInfoWindow) {
-    debugger;
     var icon;
     if (marker.status == "finalized") {
       icon = '/destinationFinalized.png';
@@ -110,6 +111,8 @@
       icon: icon,
       draggable: false
     });
+    addedMarkers[marker.id] = m;
+    m.set("id", m.id);
     createContentWindow(map, m, m.title, doNotOpenInfoWindow);
     m.addListener('click', handleMarkerClick);
     return m;
@@ -133,7 +136,28 @@
     this.get('infoWindow').open(this.getMap(), this);
   }
 
-  function updatePositions(url, map) {
+  function updatePositions(positionUrl, map) {
+    var currentPosition;
+    $.ajax({
+      url: $('[data-url]').data('url'),
+      type: 'GET',
+      dataType: 'json',
+      async: false,
+      success: function (data) {
+        if ((data != undefined) && (data.data.length > 1)) {
+          currentPosition = data[data.length - 1].position;
+          // load markers in the map only if the position changed
+          if (lastPositionChange(currentPosition, lastPosition)) {
+            drawTrace(data, map);
+            lastPosition = data[data.length - 1].position
+          }
+
+        }
+      }
+    });
+  }
+
+  function updateFixedMarkers(url, businessMarker, map, pathUrl) {
     var currentPosition;
     $.ajax({
       url: url,
@@ -141,12 +165,21 @@
       dataType: 'json',
       async: false,
       success: function (data) {
-        currentPosition = data[data.length - 1].position;
-        // load markers in the map only if the position changed
-        if (lastPositionChange(currentPosition, lastPosition)) {
-          drawTrace(data, map);
-          lastPosition = data[data.length - 1].position
-        }
+        var bounds = map.get('bounds') || new google.maps.LatLngBounds();
+        data.forEach(function(updatedMarker, i) {
+          if (updatedMarker.status != fixedMarkers[i].status) {
+            fixedMarkers = data;
+            addedMarkers[updatedMarker.id].setMap(null);
+            delete addedMarkers[updatedMarker.id];
+            var m = addFixedMarker(map, updatedMarker, true);
+            //bounds.extend(m.getPosition());
+            // reload recommended path if some order has been canceled
+            if (updatedMarker.status == "canceled") {
+              polyline.setMap(null);
+              loadRecommendedPath(map, pathUrl);
+            }
+          }
+        });
       }
     });
   }
@@ -210,7 +243,7 @@
     for (var i = 0; i < path.length; i++) {
           bounds.extend(path[i]);
     }
-    var polyline = new google.maps.Polyline({
+    polyline = new google.maps.Polyline({
       path: path,
       strokeColor: '#68FF33',
       strokeOpacity: 0.8,
@@ -249,9 +282,10 @@
 
   function createMapInitializer(target, container) {
     var canvas = container.find('.map-canvas');
-    var markers = target.data('orders-positions-markers');
     var businessMarker = target.data('business-marker');
     var pathUrl = target.data('recommended-path-url');
+    var markersUrl = target.data('markers-url') || target.data('marker-url');
+    var positionUrl = target.data('url');
     return {
       init: function() {
         var map = new google.maps.Map(canvas.get(0), {
@@ -260,13 +294,17 @@
           mapTypeId: google.maps.MapTypeId.ROADMAP
         });
         map.setCenter(new google.maps.LatLng(-34.913283, -57.951501));
+        //Load orders delivery position markers
+        fixedMarkers = target.data('orders-positions-markers');
+        loadMarkers(fixedMarkers, businessMarker, map);
         // Load recommended path
         loadRecommendedPath(map, pathUrl);
-        //Load orders delivery position markers
-        loadMarkers(markers, businessMarker, map);
-        // Update traces every 5 seconds
+        // Update information in interval
         window.setInterval(function(){
-          updatePositions(target.data('url'), map);
+          //update orders delivery position markers
+          updateFixedMarkers(markersUrl, businessMarker, map, pathUrl);
+          // Update traces every 5 seconds
+          updatePositions(positionUrl, map);
         }, 1000);
       },
       target: target,

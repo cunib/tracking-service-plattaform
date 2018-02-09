@@ -86,6 +86,8 @@
           </div>
           <div data-google-maps="<%= Settings.google_maps.javascript_api_key %>" 
               data-url="<%= positions_business_order_path(@business, @order) %>"
+              data-marker-url="<%= serialized_order_business_order_path(@business, @order) %>"
+              data-business-marker="<%= @business_position %>"
               data-orders-positions-markers="<%= @order.serialized.to_json %>">
           </div>
         <% else %>

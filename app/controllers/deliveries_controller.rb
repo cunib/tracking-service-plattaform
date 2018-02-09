@@ -1,7 +1,8 @@
 class DeliveriesController < ApplicationController
   before_action :set_delivery, only: [:show, :edit, :update, :destroy, :positions, 
-                                      :delivery, :activate, :recommended_path, :finalize]
-  respond_to :json, only: [ :positions, :recommended_path ]
+                                      :delivery, :activate, :recommended_path, :finalize, 
+                                      :serialized_orders]
+  respond_to :json, only: [ :positions, :recommended_path, :serialized_orders ]
 
   respond_to :html
 
@@ -41,6 +42,11 @@ class DeliveriesController < ApplicationController
   def destroy
     @delivery.destroy
     respond_with(@delivery, location: [@business, :deliveries])
+  end
+
+  def serialized_orders
+    @serialized_orders = @delivery.serialized_orders
+    respond_with @serialized_orders, location: [@business, :delivery]
   end
 
   def positions

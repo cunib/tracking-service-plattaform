@@ -1,11 +1,11 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy, :cancel, 
                                    :suspend, :process_order, :dispatch_order, :positions,
-                                  :mark_as_sended_order]
+                                  :mark_as_sended_order, :serialized_order]
 
   respond_to :html
-  respond_to :json, only: :positions
-  layout 'frontend', only: [:new_order, :create_order, :track_order, :positions]
+  respond_to :json, only: [ :positions, :serialized_order ]
+  layout 'frontend', only: [:new_order, :create_order, :track_order, :positions, :serialized_order]
 
   def index
     @orders = @business.orders
@@ -97,6 +97,7 @@ class OrdersController < ApplicationController
 
   def track_order
     @order = Order.find_by(hash_code: order_params[:hash_code]) unless params[:_reset].present? || params[:order].blank?
+    @business_position = { title: @business.address, position: { lat: @business.position.latitude, lng: @business.position.longitude } }.to_json
     respond_with @order, location: [@business, :track_order], action: :track_order
   end
 
@@ -105,6 +106,11 @@ class OrdersController < ApplicationController
       @positions = @order.serialized_positions
       respond_with @positions, location: [@business, :track_order]
     end
+  end
+
+  def serialized_order
+    @serialized_order = @order.serialized.to_json
+    respond_with @serialized_order, location: [@business, :delivery]
   end
 
   private
