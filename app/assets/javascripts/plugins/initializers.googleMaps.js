@@ -4,6 +4,7 @@
   var defaultZoom = 16;
   var lastPosition;
   var polyline;
+  var polylineTrace;
   var marker;
   var fixedMarkers;
   var addedMarkers = new Array();
@@ -56,11 +57,11 @@
   }
 
   function addPolyline(map, path) {
-    if (polyline != null) {
-      var polyPath = polyline.getPath();
+    if (polylineTrace != null) {
+      var polyPath = polylineTrace.getPath();
       polyPath.push(path[path.length - 1]);
     } else {
-      polyline = new google.maps.Polyline({
+      polylineTrace = new google.maps.Polyline({
           map: map,
           path: path,
           strokeColor: '#FF0000',
@@ -123,7 +124,6 @@
     var statusContainer = $('#order-status-' + id + ' span');
     var statusses = { sended: "<span class='label label-success'> Enviado </span>", canceled: "<span class='label label-danger'>Cancelado</span>", finalized: "<span class='label label-success'> Finalizado </span>", suspended: "<span class='label label-danger'> Suspendido </span>" };
     statusContainer.replaceWith(statusses[status]);
-    debugger;
   }
 
   function addFixedBusinessMarker(map, marker, doNotOpenInfoWindow) {
@@ -152,12 +152,12 @@
       dataType: 'json',
       async: false,
       success: function (data) {
-        if ((data != undefined) && (data.data.length > 1)) {
-          currentPosition = data[data.length - 1].position;
+        if ((data != undefined) && data.length > 1) {
+   //       currentPosition = data[data.length - 1].position;
           // load markers in the map only if the position changed
           if (lastPositionChange(currentPosition, lastPosition)) {
             drawTrace(data, map);
-            lastPosition = data[data.length - 1].position
+            //lastPosition = data[data.length - 1].position
           }
 
         }
