@@ -46,5 +46,5 @@ Los puntos de accesos (endpoints) a la API son los siguientes:
 ### Importante
 * Existe una limitante en cuanto a la cantidad de órdenes que se le puede asociar a un reparto, debido a que la versión gratuita de la API de Google Maps usada en este prototipo establece un límite de 23 posiciones como máximo por petición para armar los recorridos. Como los recorridos se armarán a partir de las posiciones de cada orden del reparto más la posición del negocio como inicio y fin (serían dos posiciones más), con lo cual como máximo se puede asociar a un reparto 21 órdenes de pedido.  
 ## Video de funcionamiento de la aplicación
-En el siguiente video solo se muestra lo relativo al seguimiento a modo de presentación.  
-[![Video](https://github.com/cunib/tracking-service-plattaform/blob/master/public/readme_images/video.png)](https://github.com/cunib/tracking-service-plattaform/blob/master/public/video.mkv)
+Haga clic en la imagen para ser redirigido al video de demostración. En este video solo se muestra lo relativo al seguimiento a modo de presentación.  
+[![Video](https://github.com/cunib/tracking-service-plattaform/blob/master/public/readme_images/video.png)](https://youtu.be/k605ZOemvG8)
